@@ -133,22 +133,22 @@ class SMTP
         }
 
         // connect to the smtp server
-    $this->smtp_conn = @fsockopen($host,    // the host of the server
-                                 $port,    // the port to use
-                                 $errno,   // error number if any
-                                 $errstr,  // error message if any
-                                 $tval);   // give up after ? secs
-    // verify we connected properly
-    if (empty($this->smtp_conn)) {
-        $this->error = array('error' => 'Failed to connect to server',
-                           'errno' => $errno,
-                           'errstr' => $errstr, );
-        if ($this->do_debug >= 1) {
-            echo 'SMTP -> ERROR: '.$this->error['error'].": $errstr ($errno)".$this->CRLF.'<br />';
-        }
+        $this->smtp_conn = @fsockopen($host,    // the host of the server
+        $port,    // the port to use
+        $errno,   // error number if any
+        $errstr,  // error message if any
+        $tval);   // give up after ? secs
+        // verify we connected properly
+        if (empty($this->smtp_conn)) {
+            $this->error = array('error' => 'Failed to connect to server',
+                            'errno' => $errno,
+                            'errstr' => $errstr, );
+            if ($this->do_debug >= 1) {
+                echo 'SMTP -> ERROR: '.$this->error['error'].": $errstr ($errno)".$this->CRLF.'<br />';
+            }
 
-        return false;
-    }
+            return false;
+        }
 
         // SMTP server can take longer to respond, give longer timeout for first read
         // Windows does not have support for this timeout function

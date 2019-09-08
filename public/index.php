@@ -565,8 +565,7 @@
         <!-- Footer bar -->
         <div class="container-fluid footer-bar bg-dark py-2 text-white d-flex justify-content-center">
             <span>&copy; 2019 All rights reserved to WWW.laraland.com.</span>
-        </div>
-        <!-- ./Footer bar -->
+        </div><!-- ./Footer bar -->
 
 
         <!-- ### Add your site or application conten above ### -->

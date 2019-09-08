@@ -1,5 +1,6 @@
 <?php
 require_once '../app/start.php';
+
 use Codecourse\Repositories\User as User;
 use Codecourse\Repositories\Session as Session;
 
@@ -91,12 +92,9 @@ if (isset($_POST['btn-submit'])) {
                 margin-bottom: 5px;
             }
 
-
-
             .hr-color {
                 background-color: #DDD;
                 height: 2px;
-                ;
                 border-radius: 5px;
                 margin-top: 5px;
                 margin-bottom: 0px;
@@ -140,15 +138,15 @@ if (isset($_POST['btn-submit'])) {
                 </div>
                 <form class="form" method="post">
                     <?php
-                if (isset($msg)) {
-                    echo $msg;
-                } else {
-                    ?>
+                    if (isset($msg)) {
+                        echo $msg;
+                    } else {
+                        ?>
                     <div class='alert alert-info'>
                         Please enter your email address. You will receive a link to create a new password via email !
                     </div>
                     <?php
-                } ?>
+                    } ?>
                     <div class="form-group has-feedback">
                         <input type="email" class="form-control" placeholder="Email address" name="txtemail" required />
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

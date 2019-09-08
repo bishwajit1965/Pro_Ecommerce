@@ -6,7 +6,10 @@ use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\Session as Session;
 use Codecourse\Repositories\User as User;
 
+
+
 Session::init();
+
 $user_home = new User();
 $fm = new Helpers();
 

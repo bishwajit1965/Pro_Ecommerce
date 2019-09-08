@@ -2,6 +2,7 @@
 namespace Codecourse\Repositories;
 
 use Codecourse\Repositories\SMTP;
+use Codecourse\Repositories\Exception;
 
 /* class.phpmailer.php
 .---------------------------------------------------------------------------.
@@ -2495,12 +2496,12 @@ class PHPMailer
     }
 }
 
-// class phpmailerException extends Exception
-// {
-//     public function errorMessage()
-//     {
-//         $errorMsg = '<strong>' . $this->getMessage() . "</strong><br />\n";
+class phpmailerException extends Exception
+{
+    public function errorMessage()
+    {
+        $errorMsg = '<strong>' . $this->getMessage() . "</strong><br />\n";
 
-//         return $errorMsg;
-//     }
-// }
+        return $errorMsg;
+    }
+}
