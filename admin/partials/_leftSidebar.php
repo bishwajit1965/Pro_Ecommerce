@@ -35,7 +35,7 @@
         if ($_SESSION['userEmail'] == $user->getEmail()) {
             ?>
 
-        <?php
+            <?php
         }
         ?>
         <ul class="sidebar-menu" data-widget="tree">
@@ -88,6 +88,30 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="../category/categoryIndex.php"><i class="fa fa-circle-o"></i> Category index</a></li>
+                </ul>
+            </li>
+             <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Subb Category Options</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../subCategory/subCategoryIndex.php"><i class="fa fa-circle-o"></i> Sub Category index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Ecommerce Options</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../ecommerce/ecommerceIndex.php"><i class="fa fa-circle-o"></i> Ecommerce index</a></li>
                 </ul>
             </li>
         </ul>

@@ -21,7 +21,7 @@
         ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Photo gallery index page<small>it all starts here</small></h1>
+            <h1>Product category index page<small>it all starts here</small></h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Examples</a></li>
@@ -79,16 +79,17 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Category Name</th>
+                                <th>Category Id</th>
                                 <th>Created at</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $studentData = $category->index($table);
-                            if (!empty($studentData)) {
+                            $categoryData = $category->index($table);
+                            if (!empty($categoryData)) {
                                 $id = 1;
-                                foreach ($studentData as $result) {
+                                foreach ($categoryData as $result) {
                                     ?>
                             <tr>
                                 <td>
@@ -96,6 +97,9 @@
                                 </td>
                                 <td>
                                     <?php echo $result->cat_name; ?>
+                                </td>
+                                 <td>
+                                    <?php echo $result->cat_id; ?>
                                 </td>
                                 <td>
                                     <?php echo $helper->dateFormat($result->created_at); ?>
@@ -105,7 +109,7 @@
                                     if ($_SESSION['userEmail'] == $user_home->getEmail()) {
                                         ?>
 
-                                    <a class="btn btn-xs btn-primary"
+                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Product!"
                                         href="editCategory.php?edit_id=<?php echo $result->cat_id; ?>"><i
                                             class="fa fa-pencil"></i> Edit</a>
 
@@ -117,7 +121,7 @@
                                     <a class="btn btn-xs btn-danger"
                                         href="deleteCategory.php?delete_id=<?php echo $result->cat_id; ?>">
                                         <i class="fa fa-trash"></i> View & Delete</a>
-                                    <?php
+                                        <?php
                                     } else {
                                         ?>
                                     <a class="btn btn-xs btn-primary"
@@ -126,7 +130,7 @@
                                     } ?>
                                 </td>
                             </tr>
-                            <?php
+                                    <?php
                                 }
                             }
                             ?>
@@ -135,6 +139,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Category Name</th>
+                                <th>Category Id</th>
                                 <th>Created at</th>
                                 <th>Actions</th>
                             </tr>

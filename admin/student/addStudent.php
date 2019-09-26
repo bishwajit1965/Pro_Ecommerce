@@ -11,7 +11,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Add categogy data
+                Add products data
                 <small>it all starts here</small>
             </h1>
             <ol class="breadcrumb">

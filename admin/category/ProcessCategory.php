@@ -15,13 +15,30 @@ switch ($_POST['submit']) {
             if ($_REQUEST['action'] == 'add') {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
-                        $cat_name = $category->validate($_POST['cat_name']);
+                        $cat_name = $category->validate(ucfirst($_POST['cat_name']));
                         $cat_name = filter_var($cat_name, FILTER_SANITIZE_STRING);
 
                         $fields = [
                             'cat_name' => $cat_name
                         ];
-
+                        // This code will check and prevent duplicate entry of data
+                        $categoryData = $category->index($table);
+                        if (!empty($categoryData)) {
+                            foreach ($categoryData as $categoryName) {
+                                if ($categoryName->cat_name ==  $cat_name) {
+                                    $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
+                                    Category data has already been taken before !!! Please try another one !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'addCategory.php';
+                                    $category->redirect($home_url);
+                                    exit();
+                                }
+                            }
+                        }
                         if (empty($_POST['cat_name'])) {
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
                             Category name field remained blank!!!

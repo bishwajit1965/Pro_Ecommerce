@@ -27,7 +27,6 @@
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Title</h3>
-
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                             title="Collapse">
@@ -75,7 +74,6 @@
                                 <input type="text" name="cat_name" class="form-control" class="form-control"
                                     value="<?php echo isset($result->cat_name) ? $result->cat_name : '' ; ?>">
                             </div>
-
 
                             <?php
                             if ($_SESSION['userEmail'] == $user_home->getEmail()) {

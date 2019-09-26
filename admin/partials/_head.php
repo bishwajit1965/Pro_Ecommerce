@@ -6,8 +6,6 @@ use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\Session as Session;
 use Codecourse\Repositories\User as User;
 
-
-
 Session::init();
 
 $user_home = new User();
@@ -44,6 +42,8 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="../bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../css/app.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,7 +51,6 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
 
     <!-- Google Font -->
     <link rel="stylesheet"

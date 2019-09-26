@@ -1,0 +1,93 @@
+#heading {
+    font-size: 42px;
+    font-weight: bold;
+    text-shadow: 1px 2px 3px #000;
+    color: #F10;
+}
+.header-area {background-color: #6CE6F9;
+}
+.img-class {
+    width: 100%;
+    height: 315px;
+}
+
+.cart-img {
+    width: ;
+    height: 140px;
+    margin-bottom: -16px;
+}
+
+.card-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+}
+
+::placeholder {
+    color: red;
+}
+
+/* Edge */
+::-webkit-input-placeholder {
+    color: red;
+    font-weight: bold;
+}
+
+s {
+    color: red;
+    font-weight: bold;
+}
+
+.cart-add-link a {
+    font-size: 12px;
+}
+
+.card-body p {
+    line-height: 16px;
+    font-size: 16px;
+    margin-bottom: 2px;
+    color: #78788B;
+    font-weight: 500;
+}
+
+.rating-star {
+    line-height: 15px;
+    font-size: 14px;
+    margin-bottom: 2px;
+    color: #0D0DD3;
+    font-weight: 450;
+}
+
+.container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cart-add-link {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.social-links {
+    font-size: 24px;
+}
+
+h1::first-letter {
+    font-size: 200%;
+    color: #8A2BE2;
+}
+h2::first-letter {
+    font-size: 200%;
+    color: #DA0A0A;
+    text-shadow: 1px 2px 3px #FFF;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Allura', cursive;
+    font-weight: 800;
+    line-height: 18px;
+}
+ul>li>a {
+    text-transform: uppercase;
+}

@@ -309,9 +309,9 @@ class User
         // $mail->SetFrom('your_gmail_id_here@gmail.com','Coding Cage');
         // $mail->AddReplyTo("your_gmail_id_here@gmail.com","Coding Cage");
         $mail->Username = 'paul.bishwajit09@gmail.com';
-        $mail->Password = 'B.66129.Paul';
-        $mail->SetFrom('paul.bishwajit09@gmail.com', 'Project Master');
-        $mail->AddReplyTo('paul.bishwajit09@gmail.com', 'Project Master');
+        $mail->Password = 'B.#66129.#Paul';
+        $mail->SetFrom('paul.bishwajit09@gmail.com', 'Project Ecommerce');
+        $mail->AddReplyTo('paul.bishwajit09@gmail.com', 'Project Ecommerce');
         $mail->Subject = $subject;
         $mail->MsgHTML($message);
         $mail->Send();

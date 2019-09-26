@@ -46,7 +46,6 @@
             .hr-color {
                 background-color: #DDD;
                 height: 2px;
-                ;
                 border-radius: 5px;
                 margin-top: 5px;
                 margin-bottom: 0px;
@@ -99,9 +98,9 @@
 
                                 $msg = "<div class='alert alert-success'>
                                 <button class='close' data-dismiss='alert'>&times;</button>
-                                Password Changed.
+                                Password has been Changed!
                                 </div>";
-                                header('refresh:5;index.php');
+                                header('refresh:2;index.php');
                             }
                         }
                     } else {

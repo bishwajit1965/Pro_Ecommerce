@@ -17,14 +17,7 @@ class Category
         $dbConnection = $database->dbConnection();
         $this->conn = $dbConnection;
     }
-    // Input data validation
-    public function validate($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+
     // View Data in Index page
     public function index($table)
     {
@@ -34,10 +27,10 @@ class Category
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    $galleryData[] = $data;
+                    $categoryData[] = $data;
                 }
 
-                return $galleryData;
+                return $categoryData;
             }
         } catch (PDOException $e) {
             echo $e->getMesssage();
@@ -134,10 +127,25 @@ class Category
     }
 
     /**
+     * { for validating input data }
+     *
+     * @param <type> $data   The data
+     *
+     * @return <type>(fresh validated data)
+     */
+    public function validate($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    /**
      * Count rows from related table
      *
      * @param [type] $table
-     * @return void
+     * @return void or countred data/rows
      */
 
     public function numberOfRows($table)

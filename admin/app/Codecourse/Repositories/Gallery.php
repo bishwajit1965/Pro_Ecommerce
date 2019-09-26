@@ -33,7 +33,7 @@ class Gallery
                 return $galleryData;
             }
         } catch (PDOException $e) {
-            echo $e->getMesssage();
+            echo $e->getMessage();
         }
     }
 
@@ -55,7 +55,7 @@ class Gallery
                 header('Location: ../../admin/gallery/galleryIndex.php?uploaded=0');
             }
         } catch (PDOException $e) {
-            echo $e->getMesssage();
+            echo $e->getMessage();
         }
     }
 

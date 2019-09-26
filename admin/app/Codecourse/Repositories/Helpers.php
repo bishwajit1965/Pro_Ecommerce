@@ -1,5 +1,5 @@
 <?php
-namespace Codecourse\Repositories;
+ namespace Codecourse\Repositories;
 
 class Helpers
 {
