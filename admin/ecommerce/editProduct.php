@@ -111,14 +111,14 @@
                                                 if (!empty($categoryData)) {
                                                     foreach ($categoryData as $category) {
                                                         ?>
-                                                <option <?php if ($result->cat_id == $category->cat_id) {
+                                                        <option <?php if ($result->cat_id == $category->cat_id) {
                                                             ?>
-                                                    selected = "selected"
-                                                    <?php
-                                                        } ?>
-                                                    value="<?= $category->cat_id; ?>">
-                                                    <?= $category->cat_name; ?>
-                                                </option>
+                                                            selected = "selected"
+                                                            <?php
+                                                            } ?>
+                                                            value="<?= $category->cat_id; ?>">
+                                                        <?= $category->cat_name; ?>
+                                                        </option>
                                                 <?php
                                                     }
                                                 }

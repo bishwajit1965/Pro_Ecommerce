@@ -95,11 +95,11 @@
                                                 <?php
 
                                                 $rating = $product->pro_rating;
-                                    for ($i=0; $i < $rating; $i++) {
-                                        ?>
+                                                for ($i=0; $i < $rating; $i++) {
+                                                ?>
                                                 <i class="fas fa-star rating-star"></i>
                                                 <?php
-                                    } ?>
+                                                } ?>
                                             </span>
                                             <div class="btn-group cart-add-link" role="group"
                                                 aria-label="Basic example">
