@@ -1,5 +1,4 @@
 <?php
-
 namespace Codecourse\Repositories;
 
 use Codecourse\Repositories\Database as Database;

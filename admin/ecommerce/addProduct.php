@@ -11,8 +11,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-            Add products data
-            <small>it all starts here</small>
+                Add products data
+                <small>it all starts here</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -28,9 +28,9 @@
                     <h3 class="box-title">Title</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse"><i class="fa fa-minus"></i></button>
+                            title="Collapse"><i class="fa fa-minus"></i></button>
                         <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                        title="Remove"> <i class="fa fa-times"></i></button>
+                            title="Remove"> <i class="fa fa-times"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -41,13 +41,18 @@
                     use Codecourse\Repositories\Session as Session;
                     use Codecourse\Repositories\Category as Category;
                     use Codecourse\Repositories\SubCategory as SubCategory;
+                    use Codecourse\Repositories\Brand as Brand;
 
                     // Needed for inserting category id to products table
-                    $category = new Category;
-                    $subCategory = new SubCategory;
+                    $category = new Category();
+                    $subCategory = new SubCategory();
+                    $brand = new Brand();
+
                     // Needed for fetching data from table
                     $table = 'tbl_category';
                     $table2 = 'tbl_sub_category';
+                    $table3 = 'tbl_brand';
+
                     // Will display all the messages vlidation/insert/update/delete
                     Session::init();
                     $message = Session::get('message');
@@ -62,22 +67,22 @@
                                 <div class="form-group">
                                     <label for="pro_name">Product Name:</label>
                                     <input type="text" name="pro_name" class="form-control form-control-sm"
-                                    placeholder="Insert product name....">
+                                        placeholder="Insert product name....">
                                 </div>
                                 <div class="form-group">
                                     <label for="pro_number">Product Number:</label>
                                     <input type="text" name="pro_number" class="form-control form-control-sm"
-                                    placeholder="Insert product number....">
+                                        placeholder="Insert product number....">
                                 </div>
                                 <div class="form-group">
                                     <label for="former_price">Former Price:</label>
                                     <input type="text" name="former_price" class="form-control form-control-sm"
-                                    placeholder="Insert former price....">
+                                        placeholder="Insert former price....">
                                 </div>
                                 <div class="form-group">
                                     <label for="present_price">Present Price:</label>
                                     <input type="text" name="present_price" class="form-control form-control-sm"
-                                    placeholder="Insert present price....">
+                                        placeholder="Insert present price....">
                                 </div>
                                 <div class="form-group">
                                     <label for="photo"> Photo:</label>
@@ -87,8 +92,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="pro_rating">Prod Rating:</label>
-                                    <input type="number" name="pro_rating" min="1" max="5" class="form-control form-control-sm"
-                                    placeholder="Insert product rating....">
+                                    <input type="number" name="pro_rating" min="1" max="5"
+                                        class="form-control form-control-sm" placeholder="Insert product rating....">
                                 </div>
                                 <div class="form-group">
                                     <label for="name"> Category:</label>
@@ -98,10 +103,11 @@
                                         if (!empty($categoryData)) {
                                             foreach ($categoryData as $category) {
                                                 ?>
-                                        <option value="<?= $category->cat_id;?>">
-                                                <?= $category->cat_name;?>
+                                        <option
+                                            value="<?= $category->cat_id; ?>">
+                                            <?= $category->cat_name; ?>
                                         </option>
-                                                <?php
+                                        <?php
                                             }
                                         }
                                         ?>
@@ -115,10 +121,11 @@
                                         if (!empty($subCategoryData)) {
                                             foreach ($subCategoryData as $subCategory) {
                                                 ?>
-                                        <option value="<?= $subCategory->sub_cat_id;?>">
-                                                <?= $subCategory->sub_cat_name;?>
+                                        <option
+                                            value="<?= $subCategory->sub_cat_id; ?>">
+                                            <?= $subCategory->sub_cat_name; ?>
                                         </option>
-                                                <?php
+                                        <?php
                                             }
                                         }
                                         ?>
@@ -126,7 +133,26 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Company:</label>
-                                    <input type="text" name="pro_company" class="form-control" placeholder="Insert company....">
+                                    <input type="text" name="pro_company" class="form-control"
+                                        placeholder="Insert company....">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"> Brand:</label>
+                                    <select id="select" name="brand_id" class="form-control">
+                                        <?php
+                                        $brandData = $brand->index($table3);
+                                        if (!empty($brandData)) {
+                                            foreach ($brandData as $brand) {
+                                                ?>
+                                        <option
+                                            value="<?= $brand->brand_id; ?>">
+                                            <?= $brand->brand_name; ?>
+                                        </option>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <input type="hidden" name="action" value="add">
@@ -137,9 +163,9 @@
 
                         </textarea><br>
                         <button type="submit" name="submit" value="insert" class="btn btn-sm btn-primary">
-                        <i class="fa fa-upload"></i> Insert</button>
+                            <i class="fa fa-upload"></i> Insert</button>
                         <a href="ecommerceIndex.php" class="btn btn-sm btn-warning">
-                        <i class="fa fa-fast-backward"></i> Product Index</a>
+                            <i class="fa fa-fast-backward"></i> Product Index</a>
                     </form>
 
                     <!-- Code above -->
@@ -158,4 +184,5 @@
 <!-- ./wrapper -->
 <?php include_once '../partials/_scripts.php'; ?>
 </body>
+
 </html>

@@ -95,11 +95,11 @@
                                                 <?php
 
                                                 $rating = $product->pro_rating;
-                                                for ($i=0; $i < $rating; $i++) {
-                                                ?>
+                                    for ($i=0; $i < $rating; $i++) {
+                                        ?>
                                                 <i class="fas fa-star rating-star"></i>
                                                 <?php
-                                                } ?>
+                                    } ?>
                                             </span>
                                             <div class="btn-group cart-add-link" role="group"
                                                 aria-label="Basic example">
@@ -117,7 +117,6 @@
                         </div>
                         <!-- Slider area -->
                         <div class="col-sm-4 p-1">
-
                             <div id="wrapper">
                                 <div class="slider-wrapper theme-default">
                                     <div id="slider" class="nivoSlider">
@@ -132,7 +131,6 @@
                                                 data-thumb="../admin/ecommerce/<?php echo $slider->photo; ?>"
                                                 alt="<?php echo $slider->pro_name; ?>"
                                                 title="<?php echo $slider->pro_name; ?>" />
-
                                         </a>
                                         <?php
                                         }
@@ -142,6 +140,12 @@
                             </div>
                         </div>
                         <!--/ Slider ends -->
+
+                        <!-- Featured Products -->
+                        <div class="col-sm-12">
+
+                        </div>
+                        <!-- /Featured Products -->
                     </div>
                     <!-- Pagination begins -->
                     <div class="row d-flex justify-content-center">

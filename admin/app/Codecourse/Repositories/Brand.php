@@ -71,7 +71,6 @@ class Brand
             } else {
                 return false;
             }
-
             return $result;
         } catch (PDOException $e) {
             echo $e->getMessage();

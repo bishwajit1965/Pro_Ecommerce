@@ -24,6 +24,7 @@ switch ($_POST['submit']) {
                         $cat_id = $products->validate($_POST['cat_id']);
                         $sub_cat_id = $products->validate($_POST['sub_cat_id']);
                         $pro_company = $products->validate($_POST['pro_company']);
+                        $brand_id = $products->validate($_POST['brand_id']);
                         $permitted = ['jpg', 'jpeg', 'png', 'gif'];
                         $file_name = $_FILES['photo']['name'];
                         $file_size = $_FILES['photo']['size'];
@@ -44,7 +45,8 @@ switch ($_POST['submit']) {
                                 'cat_id' => $cat_id,
                                 'sub_cat_id' => $sub_cat_id,
                                 'pro_company' => $pro_company,
-                                'photo' => $photo
+                                'photo' => $photo,
+                                'brand_id' => $brand_id
                             ];
                             if (!empty($pro_name) && !empty($pro_description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);
@@ -140,6 +142,16 @@ switch ($_POST['submit']) {
                                 Session::set('message', $message);
                                 $home_url = 'addProduct.php';
                                 $products->redirect($home_url);
+                            } elseif (empty($_POST['brand_id'])) {
+                                $message = '<div class="alert alert-danger alert-dismissible" role="alert">
+                                <strong> SORRY !</strong> Brand field was left blank !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'addProduct.php';
+                                $products->redirect($home_url);
                             } elseif (empty($file_name)) {
                                 $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
                                 Photo field remained blank!!!
@@ -196,6 +208,7 @@ switch ($_POST['submit']) {
                                 'cat_id' => $cat_id,
                                 'sub_cat_id' => $sub_cat_id,
                                 'pro_company' => $pro_company,
+                                'brand_id' => $brand_id
                             ];
                             if (!empty($pro_name) && !empty($description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);
@@ -280,6 +293,16 @@ switch ($_POST['submit']) {
                                 Session::set('message', $message);
                                 $home_url = 'addProduct.php';
                                 $products->redirect($home_url);
+                            } elseif (empty($_POST['brand_id'])) {
+                                $message = '<div class="alert alert-danger alert-dismissible" role="alert">
+                                <strong> SORRY !</strong> Brand field was left blank !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'addProduct.php';
+                                $products->redirect($home_url);
                             } else {
                                 // Will store data in database without photo
                                 $insertedDataWithoutProducts = $products->store($fields, $table);
@@ -318,6 +341,8 @@ switch ($_POST['submit']) {
                         $cat_id = $products->validate($_POST['cat_id']);
                         $sub_cat_id = $products->validate($_POST['sub_cat_id']);
                         $pro_company = $products->validate($_POST['pro_company']);
+                        $brand_id = $products->validate($_POST['brand_id']);
+
                         $permitted = ['jpg', 'jpeg', 'png', 'gif'];
                         $file_name = $_FILES['photo']['name'];
                         $file_size = $_FILES['photo']['size'];
@@ -339,7 +364,8 @@ switch ($_POST['submit']) {
                                 'cat_id' => $cat_id,
                                 'sub_cat_id' => $sub_cat_id,
                                 'pro_company' => $pro_company,
-                                'photo' => $photo
+                                'photo' => $photo,
+                                'brand_id' => $brand_id
                             ];
                             if (!empty($pro_name) && !empty($pro_description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);
@@ -435,6 +461,16 @@ switch ($_POST['submit']) {
                                 Session::set('message', $message);
                                 $home_url = 'addProduct.php';
                                 $products->redirect($home_url);
+                            } elseif (empty($_POST['brand_id'])) {
+                                $message = '<div class="alert alert-danger alert-dismissible" role="alert">
+                                <strong> SORRY !</strong> Brand field was left blank !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'editProduct.php';
+                                $products->redirect($home_url);
                             } elseif (empty($file_name)) {
                                 $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
                                 Photo field remained blank!!!
@@ -491,7 +527,8 @@ switch ($_POST['submit']) {
                                 'pro_rating' => $pro_rating,
                                 'cat_id' => $cat_id,
                                 'sub_cat_id' => $sub_cat_id,
-                                'pro_company' => $pro_company
+                                'pro_company' => $pro_company,
+                                'brand_id' => $brand_id
                             ];
                             if (!empty($pro_name) && !empty($description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);
@@ -569,6 +606,16 @@ switch ($_POST['submit']) {
                             } elseif (empty($_POST['sub_cat_id'])) {
                                 $message = '<div class="alert alert-danger alert-dismissible" role="alert">
                                 <strong> SORRY !</strong> Sub category id field was left blank !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'editProduct.php';
+                                $products->redirect($home_url);
+                            } elseif (empty($_POST['brand_id'])) {
+                                $message = '<div class="alert alert-danger alert-dismissible" role="alert">
+                                <strong> SORRY !</strong> Brand field was left blank !!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

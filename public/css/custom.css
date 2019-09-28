@@ -4,8 +4,11 @@
     text-shadow: 1px 2px 3px #000;
     color: #F10;
 }
-.header-area {background-color: #6CE6F9;
+
+.header-area {
+    background-color: #6CE6F9;
 }
+
 .img-class {
     width: 100%;
     height: 315px;
@@ -75,6 +78,7 @@ h1::first-letter {
     font-size: 200%;
     color: #8A2BE2;
 }
+
 h2::first-letter {
     font-size: 200%;
     color: #DA0A0A;
@@ -88,6 +92,44 @@ h3 {
     font-weight: 800;
     line-height: 18px;
 }
+
 ul>li>a {
     text-transform: uppercase;
+}
+
+/** Category links
+ * =================*/
+.category ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.category ul>li {
+    background-color: #DDD;
+    border-bottom: 1px solid #999;
+    border-top: 1px solid #FFF;
+}
+
+.category ul>li:last-child {
+    border-bottom: 1px solid #FFF;
+}
+
+.category ul>li:first-child {
+    border-top: 1px solid #FFF;
+}
+
+.category ul>li>a {
+    font-size: 18px;
+    font-weight: 700;
+    color: #494141;
+    text-decoration: none;
+    display: block;
+    padding: 5px 10px;
+}
+
+.category ul>li>a:hover {
+    background-color: #1a84db;
+    color: #FFF;
+    text-align: center;
 }

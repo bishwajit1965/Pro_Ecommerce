@@ -43,14 +43,18 @@
                     use Codecourse\Repositories\Products as Products;
                     use Codecourse\Repositories\Category as Category;
                     use Codecourse\Repositories\Subcategory as Subcategory;
+                    use Codecourse\Repositories\Brand as Brand;
                     use Codecourse\Repositories\Session as Session;
 
                     $product = new Products();
                     $category = new Category();
                     $subCategory = new Subcategory();
+                    $brand = new Brand();
+
                     $table = 'tbl_category';
                     $table1 = 'tbl_sub_category';
                     $table2 = 'tbl_products';
+                    $table3 = 'tbl_brand';
                     // Fetch single data from database to display
                     if (isset($_GET['edit_id'])) {
                         $id = $_GET['edit_id'];
@@ -170,6 +174,28 @@
                                 <div class="form-group">
                                     <label for="photo"> Photo:</label>
                                     <input type="file" class="form-control" id="photo" name="photo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="name"> Brand:</label>
+                                    <select id="select" name="brand_id" class="form-control">
+                                        <?php
+                                        $brandData = $brand->index($table3);
+                                        if (!empty($brandData)) {
+                                            foreach ($brandData as $brand) {
+                                                ?>
+                                                <option <?php if ($result->brand_id == $brand->brand_id) {
+                                                    ?>
+                                                    selected = "selected"
+                                                    <?php
+                                                    } ?>
+                                                    value="<?= $brand->brand_id; ?>">
+                                                <?= $brand->brand_name; ?>
+                                                </option>
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
