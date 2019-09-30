@@ -21,7 +21,8 @@
                 <h2>Your Single Product in Detail</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
+                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span
+                        class="badge badge-secondary"></h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -86,19 +87,24 @@
                     $single_product = $product->getSingleProduct($id, $table3);
                     ?>
                     <div class="col-sm-6">
-                        <img src="../../admin/ecommerce/<?= $single_product->photo; ?>" class="card-img-top cart-img img-cover" alt="Cart Image" style="height:292px;">
+                        <img src="../../admin/ecommerce/<?= $single_product->photo; ?>"
+                            class="card-img-top cart-img img-cover" alt="Cart Image" style="height:292px;">
                     </div>
 
                     <div class="col-sm-6">
-                        <h4 class="card-title" style="font-size:30px; font-weight:bold;"><?= $single_product->pro_name; ?></h4>
+                        <h4 class="card-title" style="font-size:30px; font-weight:bold;"><?= $single_product->pro_name; ?>
+                        </h4>
                         <p class="card-text" style="text-align:justify;">
                             <?= $helper->textShorten(htmlspecialchars_decode($single_product->pro_description), 277); ?>
                         </p>
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-sm-6">
-                                <span class="price-rating-description mb-2" style="font-weight:bold; display:block;"><s>Form Price : <?= number_format((float) $single_product->present_price, 2, '.', '') ?> <b>&#2547;</b></s></span>
+                                <span class="price-rating-description mb-2"
+                                    style="font-weight:bold; display:block;"><s>Form Price : <?= number_format((float) $single_product->present_price, 2, '.', '') ?>
+                                        <b>&#2547;</b></s></span>
 
-                                <span class="price-rating-description" style="font-weight:bold; display:block;">Present Price : <?= number_format((float) $single_product->present_price, 2, '.', '') ?>
+                                <span class="price-rating-description" style="font-weight:bold; display:block;">Present
+                                    Price : <?= number_format((float) $single_product->present_price, 2, '.', '') ?>
                                     <b>&#2547;</b></span>
                                 <span>
                                     <span class="price-rating-description"><b>Rating:</b></span>
@@ -106,25 +112,27 @@
                                     $rating = $single_product->pro_rating;
                                     for ($i = 1; $i <= $rating; $i++) {
                                         ?>
-                                        <i class="fas fa-star rating-star price-rating-description"></i>
+                                    <i class="fas fa-star rating-star price-rating-description"></i>
                                     <?php
                                     }
                                     ?>
                                 </span>
                             </div>
                             <div class="col-sm-6">
-                                <span class="price-rating-description mb-2" style="font-weight:bold; display:block;">Comp: <?= $single_product->pro_company; ?></span>
+                                <span class="price-rating-description mb-2"
+                                    style="font-weight:bold; display:block;">Comp: <?= $single_product->pro_company; ?></span>
                                 <?php
                                 $brandData = $brand->index($table4);
                                 if (!empty($brandData)) {
                                     foreach ($brandData as $brand) {
                                         if ($brand->brand_id == $single_product->brand_id) {
                                             ?>
-                                            <span class="price-rating-description" style="font-weight:bold; display:block;">
-                                                Brand : <?= $brand->brand_name; ?>
-                                            </span>
+                                <span class="price-rating-description" style="font-weight:bold; display:block;">
+                                    Brand : <?= $brand->brand_name; ?>
+                                </span>
                                 <?php
-                                        } else { }
+                                        } else {
+                                        }
                                     }
                                 }
                                 ?>
@@ -134,14 +142,18 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="number" name="quantity" min="1" max="5" class="form-control input-sm mt-2 mb-2 bg-light" placeholder="Number of items.." selected="selected">
+                                    <input type="number" name="quantity" min="1" max="20"
+                                        class="form-control input-sm mt-2 mb-2 bg-light" placeholder="Number of items.."
+                                        selected="selected">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <form action="process.php" method="post">
                                     <input type="hidden" name="action" value="verify">
-                                    <input type="hidden" name="" value="<?= $single_product->pro_id; ?>">
-                                    <button type="submit" name="submit" value="add-to-cart" class="btn btn-primary btn-block mt-2 mb-2">
+                                    <input type="hidden" name=""
+                                        value="<?= $single_product->pro_id; ?>">
+                                    <button type="submit" name="submit" value="add-to-cart"
+                                        class="btn btn-primary btn-block mt-2 mb-2">
                                         <i class="fas fa-plus"></i> Add to Cart</button>
                                 </form>
                             </div>
@@ -157,7 +169,9 @@
                     </p>
                 </div>
             </div>
+            <!-- Right Sidebar -->
             <?php include_once '../partials/_rightSidebar.php'; ?>
+            <!-- /Right Sidebar -->
         </div>
     </div>
     <!-- /Content area ends -->

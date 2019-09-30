@@ -47,7 +47,12 @@
                 <h2> Cart Home</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
+                <h3>
+                    <span class="badge badge-info">
+                        <i class="fas fa-cart-plus">&nbsp;</i>
+                        <sup>3</sup>
+                    </span class="badge badge-secondary">
+                </h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -85,20 +90,23 @@
                                             </p>
                                             <s>Price :
                                                 <?= isset($product->former_price) ? $product->former_price : ''; ?>
-                                                <b>&#2547;</b></s>
+                                                <b>&#2547;</b>
+                                            </s>
                                             <span style="font-weight:bold; display:block;">Price :
                                                 <?= isset($product->present_price) ? $product->present_price : ''; ?>
-                                                <b>&#2547;</b></span>
+                                                <b>&#2547;</b>
+                                            </span>
                                             <span>
-                                                <span class="rating-star"><b>Rating:</b></span>
+                                                <span class="rating-star">
+                                                    <b>Rating:</b>
+                                                </span>
                                                 <?php
                                                     $rating = $product->pro_rating;
-                                                    for ($i = 0; $i < $rating; $i++) {
+                                                    for ($i = 0; $i <= $rating; $i++) {
                                                         ?>
                                                     <i class="fas fa-star rating-star"></i>
                                                 <?php
-                                                    }
-                                                    ?>
+                                                    } ?>
                                             </span>
                                             <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                 <a href="#" class="btn btn-primary btn-sm">Add</a>
