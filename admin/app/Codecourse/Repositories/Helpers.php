@@ -1,5 +1,6 @@
 <?php
- namespace Codecourse\Repositories;
+
+namespace Codecourse\Repositories;
 
 class Helpers
 {
@@ -13,7 +14,7 @@ class Helpers
         $text = $text . " ";
         $text = substr($text, 0, $limit);
         $text = substr($text, 0, strrpos($text, ' '));
-        $text = $text . ".....";
+        $text = $text . "....";
         return $text;
     }
 

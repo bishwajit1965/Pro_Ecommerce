@@ -54,12 +54,12 @@ s {
     font-weight: 500;
 }
 
-.rating-star {
-    line-height: 15px;
-    font-size: 14px;
+.price-rating-description {
+    line-height: 13px;
+    font-size: 13px;
     margin-bottom: 2px;
-    color: #0D0DD3;
-    font-weight: 450;
+    color: #777;
+    font-weight: 500;
 }
 
 .container {
@@ -97,8 +97,8 @@ ul>li>a {
     text-transform: uppercase;
 }
 
-/** Category links
- * =================*/
+/** Category &sub category links
+ * =============================*/
 .category ul {
     margin: 0;
     padding: 0;
@@ -112,20 +112,20 @@ ul>li>a {
 }
 
 .category ul>li:last-child {
-    border-bottom: 1px solid #FFF;
+    border-bottom: 0px solid #999;
 }
 
 .category ul>li:first-child {
-    border-top: 1px solid #FFF;
+    border-top: 0px solid #999;
 }
 
 .category ul>li>a {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 15px;
+    font-weight: 500;
     color: #494141;
     text-decoration: none;
     display: block;
-    padding: 5px 10px;
+    padding: 3px 12px;
 }
 
 .category ul>li>a:hover {

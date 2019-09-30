@@ -65,7 +65,13 @@ class FrontEnd
         return $query2;
     }
 
-    // Pagination
+    /**
+     * Pagination
+     *
+     * @param [type] $table
+     * @param [type] $records_per_page
+     * @return void
+     */
     public function paginglink($table, $records_per_page)
     {
         $query = "SELECT * FROM $table";
@@ -75,8 +81,8 @@ class FrontEnd
         $total_no_of_records = $stmt->rowCount();
         if ($total_no_of_records > 0) {
             ?>
-<ul class="pagination">
-    <?php
+            <ul class="pagination">
+            <?php
             $total_no_of_pages = ceil($total_no_of_records/$records_per_page);
             $current_page = 1;
             if (isset($_GET["page_no"])) {
@@ -90,7 +96,7 @@ class FrontEnd
             for ($i=1; $i<=$total_no_of_pages; $i++) {
                 if ($i == $current_page) {
                     echo "<li class='page-item'><a class='page-link' href='".$self."?page_no=".$i."'
-                            style='color:red; background-color:#D9EDF7;'> ".$i."</a></li>";
+                                    style='color:red; background-color:#D9EDF7;'> ".$i."</a></li>";
                 } else {
                     echo "<li class='page-item'><a class='page-link' href='".$self."?page_no=".$i."'>".$i."</a></li>";
                 }
@@ -99,10 +105,10 @@ class FrontEnd
                 $next=$current_page+1;
                 echo "<li class='page-item'><a class='page-link' href='".$self."?page_no=".$next."'>Next</a></li>";
                 echo "<li class='page-item'><a class='page-link' href='".$self."?page_no=".$total_no_of_pages."'>
-                        Last</a></li>";
+                                Last</a></li>";
             } ?>
-</ul>
-<?php
+            </ul>
+            <?php
         }
     }
     /**
@@ -122,9 +128,9 @@ class FrontEnd
     }
     /**
      * It will fetch the number of rows
-     * @param      <type>   $table  The table
+     * @param <type>$table The table
      *
-     * @return     boolean  ( description_of_the_return_value )
+     * @return boolean ( description_of_the_return_value )
      */
     public function numberOfRows($table)
     {

@@ -46,7 +46,7 @@ class Category
             $query = "INSERT INTO $table ($columns) VALUES(:$placeholders)";
             $stmt = $this->conn->prepare($query);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
@@ -88,20 +88,20 @@ class Category
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :".$key;
-                    $st = $st.$set;
+                    $set = "$key = :" . $key;
+                    $st = $st . $set;
                 } else {
-                    $set = "$key = :".$key.', ';
-                    $st = $st.$set;
+                    $set = "$key = :" . $key . ', ';
+                    $st = $st . $set;
                     ++$counter;
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET ".$st;
-            $sql .= ' WHERE cat_id = '.$id;
+            $sql .= "UPDATE $table SET " . $st;
+            $sql .= ' WHERE cat_id = ' . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $result = $stmt->execute();
             if ($result) {
@@ -123,13 +123,13 @@ class Category
 
     public function redirect($url)
     {
-        header('Location:'.$url);
+        header('Location:' . $url);
     }
 
     /**
      * { for validating input data }
      *
-     * @param <type> $data   The data
+     * @param <type> $data The data
      *
      * @return <type>(fresh validated data)
      */

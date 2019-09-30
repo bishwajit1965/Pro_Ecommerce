@@ -35,7 +35,7 @@ switch ($_POST['submit']) {
                                         </button>
                                         </div>';
                                     Session::set('message', $message);
-                                    $home_url = 'addCategory.php';
+                                    $home_url = 'addBrand.php';
                                     $brand->redirect($home_url);
                                     exit();
                                 }

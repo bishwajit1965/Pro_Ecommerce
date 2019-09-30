@@ -33,7 +33,28 @@ class Products
                 return $products;
             }
         } catch (PDOException $e) {
-            echo $e->getMesssage();
+            echo $e->getMessage();
+        }
+    }
+
+    // Get single product
+    public function getSingleProduct($id, $table)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE pro_id = :single_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':single_id', $id);
+            $stmt->execute();
+            $single_product = $stmt->fetch(PDO::FETCH_OBJ);
+            if ($single_product) {
+                return $single_product;
+            } else {
+                return false;
+            }
+
+            return $single_product;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
 
@@ -46,7 +67,7 @@ class Products
             $query = "INSERT INTO $table ($columns) VALUES(:$placeholders)";
             $stmt = $this->conn->prepare($query);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
@@ -97,20 +118,20 @@ class Products
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :".$key;
-                    $st = $st.$set;
+                    $set = "$key = :" . $key;
+                    $st = $st . $set;
                 } else {
-                    $set = "$key = :".$key.', ';
-                    $st = $st.$set;
+                    $set = "$key = :" . $key . ', ';
+                    $st = $st . $set;
                     ++$counter;
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET ".$st;
-            $sql .= ' WHERE pro_id = '.$id;
+            $sql .= "UPDATE $table SET " . $st;
+            $sql .= ' WHERE pro_id = ' . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $result = $stmt->execute();
             if ($result) {
@@ -132,20 +153,20 @@ class Products
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :".$key;
-                    $st = $st.$set;
+                    $set = "$key = :" . $key;
+                    $st = $st . $set;
                 } else {
-                    $set = "$key = :".$key.' , ';
-                    $st = $st.$set;
+                    $set = "$key = :" . $key . ' , ';
+                    $st = $st . $set;
                     ++$counter;
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET ".$st;
-            $sql .= ' WHERE pro_id = '.$id;
+            $sql .= "UPDATE $table SET " . $st;
+            $sql .= ' WHERE pro_id = ' . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $result = $stmt->execute();
             if ($result) {
@@ -209,15 +230,15 @@ class Products
      */
     public function redirect($url)
     {
-        header('Location:'.$url);
+        header('Location:' . $url);
     }
-     /**
-      * { for input data validation }
-      *
-      * @param <type>$data   The data
-      *
-      * @return <type>( description_of_the_return_value )
-      */
+    /**
+     * { for input data validation }
+     *
+     * @param <type>$data   The data
+     *
+     * @return <type>( description_of_the_return_value )
+     */
     public function validate($data)
     {
         $data = trim($data);

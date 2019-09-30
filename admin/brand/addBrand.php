@@ -29,11 +29,9 @@
                     <h3 class="box-title">Title</h3>
 
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                            title="Collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
 
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                            title="Remove"> <i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"> <i class="fa fa-times"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -57,9 +55,8 @@
 
                         <form action="ProcessBrand.php" method="post">
                             <div class="form-group">
-                                <label for="name">Brand Name:</label>
-                                <input type="text" name="brand_name" class="form-control form-control-sm"
-                                    placeholder="Insert brand name....">
+                                <label for="brand_name">Brand Name:</label>
+                                <input type="text" name="brand_name" class="form-control form-control-sm" placeholder="Insert brand name....">
                             </div>
                             <div class="form-group">
                                 <label for="name"> Category:</label>
@@ -70,10 +67,9 @@
                                     if (!empty($categoryData)) {
                                         foreach ($categoryData as $category) {
                                             ?>
-                                    <option
-                                        value="<?=$category->cat_id; ?>">
-                                        <?=$category->cat_name; ?>
-                                    </option>
+                                            <option value="<?= $category->cat_id; ?>">
+                                                <?= $category->cat_name; ?>
+                                            </option>
                                     <?php
                                         }
                                     }

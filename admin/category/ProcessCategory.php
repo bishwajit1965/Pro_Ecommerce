@@ -17,9 +17,11 @@ switch ($_POST['submit']) {
                     if (isset($_POST['submit'])) {
                         $cat_name = $category->validate(ucfirst($_POST['cat_name']));
                         $cat_name = filter_var($cat_name, FILTER_SANITIZE_STRING);
+                        $brand_id = filter_var($brand_id, FILTER_SANITIZE_STRING);
 
                         $fields = [
-                            'cat_name' => $cat_name
+                            'cat_name' => $cat_name,
+                            'brand_id' => $brand_id,
                         ];
                         // This code will check and prevent duplicate entry of data
                         $categoryData = $category->index($table);
@@ -56,7 +58,7 @@ switch ($_POST['submit']) {
                                 $message = '<div class="alert alert-success alert-dismissible" role="alert">
                                 <strong> WOW !</strong> Data inserted successfully !!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true">&times;</span>
                                 </button>
                                 </div>';
                                 Session::set('message', $message);
