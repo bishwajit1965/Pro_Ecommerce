@@ -32,7 +32,7 @@ class Brand
                 return $brandData;
             }
         } catch (PDOException $e) {
-            echo $e->getMessage();
+            echo $e->getMesshage();
         }
     }
 

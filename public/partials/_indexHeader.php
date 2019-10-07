@@ -1,10 +1,3 @@
-<?php
-require_once '../../admin/app/start.php';
-
-use Codecourse\Repositories\Session as Session;
-
-Session::init();
-?>
 <div class="row pt-1 header-area">
     <div class="col-sm-3 d-flex flex-column justify-content-center">
         <h1 id="heading">Ecommerce site</h1>
@@ -19,7 +12,7 @@ Session::init();
             </form>
         </div>
     </div>
-    <div class="col-sm-3 d-flex flex-column justify-content-center text-center">
+    <div class="col-sm-2 d-flex flex-column justify-content-center text-center">
         <form action="">
             <div class="input-group input-group-sm p-1">
                 <div class="input-group-prepend">
@@ -29,7 +22,7 @@ Session::init();
             </div>
         </form>
     </div>
-    <div class="col-sm-3 d-flex flex-column justify-content-center">
+    <div class="col-sm-4 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="col-sm-8 social-links">
                 <a href=""><i class="fab fa-facebook-square"></i> </a>
@@ -39,33 +32,18 @@ Session::init();
                 <a href=""><i class="fab fa-github"></i> </a>
             </div>
             <div class="col-sm-4 d-flex flex-row justify-content-center log-in">
-                <?php
-                if (Session::checkLogin() == true) {
-                    ?>
-                <form action="processLogin.php" method="post">
-                    <input type="hidden" name="action" value="verify">
-                    <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger">Logout</button>
-                </form>
-                <?php
-                } else {
-                    ?>
                 <form action="pages/login.php" method="post">
                     <button type="submit" class="btn btn-sm btn-info">
                         Login
                     </button>
+                </form>&nbsp;&nbsp;
+
+                <form action="pages/registerForm.php" method="post">
+                    <button type="submit" class="btn btn-sm btn-info">
+                        Register
+                    </button>
                 </form>
-                <?php
-                }
-                ?>
             </div>
         </div>
-    </div>
-    <div class="float-right px-2" style="margin-left:auto;font-weight:bold;">
-        <?php
-        if (isset($_SESSION['login'])) {
-            $sessionEmail = $_SESSION['login'];
-            echo isset($sessionEmail) ? 'Welcome !!! you are logged in '. $sessionEmail : '';
-        }
-        ?>
     </div>
 </div>

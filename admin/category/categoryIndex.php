@@ -98,7 +98,7 @@
                                 <td>
                                     <?php echo $result->cat_name; ?>
                                 </td>
-                                 <td>
+                                <td>
                                     <?php echo $result->cat_id; ?>
                                 </td>
                                 <td>
@@ -113,24 +113,27 @@
                                         href="editCategory.php?edit_id=<?php echo $result->cat_id; ?>"><i
                                             class="fa fa-pencil"></i> Edit</a>
 
-                                    <a class="btn btn-xs btn-danger"
+                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip" title="Delete Product!"
                                         href="categoryIndex.php?delete_id=<?php echo $result->cat_id; ?>"
                                         onClick="return confirm('Do you really want to delete this data? If deleted it is lost for ever !!!');">
                                         <i class="fa fa-trash"></i> Delete</a>
 
-                                    <a class="btn btn-xs btn-danger"
-                                        href="deleteCategory.php?delete_id=<?php echo $result->cat_id; ?>">
+                                    <a class="btn btn-xs btn-danger" data-toggle="tooltip"
+                                        title="View and delete Product!"
+                                        href="deleteCategory.php?delete_id=<?php echo $result->cat_id; ?>"
+                                        onClick="return confirm('Do you really want to view this data?');">
                                         <i class="fa fa-trash"></i> View & Delete</a>
-                                        <?php
+                                    <?php
                                     } else {
                                         ?>
-                                    <a class="btn btn-xs btn-primary"
-                                        href="editCategopry.php?edit_id=<?php echo $result->cat_id; ?>"><i
+                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="View Product!"
+                                        href="editCategopry.php?edit_id=<?php echo $result->cat_id; ?>"
+                                        onClick="return confirm('Do you really want to view this data?');"><i
                                             class="fa fa-eye"></i> View</a><?php
                                     } ?>
                                 </td>
                             </tr>
-                                    <?php
+                            <?php
                                 }
                             }
                             ?>

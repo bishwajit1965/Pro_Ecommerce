@@ -42,9 +42,11 @@
                         </span>
                     </h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse"><i class="fa fa-minus"></i></button>
 
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                            title="Remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -87,11 +89,11 @@
                     <table id="example1" class="table table-bordered table-striped table-small">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Brand Name</th>
-                                <th>Category Id</th>
-                                <th>Created at</th>
-                                <th>Actions</th>
+                                <th width="10%">Id</th>
+                                <th width="20%">Brand Name</th>
+                                <th width="20%">Category Id</th>
+                                <th width="25%">Created at</th>
+                                <th width="25%">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,37 +103,44 @@
                                 $id = 1;
                                 foreach ($brandData as $result) {
                                     ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $id++; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $result->brand_name; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $result->cat_id; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $helper->dateFormat($result->created_at); ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($_SESSION['userEmail'] == $user_home->getEmail()) {
-                                                ?>
-                                                <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Product!" href="editBrand.php?edit_id=<?php echo $result->brand_id; ?>"><i class="fa fa-pencil"></i> Edit</a>
+                            <tr>
+                                <td>
+                                    <?php echo $id++; ?>
+                                </td>
+                                <td>
+                                    <?php echo $result->brand_name; ?>
+                                </td>
+                                <td>
+                                    <?php echo $result->cat_id; ?>
+                                </td>
+                                <td>
+                                    <?php echo $helper->dateFormat($result->created_at); ?>
+                                </td>
+                                <td>
+                                    <?php
+                                    if ($_SESSION['userEmail'] == $user_home->getEmail()) {
+                                        ?>
+                                    <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="Edit Product!"
+                                        href="editBrand.php?edit_id=<?php echo $result->brand_id; ?>"><i
+                                            class="fa fa-pencil"></i> Edit</a>
 
-                                                <a class="btn btn-xs btn-danger" href="brandIndex.php?delete_id=<?php echo $result->brand_id; ?>" onClick="return confirm('Do you really want to delete this data? If deleted it is lost for ever !!!');">
-                                                    <i class="fa fa-trash"></i> Delete</a>
+                                    <a class="btn btn-xs btn-danger"
+                                        href="brandIndex.php?delete_id=<?php echo $result->brand_id; ?>"
+                                        onClick="return confirm('Do you really want to delete this data? If deleted it is lost for ever !!!');">
+                                        <i class="fa fa-trash"></i> Delete</a>
 
-                                                <a class="btn btn-xs btn-danger" href="deleteBrand.php?delete_id=<?php echo $result->brand_id; ?>">
-                                                    <i class="fa fa-trash"></i> View & Delete</a>
-                                            <?php
-                                            } else {
-                                                ?>
-                                                <a class="btn btn-xs btn-primary" href="editBrand.php?edit_id=<?php echo $result->brand_id; ?>"><i class="fa fa-eye"></i> View</a><?php
-                                                                                                                                                                            } ?>
-                                        </td>
-                                    </tr>
+                                    <a class="btn btn-xs btn-danger"
+                                        href="deleteBrand.php?delete_id=<?php echo $result->brand_id; ?>">
+                                        <i class="fa fa-trash"></i> View & Delete</a>
+                                    <?php
+                                    } else {
+                                        ?>
+                                    <a class="btn btn-xs btn-primary"
+                                        href="editBrand.php?edit_id=<?php echo $result->brand_id; ?>"><i
+                                            class="fa fa-eye"></i> View</a><?php
+                                    } ?>
+                                </td>
+                            </tr>
                             <?php
                                 }
                             }
@@ -139,11 +148,11 @@
                         </tbody>
                         <tfooter>
                             <tr>
-                                <th>Id</th>
-                                <th>Brand Name</th>
-                                <th>Category Id</th>
-                                <th>Created at</th>
-                                <th>Actions</th>
+                                <th width="10%">Id</th>
+                                <th width="20%">Brand Name</th>
+                                <th width="20%">Category Id</th>
+                                <th width="25%">Created at</th>
+                                <th width="25%">Actions</th>
                             </tr>
                         </tfooter>
                     </table>

@@ -1,3 +1,35 @@
+<?php
+require_once '../../admin/app/start.php';
+
+use Codecourse\Repositories\Brand as Brand;
+use Codecourse\Repositories\Helpers as Helpers;
+use Codecourse\Repositories\Session as Session;
+use Codecourse\Repositories\Category as Category;
+use Codecourse\Repositories\Products as MyProduct;
+use Codecourse\Repositories\SubCategory as SubCategory;
+
+Session::init();
+Session::checkSession();
+
+// Needed for inserting category id to products table
+$category = new Category;
+$subCategory = new SubCategory;
+$product = new MyProduct();
+$helper = new Helpers();
+$brand = new Brand();
+
+// Needed table for fetching data
+$table = 'tbl_category';
+$table2 = 'tbl_sub_category';
+$table3 = 'tbl_products';
+$table4 = 'tbl_brand';
+$table5 = 'tbl_cart';
+
+// Get single product id to fetch data
+if (isset($_GET['single_id'])) {
+    $id = $_GET['single_id'];
+}
+?>
 <?php include_once '../partials/_head.php'; ?>
 
 <body>
@@ -49,32 +81,6 @@
                 <!-- /Error message will be displayed -->
                 <div class="row">
                     <?php
-                    require_once '../../admin/app/start.php';
-
-                    use Codecourse\Repositories\Session as Session;
-                    use Codecourse\Repositories\Category as Category;
-                    use Codecourse\Repositories\SubCategory as SubCategory;
-                    use Codecourse\Repositories\Products as MyProduct;
-                    use Codecourse\Repositories\Helpers as Helpers;
-                    use Codecourse\Repositories\Brand as Brand;
-
-                    // Needed for inserting category id to products table
-                    $category = new Category;
-                    $subCategory = new SubCategory;
-                    $product = new MyProduct();
-                    $helper = new Helpers();
-                    $brand = new Brand();
-
-                    // Needed table for fetching data
-                    $table = 'tbl_category';
-                    $table2 = 'tbl_sub_category';
-                    $table3 = 'tbl_products';
-                    $table4 = 'tbl_brand';
-
-                    // Get single product id to fetch data
-                    if (isset($_GET['single_id'])) {
-                        $id = $_GET['single_id'];
-                    }
                     // Will display all the messages vlidation/insert/update/delete
                     // Session::init();
                     $message = Session::get('message');
@@ -92,7 +98,8 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <h4 class="card-title" style="font-size:30px; font-weight:bold;"><?= $single_product->pro_name; ?>
+                        <h4 class="card-title" style="font-size:30px; font-weight:bold;">
+                            <?= $single_product->pro_name; ?>
                         </h4>
                         <p class="card-text" style="text-align:justify;">
                             <?= $helper->textShorten(htmlspecialchars_decode($single_product->pro_description), 277); ?>
@@ -100,7 +107,8 @@
                         <div class="row ">
                             <div class="col-sm-6">
                                 <span class="price-rating-description mb-2"
-                                    style="font-weight:bold; display:block;"><s>Form Price : <?= number_format((float) $single_product->present_price, 2, '.', '') ?>
+                                    style="font-weight:bold; display:block;"><s>Form Price :
+                                        <?= number_format((float) $single_product->present_price, 2, '.', '') ?>
                                         <b>&#2547;</b></s></span>
 
                                 <span class="price-rating-description" style="font-weight:bold; display:block;">Present
@@ -120,7 +128,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <span class="price-rating-description mb-2"
-                                    style="font-weight:bold; display:block;">Comp: <?= $single_product->pro_company; ?></span>
+                                    style="font-weight:bold; display:block;">Comp:
+                                    <?= $single_product->pro_company; ?></span>
                                 <?php
                                 $brandData = $brand->index($table4);
                                 if (!empty($brandData)) {
@@ -132,32 +141,36 @@
                                 </span>
                                 <?php
                                         } else {
+                                            #....
                                         }
                                     }
                                 }
                                 ?>
-                                <span class="price-rating-description"><b>Product Number:&nbsp;<?= $single_product->pro_number; ?></b></span>
+                                <span class="price-rating-description"><b>Product
+                                        Number:&nbsp;<?= $single_product->pro_number; ?></b></span>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input type="number" name="quantity" min="1" max="20"
-                                        class="form-control input-sm mt-2 mb-2 bg-light" placeholder="Number of items.."
-                                        selected="selected">
+
+                        <form action="processCart.php" method="post" autocomplete="on">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="number" name="quantity" value="1" min="1" autofocus max="20"
+                                            selected class="form-control input-sm mt-2 mb-2 bg-light"
+                                            placeholder="Select">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <form action="process.php" method="post">
+                                <div class="col-sm-6">
                                     <input type="hidden" name="action" value="verify">
-                                    <input type="hidden" name=""
+                                    <input type="hidden" name="pro_id"
                                         value="<?= $single_product->pro_id; ?>">
                                     <button type="submit" name="submit" value="add-to-cart"
                                         class="btn btn-primary btn-block mt-2 mb-2">
                                         <i class="fas fa-plus"></i> Add to Cart</button>
-                                </form>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
                 <div class="category bg-secondary py-2 mt-4 px-3 mb-3 text-white text-center">
@@ -168,6 +181,8 @@
                         <?= htmlspecialchars_decode($single_product->pro_description); ?>
                     </p>
                 </div>
+                <a href=" ../index.php" class="btn btn-sm btn-primary mb-2"><i class="fas fa-fast-backward"> </i> Home
+                    page</a>
             </div>
             <!-- Right Sidebar -->
             <?php include_once '../partials/_rightSidebar.php'; ?>

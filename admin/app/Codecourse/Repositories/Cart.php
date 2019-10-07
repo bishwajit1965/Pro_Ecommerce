@@ -2,11 +2,11 @@
 
 namespace Codecourse\Repositories;
 
-use Codecourse\Repositories\Database as Database;
 use PDO;
 use PDOException;
+use Codecourse\Repositories\Database as Database;
 
-class Products
+class Cart
 {
     // Database connection constructor
     private $conn;
@@ -17,7 +17,14 @@ class Products
         $dbConnection = $database->dbConnection();
         $this->conn = $dbConnection;
     }
-
+    // Input data validation
+    public function validate($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
     // View Data in Index page
     public function index($table)
     {
@@ -26,67 +33,35 @@ class Products
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    $products[] = $data;
+                while ($cData = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $cartData[] = $cData;
                 }
-
-                return $products;
+                return $cartData;
             }
         } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-    // View Data in Index page
-    public function products($table, $productId)
-    {
-        try {
-            $sql = "SELECT * FROM $table WHERE pro_id = :pro_id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':pro_id', $productId);
-            $stmt->execute();
-            if ($stmt->rowCount() > 0) {
-                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    $products[] = $data;
-                }
-                return $products;
-            }
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
-    }
-
-    // Get single product
-    public function getSingleProduct($id, $table)
-    {
-        try {
-            $sql = "SELECT * FROM $table WHERE pro_id = :single_id";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindValue(':single_id', $id);
-            $stmt->execute();
-            $single_product = $stmt->fetch(PDO::FETCH_OBJ);
-            if ($single_product) {
-                return $single_product;
-            } else {
-                return false;
-            }
-
-            return $single_product;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
+            echo $e->getMesssage();
         }
     }
 
     // Insert data
-    public function store($fields, $table)
+    public function addToCart($table5, $table3, $productId, $quantity, $sessionId)
     {
         try {
-            $columns = implode(', ', array_keys($fields));
-            $placeholders = implode(', :', array_keys($fields));
-            $query = "INSERT INTO $table ($columns) VALUES(:$placeholders)";
+            $query = "SELECT * FROM $table3 WHERE pro_id = :pro_id";
             $stmt = $this->conn->prepare($query);
-            foreach ($fields as $key => $value) {
-                $stmt->bindValue(':' . $key, $value);
-            }
+            $stmt->bindParam(':pro_id', $productId);
+            $stmt->execute([':pro_id' => $productId]);
+            $cartItem = $stmt->fetch(PDO::FETCH_OBJ);
+
+            $query = "INSERT INTO $table5 (session_id, pro_id, pro_name, pro_price, pro_quantity , photo) VALUES('$sessionId', '$productId', '$cartItem->pro_name', '$cartItem->present_price', '$quantity' , '$cartItem->photo')";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(":$sessionId", $sessionId);
+            $stmt->bindValue(":$productId", $productId);
+            $stmt->bindValue(":$cartItem->pro_name", $cartItem->pro_name);
+            $stmt->bindValue(":$cartItem->present_price", $cartItem->present_price);
+            $stmt->bindValue(":$quantity", $quantity);
+            $stmt->bindValue(":$cartItem->photo", $cartItem->photo);
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
                 $lastId = $this->conn->lastInsertId();
@@ -101,7 +76,7 @@ class Products
     public function updateView($id, $table)
     {
         try {
-            $sql = "SELECT * FROM $table WHERE pro_id = :edit_id";
+            $sql = "SELECT * FROM $table WHERE id = :edit_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':edit_id', $id);
             $stmt->execute();
@@ -122,7 +97,7 @@ class Products
     public function update($fields, $id, $table)
     {
         // Delete photo from uploads folder
-        $stmt = $this->conn->prepare("SELECT photo FROM $table WHERE pro_id = :id");
+        $stmt = $this->conn->prepare("SELECT photo FROM $table WHERE id = :id");
         $stmt->execute([':id' => $_GET['edit_id']]);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
@@ -136,20 +111,20 @@ class Products
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :" . $key;
-                    $st = $st . $set;
+                    $set = "$key = :".$key;
+                    $st = $st.$set;
                 } else {
-                    $set = "$key = :" . $key . ', ';
-                    $st = $st . $set;
+                    $set = "$key = :".$key.', ';
+                    $st = $st.$set;
                     ++$counter;
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET " . $st;
-            $sql .= ' WHERE pro_id = ' . $id;
+            $sql .= "UPDATE $table SET ".$st;
+            $sql .= ' WHERE id = '.$id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':' . $key, $value);
+                $stmt->bindValue(':'.$key, $value);
             }
             $result = $stmt->execute();
             if ($result) {
@@ -171,20 +146,20 @@ class Products
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :" . $key;
-                    $st = $st . $set;
+                    $set = "$key = :".$key;
+                    $st = $st.$set;
                 } else {
-                    $set = "$key = :" . $key . ' , ';
-                    $st = $st . $set;
+                    $set = "$key = :".$key.' , ';
+                    $st = $st.$set;
                     ++$counter;
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET " . $st;
-            $sql .= ' WHERE pro_id = ' . $id;
+            $sql .= "UPDATE $table SET ".$st;
+            $sql .= ' WHERE id = '.$id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':' . $key, $value);
+                $stmt->bindValue(':'.$key, $value);
             }
             $result = $stmt->execute();
             if ($result) {
@@ -199,7 +174,7 @@ class Products
     public function destroyView($id, $table)
     {
         try {
-            $sql = "SELECT * FROM $table WHERE pro_id = :delete_id";
+            $sql = "SELECT * FROM $table WHERE id = :delete_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':delete_id', $id);
             $stmt->execute();
@@ -215,21 +190,10 @@ class Products
     // Delete data from database
     public function destroy($id, $table)
     {
-        // Select uploaded photo to delete from uploads
-        $query = "SELECT photo FROM $table WHERE pro_id = :id";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute([':id' => $_GET['delete_id']]);
-        $stmt->bindparam(':id', $id);
-        $stmt->execute();
-        while ($photo_data = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $del_photo = $photo_data->photo;
-            unlink($del_photo);
-        }
         try {
-            $sql = "DELETE FROM $table WHERE pro_id = :id";
+            $sql = "DELETE FROM $table WHERE cart_id = :cart_id";
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([':id' => $_GET['delete_id']]);
-            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':cart_id', $id);
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
                 return $stmtExec ? true : false;
@@ -239,38 +203,11 @@ class Products
         }
     }
 
-    /**
-     * Redirect url function.
-     *
-     * @param [type] $url
-     *
-     * @return void
-     */
     public function redirect($url)
     {
-        header('Location:' . $url);
-    }
-    /**
-     * { for input data validation }
-     *
-     * @param <type>$data   The data
-     *
-     * @return <type>( description_of_the_return_value )
-     */
-    public function validate($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+        header("Location: $url");
     }
 
-    /**
-     * Count rows from related table
-     *
-     * @param [type] $table
-     * @return void
-     */
     public function numberOfRows($table)
     {
         $query = "SELECT FOUND_ROWS() FROM $table";

@@ -34,6 +34,27 @@ class FrontEnd
             echo $e->getMessage();
         }
     }
+    /**
+     * Branded products
+     *
+     * @param [type] $query
+     * @return void
+     */
+    public function frontEndBrandedProducts($query)
+    {
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $productsData[] = $data;
+                }
+                return $productsData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     // Slider data
     public function sliderDataDisplay($table)
     {

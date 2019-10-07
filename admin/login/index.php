@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login | Pro_master</title>
+        <title>Admin Login | Pro_master</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Favicon -->
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <!-- /.login-logo -->
             <div class="login-box-body">
                 <div class="login-logo">
-                    <a href="#"><span class="text-color"><b>Project Master</b> Login</a></span>
+                    <a href="#"><span class="text-color"><b>Project Master</b>Admin Login</a></span>
                     <hr class="hr-color">
                 </div>
                 <div class="text-center text-color">

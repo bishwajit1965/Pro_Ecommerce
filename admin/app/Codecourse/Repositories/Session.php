@@ -40,7 +40,7 @@ class Session
         self::init();
         if (self::get('login') == false) {
             self::destroy();
-            header('Location:login.php');
+            header('Location: login.php');
         }
     }
 
@@ -49,8 +49,21 @@ class Session
     {
         self::init();
         if (self::get('login') == true) {
-            header('Location:index.php');
+            // header('Location: ../index.php');
+            return true;
         }
+    }
+    /**
+     * Redirect url function.
+     *
+     * @param [type] $url
+     *
+     * @return void
+     */
+
+    public function redirect($url)
+    {
+        header('Location:'.$url);
     }
 
     // Destroying session ang logging out
