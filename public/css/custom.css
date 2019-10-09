@@ -133,3 +133,40 @@ ul>li>a {
     color: #FFF;
     text-align: center;
 }
+
+/** Brands Items
+ * ==================**/
+.brands ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.brands ul>li {
+    background-color: #DDD;
+    border-bottom: 1px solid #999;
+    border-top: 1px solid #FFF;
+}
+
+.brands ul>li:last-child {
+    border-bottom: 0px solid #999;
+}
+
+.brands ul>li:first-child {
+    border-top: 0px solid #999;
+}
+
+.brands ul>li>a {
+    font-size: 15px;
+    font-weight: 500;
+    color: #494141;
+    text-decoration: none;
+    display: block;
+    padding: 3px 12px;
+}
+
+.brands ul>li>a:hover {
+    background-color: #1a84db;
+    color: #FFF;
+    text-align: center;
+}

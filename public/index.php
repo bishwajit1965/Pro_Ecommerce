@@ -3,10 +3,15 @@ include_once '../admin/app/start.php';
 
 use Codecourse\Repositories\FrontEnd as FrontEnd;
 use Codecourse\Repositories\Helpers as Helper;
+use Codecourse\Repositories\Brand as Brand;
+use Codecourse\Repositories\Products as Products;
 
 $table = 'tbl_products';
+$table1 = 'tbl_brand';
 $helper = new Helper;
 $frontEnd = new FrontEnd;
+$brand = new Brand();
+$pdoduct = new Products();
 ?>
 <!doctype html>
 <html lang="en">
@@ -154,15 +159,7 @@ $frontEnd = new FrontEnd;
                         </div>
                         <!--/ Slider ends -->
                     </div>
-                    <!-- Featured Products -->
-                    <div class="row bg-secondary text-cen">
-                        <div class="col-sm-12">
-                            <div class="branded-items ">
-                                <h1>Branded Products</h1>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Featured Products -->
+
                     <!-- Pagination begins -->
                     <div class="row d-flex justify-content-center">
                         <nav aria-label="Page navigation example ">
@@ -175,6 +172,99 @@ $frontEnd = new FrontEnd;
                         ?>
                     </div>
                     <!-- /Pagination eends -->
+
+                    <!-- Featured Products -->
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="row branded-product bg-secondary  p-2">
+                                <h2 style="margin:auto;padding-top:4px;padding-bottom:4px;">Branded Products</h2>
+                            </div>
+                            <div class="row">
+                                <?php
+                                if (!empty($_GET['brand_id'])) {
+                                    $brandId = $_GET['brand_id'];
+                                    $displayBrandedData = $pdoduct->displayAllBrandedItems($table, $brandId);
+                                    if (!empty($displayBrandedData)) {
+                                        foreach ($displayBrandedData as $displayAllData) {
+                                            if ($brandId == $displayAllData->brand_id) {
+                                                ?>
+
+                                <div class="col-sm-3 p-1">
+                                    <div class="card" style="">
+                                        <img src="../admin/ecommerce/<?= isset($displayAllData->photo) ? $displayAllData->photo : ''; ?>"
+                                            class="card-img-top cart-img img-cover" alt="Cart Image">
+                                        <div class="card-body p-1 pt-3 pb-2">
+                                            <h6 class="card-title">
+                                                <?= isset($displayAllData->pro_name) ? $displayAllData->pro_name : ''; ?>
+                                            </h6>
+                                            <p class="card-texts">
+                                                <?= isset($displayAllData->pro_description) ? $helper->textShorten(htmlspecialchars_decode($displayAllData->pro_description), 68)  : ''; ?>
+                                            </p>
+                                            <s>Price :
+                                                <?= isset($displayAllData->former_price) ? number_format($displayAllData->former_price, 2, '.', '') : ''; ?>
+                                                <b>&#2547;</b>
+                                            </s>
+                                            <span style="font-weight:bold; display:block;">Price :
+                                                <?= isset($displayAllData->present_price) ? number_format($displayAllData->present_price, 2, '.', ''): ''; ?>
+                                                <b>&#2547;</b>
+                                            </span>
+
+                                            <span class="rating-star">
+                                                <b>Rating:</b>
+                                            </span>
+                                            <?php
+                                            $rating = $displayAllData->pro_rating;
+                                                for ($i = 1; $i <= $rating; $i++) {
+                                                    ?>
+                                            <i class="fas fa-star rating-star"></i>
+                                            <?php
+                                                } ?>
+
+                                            <div class="btn-group cart-add-link" role="group"
+                                                aria-label="Basic example">
+                                                <a href="#" class="btn btn-primary btn-sm">Add</a>
+                                                <a href="pages/single.php?single_id=<?php echo $displayAllData->pro_id; ?>"
+                                                    class="btn btn-warning btn-sm">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
+                                            }
+                                        }
+                                    } else {
+                                        // echo "No product is available in this category";
+                                        include_once 'pages/notFound.php';
+                                    }
+                                } else {
+                                    echo 'Click the desired brand to see branded products.';
+                                }
+                        ?>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 bg-light brands">
+                            <div class="branded-product bg-secondary text-center p-2">
+                                <h2>Brands</h2>
+                            </div>
+                            <ul>
+                                <?php
+                                $brandedData = $brand->brandedItems($table1);
+                                if (!empty($brandedData)) {
+                                    foreach ($brandedData as $brand) {
+                                        ?>
+
+                                <li><a href="index.php?brand_id=<?=$brand->brand_id?>">
+                                        <?=$brand->brand_name?></a>
+                                </li>
+                                <?php
+                                    }
+                                }
+                                ?>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- /Featured Products -->
                 </div>
             </div>
             <!-- /Content area ends -->

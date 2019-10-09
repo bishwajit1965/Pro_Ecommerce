@@ -8,6 +8,7 @@ use Codecourse\Repositories\Cart as Cart;
 Session::init();
 Session::checkSession();
 
+$sessionId = session_id();
 $cart = new Cart();
 $product = new Products();
 $table = 'tbl_cart';
@@ -33,8 +34,18 @@ $table = 'tbl_cart';
                 <h2> Cart Products</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>5</sup></span
-                        class="badge badge-secondary"></h3>
+                <h3>
+                    <span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i>
+                        <sup>
+                            <?php
+                            $numberOfItems = $cart->numberOfRows($table, $sessionId);
+                            if (!empty($numberOfItems)) {
+                                echo $numberOfItems;
+                            }
+                            ?>
+                        </sup>
+                    </span class="badge badge-secondary">
+                </h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -63,35 +74,43 @@ $table = 'tbl_cart';
             </thead>
             <tbody>
                 <?php
-                $cartData = $cart->index($table);
+                $cartData = $cart->index($table, $sessionId);
                 if (!empty($cartData)) {
-                    $i =0;
+                    $i = 0;
+                    $sum = 0;
                     foreach ($cartData as $cart) {
+                        // $cart->pro_price++;
                         $i++; ?>
                 <tr>
                     <td scope="row"><?=$i; ?>
-                    <td scope="row"><?=$cart->pro_name; ?>
+                    <td scope="row"><?= isset($cart->pro_name) ? $cart->pro_name :''; ?>
                     </td>
                     <td><img class="" src="../../admin/ecommerce/<?=$cart->photo; ?>" alt="<?=$cart->pro_name; ?>"
                             style="width:50px;height:40px;"></td>
-                    <td><?=$cart->pro_price; ?> <b> &#2547;</b></td>
+                    <td><?= isset($cart->pro_price) ? number_format($cart->pro_price, 2, '.', '') : ''; ?>
+                        <b> &#2547;</b></td>
                     <td>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input type="number" name="quantity" value="<?= $cart->pro_quantity; ?>" min="1"
-                                    max="25" class="form-control form-control-sm" placeholder="Select"
-                                    selected="selected">
-                            </div>
-                            <div class="col-sm-6">
-                                <form action="processProductcart.php" method="post">
+                        <form action="processCart.php" method="post">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="number" name="pro_quantity"
+                                        value="<?= isset($cart->pro_quantity) ? $cart->pro_quantity : ''; ?>" min="1"
+                                        max="25" class="form-control form-control-sm" placeholder="Select"
+                                        selected="selected">
+                                </div>
+                                <div class="col-sm-6">
+
                                     <input type="hidden" name="action" value="verify">
+                                    <input type="hidden" name="pro_id" value="<?=$cart->pro_id; ?>">
+
                                     <button type="submit" name="submit" value="update-cart-item"
                                         class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Update</button>
-                                </form>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </td>
-                    <td style="display:block;text-align:right;"><?=$cart->pro_price * $cart->pro_quantity; ?>
+                    <td style="display:block;text-align:right;"><?php $total = $cart->pro_price * $cart->pro_quantity;
+                        echo isset($total) ? number_format($total, 2, '.', '') : ''; ?>
                         <b>&#2547;</b></td>
                     <td>
                         <form action="processCart.php" method="post">
@@ -104,26 +123,70 @@ $table = 'tbl_cart';
                     </td>
                 </tr>
                 <?php
+                        // Grand tgotal calculation
+                        if ($sum !== null) {
+                            $sum = $sum + $total;
+                        }
                     }
                 } else {
+                    ?>
+                <div class="alert alert-primary alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>SORRY !</strong> There is no data avaiable in the cart table.
+                </div>
+                <?php
                 }
                 ?>
                 <tr>
-                    <td colspan="7" class="">
-                        <span style="display:block;text-align:right;font-weight:bold;color:#666;">Sub total : 50,000.00
-                            <b>&#2547;</b></span>
-                        <span
-                            style="display:block;text-align:right;font-weight:bold;color:#666;margin-bottom:10px;">Vat-
-                            15% : 7,500.00 <b>&#2547;</b></span>
-                        <span style="display:block;text-align:right;font-weight:700;font-size:18px;">Grand total: Tk-
-                            57,500.00 <b>&#2547;</b></span>
+                    <td colspan="7" class="bg-dark text-white " style="padding-right:140px;">
+                        <div class="row">
+                            <div class="col-sm-5"></div>
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-3">
+                                <span
+                                    style="display:block;text-align:right;font-weight:bold;color:#FFF;font-size:14px;">
+                                    Sub total :
+                                    <?php
+                                    if (!empty($sum)) {
+                                        echo number_format($sum, 2, '.', '');
+                                    }
+                                    ?>
+                                    <b>&#2547;</b>
+                                </span>
+                                <span style="margin-left:auto;">+</span>
+                                <span
+                                    style="display:block;text-align:right;font-weight:bold;color:#FFF;margin-bottom:10px;border-bottom:3px solid #DDD;font-size:14px;">
+                                    Vat - 15% :
+                                    <?php
+                                    if (!empty($sum)) {
+                                        $vat = $sum * 0.15 ;
+                                        echo number_format($vat, 2, '.', '') ;
+                                    }
+                                    ?>
+                                    <b>&#2547;</b>
+                                </span>
+                                <span style="display:block;text-align:right;font-weight:700;font-size:14px;color:#FFF;">
+                                    Grand total :
+                                    <?php
+                                    if (!empty($sum) && !empty($vat)) {
+                                        $grandTotal = $sum + $vat;
+                                        echo number_format($grandTotal, 2, '.', '');
+                                    }
+                                    ?>
+                                    <b> &#2547; </b></span>
+                            </div>
+
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
         <div class="row d-dlex flex-row justify-content-around">
             <a href=" ../index.php" class="btn btn-sm btn-primary"><i class="fas fa-fast-backward"> </i> Home page</a>
-            <form action="processProductCart.php" method="post">
+            <form action="processCart.php" method="post">
                 <button type="submit" name="submit" class="btn btn-sm btn-success"><i class="fas fa-cart-plus"> </i>
                     Process Cart </button>
             </form>

@@ -21,11 +21,13 @@ Session::init();
     </div>
     <div class="col-sm-3 d-flex flex-column justify-content-center text-center">
         <form action="">
-            <div class="input-group input-group-sm p-1">
+            <div class="input-group input-group-sm p-2">
                 <div class="input-group-prepend">
                     <span class="input-group-text bg-warning"><i class="fas fa-cart-plus"></i></span>
                 </div>
-                <input type="text" class="form-control p-0 pl-2" placeholder="Empty cart...">
+                <input type="text" class="form-control p-0 pl-2" placeholder="
+
+                ">
             </div>
         </form>
     </div>

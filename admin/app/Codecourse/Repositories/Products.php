@@ -54,7 +54,26 @@ class Products
             echo $e->getMessage();
         }
     }
-
+    // For displaying branded items
+    public function displayAllBrandedItems($table, $brandId)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE brand_id = :brand_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(":brand_id", $brandId);
+            $stmt->execute([':brand_id' => $_GET['brand_id']]);
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $displayBrandedData[] = $data;
+                }
+                return $displayBrandedData;
+                var_dump($displayBrandedData);
+                die();
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     // Get single product
     public function getSingleProduct($id, $table)
     {
@@ -62,7 +81,7 @@ class Products
             $sql = "SELECT * FROM $table WHERE pro_id = :single_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':single_id', $id);
-            $stmt->execute();
+            $stmt->execute([':single_id' => $id]);
             $single_product = $stmt->fetch(PDO::FETCH_OBJ);
             if ($single_product) {
                 return $single_product;

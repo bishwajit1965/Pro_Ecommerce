@@ -46,6 +46,7 @@
                         if (!empty($message)) {
                             echo $message;
                             Session::set('message', null);
+                            header("Refresh:3");
                         }
 
                         ?>

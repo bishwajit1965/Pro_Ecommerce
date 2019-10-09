@@ -162,11 +162,11 @@ if (isset($_GET['single_id'])) {
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="hidden" name="action" value="verify">
-                                    <input type="hidden" name="pro_id"
-                                        value="<?= $single_product->pro_id; ?>">
+                                    <input type="hidden" name="pro_id" value="<?= $single_product->pro_id; ?>">
+                                    <input type="hidden" name="session_id" value="<?= $single_product->session_id; ?>">
                                     <button type="submit" name="submit" value="add-to-cart"
                                         class="btn btn-primary btn-block mt-2 mb-2">
-                                        <i class="fas fa-plus"></i> Add to Cart</button>
+                                        <i class="fas fa-cart-plus"></i> Add to Cart</button>
                                 </div>
                             </div>
                         </form>

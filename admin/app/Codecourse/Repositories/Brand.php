@@ -32,9 +32,27 @@ class Brand
                 return $brandData;
             }
         } catch (PDOException $e) {
-            echo $e->getMesshage();
+            echo $e->getMessage();
         }
     }
+    // View branded product in Index page
+    public function brandedItems($table1)
+    {
+        try {
+            $sql = "SELECT * FROM $table1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $brandedData[] = $data;
+                }
+                return $brandedData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
 
     // Insert data
     public function store($fields, $table)
