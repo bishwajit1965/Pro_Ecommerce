@@ -53,7 +53,6 @@ class Brand
         }
     }
 
-
     // Insert data
     public function store($fields, $table)
     {
