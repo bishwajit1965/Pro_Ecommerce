@@ -9,7 +9,7 @@
             if (!empty($categoryData)) {
                 foreach ($categoryData as $category) {
                     ?>
-                    <li><a href="<?= $category->cat_id; ?>"><?= $category->cat_name; ?></a></li>
+                    <li><a href="category.php?category_id=<?= $category->cat_id; ?>"><?= $category->cat_name; ?></a></li>
             <?php
                 }
             }
@@ -26,7 +26,7 @@
             if (!empty($subCategoryData)) {
                 foreach ($subCategoryData as $subCategory) {
                     ?>
-                    <li><a href="<?= $subCategory->sub_cat_id; ?>"><?= $subCategory->sub_cat_name; ?></a></li>
+                    <li><a href="subCategory.php?sub_category_id=<?= $subCategory->sub_cat_id; ?>"><?= $subCategory->sub_cat_name; ?></a></li>
             <?php
                 }
             }

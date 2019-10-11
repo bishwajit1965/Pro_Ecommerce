@@ -48,7 +48,6 @@
                             <!-- <label for="">Password</label> -->
                             <input type="password" class="form-control form-control-sm" name="password" id=""
                                 placeholder="Insert your password..." required="required">
-
                         </div>
                         <div class="login-register-linkls">
                             <p style="color:#c0c0c0;font-weight:bold;">Alrady registered ! then log-in otherwise
@@ -57,8 +56,6 @@
                             <button type="submit" name="submit" value="login" class="btn btn-sm btn-info"><i
                                     class="fas fa-users"></i> Log
                                 in</button>
-
-
                             <a href="registerForm.php" class="btn btn-sm btn-primary"><i
                                     class="fas fa-fast-backward"></i> Register</a>
                         </div>

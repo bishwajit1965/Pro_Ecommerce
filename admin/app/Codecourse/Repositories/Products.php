@@ -36,8 +36,28 @@ class Products
             echo $e->getMessage();
         }
     }
+
     // View Data in Index page
     public function products($table, $productId)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE pro_id = :pro_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':pro_id', $productId);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $products[] = $data;
+                }
+                return $products;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // View Data in Index page
+    public function randomProductsForBrandedSection($table, $productId)
     {
         try {
             $sql = "SELECT * FROM $table WHERE pro_id = :pro_id";

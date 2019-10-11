@@ -34,16 +34,18 @@ class FrontEnd
             echo $e->getMessage();
         }
     }
+
     /**
-     * Branded products
+     * Branded products default
      *
      * @param [type] $query
      * @return void
      */
-    public function frontEndBrandedProducts($query)
+    public function defaultBrontEndBrandedProducts($table)
     {
         try {
-            $stmt = $this->conn->prepare($query);
+            $sql = "SELECT * FROM $table WHERE brand_id != 0  ORDER BY pro_id DESC LIMIT 8";
+            $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
@@ -102,10 +104,9 @@ class FrontEnd
         $total_no_of_records = $stmt->rowCount();
         if ($total_no_of_records > 0) {
             ?>
-<ul class="pagination">
-    <?php
-
-            $total_no_of_pages = ceil($total_no_of_records / $records_per_page);
+            <ul class="pagination">
+                <?php
+                $total_no_of_pages = ceil($total_no_of_records / $records_per_page);
             $current_page = 1;
             if (isset($_GET["page_no"])) {
                 $current_page = $_GET["page_no"];
@@ -127,8 +128,8 @@ class FrontEnd
                 echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $next . "'>Next</a></li>";
                 echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $total_no_of_pages . "'>Last</a></li>";
             } ?>
-</ul>
-<?php
+            </ul>
+            <?php
         }
     }
     /**

@@ -13,9 +13,20 @@
             <li class="nav-item">
                 <a class="nav-link" href="single.php">Single</a>
             </li>
-            <li class="nav-item">
+            <?php
+            include_once '../../admin/app/start.php';
+
+            use Codecourse\Repositories\Session as Session;
+
+            $session = Session::checkLogin();
+            if ($session == true) {
+                ?>
+                <li class="nav-item">
                 <a class="nav-link" href="cart.php">Cart</a>
-            </li>
+                </li>
+                <?php
+            }
+            ?>
             <li class="nav-item">
                 <a class="nav-link" href="topBrands.php">Top Brands</a>
             </li>

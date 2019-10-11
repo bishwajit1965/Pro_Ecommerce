@@ -46,7 +46,6 @@ if (isset($_POST['submit'])) {
                                         </button>
                                         </div>';
                                         Session::set('message', $message);
-
                                         $home_url = 'cart.php';
                                         $product->redirect($home_url);
                                     }

@@ -36,6 +36,23 @@ class Brand
         }
     }
     // View branded product in Index page
+    public function getBrand($table1)
+    {
+        try {
+            $sql = "SELECT * FROM $table1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $brandName[] = $data;
+                }
+                return $brandName;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    // View branded product in Index page
     public function brandedItems($table1)
     {
         try {

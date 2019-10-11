@@ -79,14 +79,13 @@ $table = 'tbl_cart';
                     $i = 0;
                     $sum = 0;
                     foreach ($cartData as $cart) {
-                        // $cart->pro_price++;
                         $i++; ?>
                 <tr>
                     <td scope="row"><?=$i; ?>
                     <td scope="row"><?= isset($cart->pro_name) ? $cart->pro_name :''; ?>
                     </td>
                     <td><img class="" src="../../admin/ecommerce/<?=$cart->photo; ?>" alt="<?=$cart->pro_name; ?>"
-                            style="width:50px;height:40px;"></td>
+                            style="width:45px;height:35px;"></td>
                     <td><?= isset($cart->pro_price) ? number_format($cart->pro_price, 2, '.', '') : ''; ?>
                         <b> &#2547;</b></td>
                     <td>

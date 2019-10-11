@@ -1,7 +1,7 @@
 #heading {
     font-size: 42px;
     font-weight: bold;
-    text-shadow: 1px 2px 3px #000;
+    text-shadow: 1px 2px 3px rgb(0, 0, 0);
     color: #F10;
 }
 
@@ -50,7 +50,7 @@ s {
     line-height: 16px;
     font-size: 16px;
     margin-bottom: 2px;
-    color: #78788B;
+    color: #888;
     font-weight: 500;
 }
 
@@ -82,7 +82,7 @@ h1::first-letter {
 h2::first-letter {
     font-size: 200%;
     color: #DA0A0A;
-    text-shadow: 1px 2px 3px #FFF;
+    text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
 }
 
 h1,
@@ -91,6 +91,7 @@ h3 {
     font-family: 'Allura', cursive;
     font-weight: 800;
     line-height: 18px;
+    color:
 }
 
 ul>li>a {
@@ -129,7 +130,7 @@ ul>li>a {
 }
 
 .category ul>li>a:hover {
-    background-color: #1a84db;
+    background-color: #3190dd;
     color: #FFF;
     text-align: center;
 }

@@ -60,7 +60,6 @@ class Session
      *
      * @return void
      */
-
     public function redirect($url)
     {
         header('Location:'.$url);

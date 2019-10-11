@@ -32,6 +32,21 @@
                 <a href=""><i class="fab fa-github"></i> </a>
             </div>
             <div class="col-sm-4 d-flex flex-row justify-content-center log-in">
+            <?php
+            include_once '../admin/app/start.php';
+
+            use Codecourse\Repositories\Session as Session;
+
+            $session = Session::checkLogin();
+            if ($session == true) {
+                ?>
+                 <form action="pages/processLogin.php" method="post">
+                    <input type="hidden" name="action" value="verify">
+                    <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger">Logout</button>
+                </form>
+                <?php
+            } else {
+                ?>
                 <form action="pages/login.php" method="post">
                     <button type="submit" class="btn btn-sm btn-info">
                         Login
@@ -39,10 +54,14 @@
                 </form>&nbsp;&nbsp;
 
                 <form action="pages/registerForm.php" method="post">
-                    <button type="submit" class="btn btn-sm btn-info">
+                    <button type="submit" class="btn btn-sm btn-success">
                         Register
                     </button>
                 </form>
+                <?php
+            }
+            ?>
+
             </div>
         </div>
     </div>

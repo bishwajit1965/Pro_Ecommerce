@@ -1,10 +1,10 @@
 <?php
 require_once '../../admin/app/start.php';
 
-use Codecourse\Repositories\Session as Session;
-use Codecourse\Repositories\Products as Products;
-use Codecourse\Repositories\LoginCustomer as LoginCustomer;
 use Codecourse\Repositories\Helpers as Helpers;
+use Codecourse\Repositories\LoginCustomer as LoginCustomer;
+use Codecourse\Repositories\Products as Products;
+use Codecourse\Repositories\Session as Session;
 
 $product = new Products();
 $loginCustomer = new LoginCustomer();
@@ -24,6 +24,7 @@ if (isset($_POST['submit'])) {
                                 $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
                                 $password = md5($_POST['password']);
                                 $customerData = $loginCustomer->logIn($email, $password, $table);
+
                                 // Will verify email and passwrd
                                 if (isset($email) && isset($password) && $email == $customerData->email && $password ==  $customerData->password) {
                                     Session::init();
