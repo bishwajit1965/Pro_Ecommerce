@@ -116,11 +116,11 @@ $pdoduct = new Products();
                                             </span>
                                             <?php
                                                 $rating = $product->pro_rating;
-                                for ($i = 1; $i <= $rating; $i++) {
-                                    ?>
+                                            for ($i = 1; $i <= $rating; $i++) {
+                                                ?>
                                                 <i class="fas fa-star rating-star"></i>
-                                            <?php
-                                } ?>
+                                                        <?php
+                                            } ?>
 
                                             <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                 <a href="#" class="btn btn-primary btn-sm">Add</a>
@@ -129,7 +129,7 @@ $pdoduct = new Products();
                                         </div>
                                     </div>
                                 </div>
-                            <?php
+                                <?php
                             }
                             ?>
                         </div>
@@ -146,7 +146,7 @@ $pdoduct = new Products();
                                         <a href="#">
                                             <img src="../admin/ecommerce/<?php echo $slider->photo; ?>" style="width:100%;height:316px;" class="img-cover" data-thumb="../admin/ecommerce/<?php echo $slider->photo; ?>" alt="<?php echo $slider->pro_name; ?>" title="<?php echo $slider->pro_name; ?>" />
                                         </a>
-                                    <?php
+                                        <?php
                                     }
                                     ?>
                                 </div>
@@ -207,12 +207,12 @@ $pdoduct = new Products();
                                                             <b>Rating:</b>
                                                         </span>
                                                         <?php
-                                                                        $rating = $displayAllData->pro_rating;
-                                            for ($i = 1; $i <= $rating; $i++) {
-                                                ?>
+                                                        $rating = $displayAllData->pro_rating;
+                                                        for ($i = 1; $i <= $rating; $i++) {
+                                                            ?>
                                                             <i class="fas fa-star rating-star"></i>
-                                                        <?php
-                                            } ?>
+                                                            <?php
+                                                        } ?>
 
                                                         <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                             <a href="#" class="btn btn-primary btn-sm">Add</a>
@@ -221,7 +221,7 @@ $pdoduct = new Products();
                                                     </div>
                                                 </div>
                                             </div>
-                                <?php
+                                            <?php
                                         }
                                     }
                                 } else {
@@ -257,15 +257,15 @@ $pdoduct = new Products();
                                                 <span style="font-weight:bold; display:block;">Brand :
                                                     <?php
                                                     $brandName = $brand->getBrand($table1);
-                                    if (!empty($brandName)) {
-                                        foreach ($brandName as $b_data) {
-                                            // echo $b_data->brand_name;
-                                            // echo $b_data->brand_id;
-                                            if ($b_data->brand_id == $product->brand_id) {
-                                                echo $b_data->brand_name;
-                                            }
-                                        }
-                                    } ?>
+                                                    if (!empty($brandName)) {
+                                                        foreach ($brandName as $b_data) {
+                                                            // echo $b_data->brand_name;
+                                                            // echo $b_data->brand_id;
+                                                            if ($b_data->brand_id == $product->brand_id) {
+                                                                echo $b_data->brand_name;
+                                                            }
+                                                        }
+                                                    } ?>
                                                 </span>
 
                                                 <span class="rating-star">
@@ -273,11 +273,11 @@ $pdoduct = new Products();
                                                 </span>
                                                 <?php
                                                 $rating = $product->pro_rating;
-                                    for ($i = 1; $i <= $rating; $i++) {
-                                        ?>
+                                                for ($i = 1; $i <= $rating; $i++) {
+                                                    ?>
                                                     <i class="fas fa-star rating-star"></i>
-                                                <?php
-                                    } ?>
+                                                            <?php
+                                                } ?>
 
                                                 <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                     <a href="#" class="btn btn-primary btn-sm">Add</a>
@@ -286,7 +286,7 @@ $pdoduct = new Products();
                                             </div>
                                         </div>
                                     </div>
-                            <?php
+                                    <?php
                                 }
                             }
                             ?>
@@ -307,7 +307,7 @@ $pdoduct = new Products();
                                         <a href="index.php?brand_id=<?= $brand->brand_id ?>">
                                             <?= $brand->brand_name ?></a>
                                     </li>
-                            <?php
+                                    <?php
                                 }
                             }
                             ?>
