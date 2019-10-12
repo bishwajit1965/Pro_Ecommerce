@@ -53,7 +53,7 @@ class Core
             $query = "INSERT INTO $table ($columns) VALUES(:$placeholders)";
             $stmt = $this->conn->prepare($query);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
@@ -79,7 +79,6 @@ class Core
             } else {
                 return false;
             }
-
             return $result;
         } catch (PDOException $e) {
             echo $e->getMessage();
@@ -104,20 +103,20 @@ class Core
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :".$key;
-                    $st = $st.$set;
+                    $set = "$key = :" . $key;
+                    $st = $st . $set;
                 } else {
-                    $set = "$key = :".$key.', ';
-                    $st = $st.$set;
+                    $set = "$key = :" . $key . ', ';
+                    $st = $st . $set;
                     ++$counter;
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET ".$st;
-            $sql .= ' WHERE id = '.$id;
+            $sql .= "UPDATE $table SET " . $st;
+            $sql .= ' WHERE id = ' . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $result = $stmt->execute();
             if ($result) {
@@ -139,20 +138,20 @@ class Core
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :".$key;
-                    $st = $st.$set;
+                    $set = "$key = :" . $key;
+                    $st = $st . $set;
                 } else {
-                    $set = "$key = :".$key.' , ';
-                    $st = $st.$set;
+                    $set = "$key = :" . $key . ' , ';
+                    $st = $st . $set;
                     ++$counter;
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET ".$st;
-            $sql .= ' WHERE id = '.$id;
+            $sql .= "UPDATE $table SET " . $st;
+            $sql .= ' WHERE id = ' . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $result = $stmt->execute();
             if ($result) {
@@ -217,7 +216,7 @@ class Core
 
     public function redirect($url)
     {
-        header('Location:'.$url);
+        header('Location:' . $url);
     }
 
     /**
