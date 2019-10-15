@@ -5,11 +5,21 @@
     <div class="category d-block">
         <ul>
             <?php
+            include_once '../../admin/app/start.php';
+
+            use Codecourse\Repositories\Session as Session;
+            use Codecourse\Repositories\Category as Category;
+
+            $category = new Category();
+            $table = 'tbl_category';
+
+            $session = Session::checkLogin();
+            $sessionId = session_id();
             $categoryData = $category->index($table);
             if (!empty($categoryData)) {
                 foreach ($categoryData as $category) {
                     ?>
-                    <li><a href="category.php?category_id=<?= $category->cat_id; ?>"><?= $category->cat_name; ?></a></li>
+            <li><a href="category.php?category_id=<?= $category->cat_id; ?>"><?= $category->cat_name; ?></a></li>
             <?php
                 }
             }
@@ -26,7 +36,9 @@
             if (!empty($subCategoryData)) {
                 foreach ($subCategoryData as $subCategory) {
                     ?>
-                    <li><a href="subCategory.php?sub_category_id=<?= $subCategory->sub_cat_id; ?>"><?= $subCategory->sub_cat_name; ?></a></li>
+            <li><a
+                    href="subCategory.php?sub_category_id=<?= $subCategory->sub_cat_id; ?>"><?= $subCategory->sub_cat_name; ?></a>
+            </li>
             <?php
                 }
             }

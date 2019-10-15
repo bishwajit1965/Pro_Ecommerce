@@ -1,15 +1,14 @@
 <?php
 require_once '../../admin/app/start.php';
 
-use Codecourse\Repositories\Cart as Cart;
-use Codecourse\Repositories\Products as Products;
+use Codecourse\Repositories\CustomerProfile as CustomerProfile;
 use Codecourse\Repositories\Session as Session;
 
-$product = new Products();
-$cart = new Cart();
+$customerProfile = new CustomerProfile();
 Session::init();
-$table3 = 'tbl_products';
-$table5 = 'tbl_cart';
+
+$table = 'tbl_customer';
+
 
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];

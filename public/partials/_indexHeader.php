@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="col-sm-2 d-flex flex-column justify-content-center text-center">
-        <form action="">
+        <form action="#">
             <div class="input-group input-group-sm p-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text bg-warning"><i class="fas fa-cart-plus"></i></span>
@@ -32,21 +32,20 @@
                 <a href=""><i class="fab fa-github"></i> </a>
             </div>
             <div class="col-sm-4 d-flex flex-row justify-content-center log-in">
-            <?php
-            include_once '../admin/app/start.php';
+                <?php
+                include_once '../admin/app/start.php';
 
-            use Codecourse\Repositories\Session as Session;
+                use Codecourse\Repositories\Session as Session;
 
-            $session = Session::checkLogin();
-            if ($session == true) {
-                ?>
-                 <form action="pages/processLogin.php" method="post">
+                $session = Session::checkLogin();
+                if ($session == true) { ?>
+                <form action="pages/processLogin.php" method="post">
                     <input type="hidden" name="action" value="verify">
                     <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger">Logout</button>
                 </form>
                 <?php
-            } else {
-                ?>
+                } else {
+                    ?>
                 <form action="pages/login.php" method="post">
                     <button type="submit" class="btn btn-sm btn-info">
                         Login
@@ -59,8 +58,8 @@
                     </button>
                 </form>
                 <?php
-            }
-            ?>
+                }
+                ?>
 
             </div>
         </div>

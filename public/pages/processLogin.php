@@ -28,6 +28,8 @@ if (isset($_POST['submit'])) {
                                 // Will verify email and passwrd
                                 if (isset($email) && isset($password) && $email == $customerData->email && $password ==  $customerData->password) {
                                     Session::init();
+                                    Session::set('customerLogin', true);
+                                    Session::set('customerId', 'id');
                                     $value = $_POST['email'];
                                     Session::set('login', $value);
                                     $home_url = '../index.php';

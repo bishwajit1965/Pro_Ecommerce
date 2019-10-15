@@ -80,9 +80,10 @@
                             </thead>
                             <tbody>
                                 <?php
+
                                 use Codecourse\Repositories\Profile as Profile;
 
-$profile = new Profile();
+                                $profile = new Profile();
                                 // Will delete profile data
                                 if (isset($_GET['delete_id'])) {
                                     $id = $_GET['delete_id'];
@@ -111,14 +112,13 @@ $profile = new Profile();
                                         <?php echo $profile->pro_social; ?>
                                     </td>
                                     <td>
-                                        <img src="<?php echo $profile->photo; ?>"
-                                            alt="Profile photo" class="img-thumbnail img-responsive"
-                                            style="width:90px;hight:80px;">
+                                        <img src="<?php echo $profile->photo; ?>" alt="Profile photo"
+                                            class="img-thumbnail img-responsive" style="width:90px;hight:80px;">
                                     </td>
                                     <td>
                                         <?php
-                                        if ($_SESSION['userEmail'] == $user->getEmail()) {
-                                            ?>
+                                                        if ($_SESSION['userEmail'] == $user->getEmail()) {
+                                                            ?>
                                         <a href="addProfile.php" class="btn btn-xs btn-primary"><i
                                                 class="fa fa-plus"></i> Add Profile</a>
 
@@ -131,8 +131,8 @@ $profile = new Profile();
                                             onClick="return confirm('Do you really want to delete this data? If deleted it is lost for ever !!!');">
                                             <i class="fa fa-trash"></i> Delete</a>
                                         <?php
-                                        } elseif ($_SESSION['userEmail'] == $user->getEditorEmail()) {
-                                            ?>
+                                                        } elseif ($_SESSION['userEmail'] == $user->getEditorEmail()) {
+                                                            ?>
                                         <a href="addProfile.php" class="btn btn-xs btn-primary"><i
                                                 class="fa fa-plus"></i> Add Profile</a>
                                         <a class="btn btn-xs btn-primary"
@@ -140,21 +140,21 @@ $profile = new Profile();
                                                 class="fa fa-pencil"></i> Edit</a>
 
                                         <?php
-                                        } elseif ($_SESSION['userEmail'] == $user->getAuthorEmail()) {
-                                            ?>
+                                                        } elseif ($_SESSION['userEmail'] == $user->getAuthorEmail()) {
+                                                            ?>
                                         <a href="addProfile.php" class="btn btn-xs btn-primary"><i
                                                 class="fa fa-plus"></i> Add Profile</a>
                                         <a class="btn btn-xs btn-primary"
                                             href="editProfile.php?edit_id=<?php echo $profile->pro_id; ?>"><i
                                                 class="fa fa-pencil"></i> Edit</a>
                                         <?php
-                                        } else {
-                                            ?>
+                                                        } else {
+                                                            ?>
                                         <a class="btn btn-xs btn-primary"
                                             href="editProfile.php?edit_id=<?php echo $profile->pro_id; ?>">
                                             <i class="fa fa-eye"></i> View</a>
                                         <?php
-                                        } ?>
+                                                        } ?>
                                     </td>
 
                                 </tr>

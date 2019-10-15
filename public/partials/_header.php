@@ -1,9 +1,17 @@
 <?php
 require_once '../../admin/app/start.php';
 
+use Codecourse\Repositories\Cart as Cart;
+use Codecourse\Repositories\Products as Products;
 use Codecourse\Repositories\Session as Session;
 
 Session::init();
+Session::checkSession();
+
+$sessionId = session_id();
+$cart = new Cart();
+$product = new Products();
+$table = 'tbl_cart';
 ?>
 <div class="row pt-1 header-area">
     <div class="col-sm-3 d-flex flex-column justify-content-center">
@@ -19,15 +27,33 @@ Session::init();
             </form>
         </div>
     </div>
-    <div class="col-sm-3 d-flex flex-column justify-content-center text-center">
-        <form action="">
-            <div class="input-group input-group-sm p-2">
+    <div class="col-sm-3 d-flex flex-column justify-content-center">
+        <form action="#">
+            <div class="input-group ">
                 <div class="input-group-prepend">
-                    <span class="input-group-text bg-warning"><i class="fas fa-cart-plus"></i></span>
+                    <span class="input-group-text bg-warning"><i class="fas fa-cart-plus px-2 py-1"></i></span>
                 </div>
-                <input type="text" class="form-control p-0 pl-2" placeholder="
+                <?php
+                $cartData = $cart->priceDisplay($table, $sessionId);
+                if (!empty($cartData)) {
+                    $sum = 0;
+                    $quantity = 0;
+                    foreach ($cartData as $carts) {
+                        $total = $carts->pro_price * $carts->pro_quantity;
+                        if ($sum !== null) {
+                            $sum = $sum + $total;
+                            $quantity = $quantity + $carts->pro_quantity;
+                        }
+                    }
+                }
 
-                ">
+                ?>
+                <input type="text" class="form-control p-0 pl-1 red" placeholder="<?php if (!empty($sum)) :
+                                                                                            echo 'Qty : ' . $quantity . ' || ' . 'Price: ' . number_format($sum, 2, '.', '') . ' &#2547; '; ?>
+                <?php else :
+                    echo "Empty cart"; ?>
+                <?php endif ?>">
+
             </div>
         </form>
     </div>
@@ -40,22 +66,21 @@ Session::init();
                 <a href=""><i class="fab fa-google-plus"></i> </a>
                 <a href=""><i class="fab fa-github"></i> </a>
             </div>
-            <div class="col-sm-4 d-flex flex-row justify-content-center log-in">
+            <div class="col-sm-3 d-flex flex-row justify-content-center log-in">
                 <?php
-                if (Session::checkLogin() == true) {
-                    ?>
-                <form action="processLogin.php" method="post">
-                    <input type="hidden" name="action" value="verify">
-                    <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger">Logout</button>
-                </form>
+                if (Session::checkLogin() == true) { ?>
+                    <form action="processLogin.php" method="post">
+                        <input type="hidden" name="action" value="verify">
+                        <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger">Logout</button>
+                    </form>
                 <?php
                 } else {
                     ?>
-                <form action="pages/login.php" method="post">
-                    <button type="submit" class="btn btn-sm btn-info">
-                        Login
-                    </button>
-                </form>
+                    <form action="pages/login.php" method="post">
+                        <button type="submit" class="btn btn-sm btn-info">
+                            Login
+                        </button>
+                    </form>
                 <?php
                 }
                 ?>
@@ -66,7 +91,7 @@ Session::init();
         <?php
         if (isset($_SESSION['login'])) {
             $sessionEmail = $_SESSION['login'];
-            echo isset($sessionEmail) ? 'Welcome !!! you are logged in '. $sessionEmail : '';
+            echo isset($sessionEmail) ? 'Welcome !!! you are logged in ' . $sessionEmail : '';
         }
         ?>
     </div>

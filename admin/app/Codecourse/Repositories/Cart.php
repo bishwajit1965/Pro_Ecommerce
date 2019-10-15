@@ -2,10 +2,10 @@
 
 namespace Codecourse\Repositories;
 
-use PDO;
-use PDOException;
 use Codecourse\Repositories\Database as Database;
 use Codecourse\Repositories\Session as Session;
+use PDO;
+use PDOException;
 
 Session::init();
 
@@ -30,6 +30,24 @@ class Cart
     }
     // View Data in Index page
     public function index($table, $sessionId)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE session_id = '$sessionId'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($cData = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $cartData[] = $cData;
+                }
+                return $cartData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // View Data in Index page
+    public function priceDisplay($table, $sessionId)
     {
         try {
             $sql = "SELECT * FROM $table WHERE session_id = '$sessionId'";
@@ -82,6 +100,20 @@ class Cart
         $query = "SELECT * FROM $table5 WHERE pro_id = :pro_id && session_id = :session_id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':pro_id', $productId);
+        $stmt->bindParam(':session_id', $sessionId);
+        $stmt->execute();
+        $stmtExecute = $stmt->fetch(PDO::FETCH_OBJ);
+        if ($stmtExecute) {
+            return $stmtExecute;
+        } else {
+            return false;
+        }
+    }
+    // Check cart table if it is empty or not
+    public function checkCartTable($table5, $sessionId)
+    {
+        $query = "SELECT * FROM $table5 WHERE session_id = :session_id";
+        $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':session_id', $sessionId);
         $stmt->execute();
         $stmtExecute = $stmt->fetch(PDO::FETCH_OBJ);

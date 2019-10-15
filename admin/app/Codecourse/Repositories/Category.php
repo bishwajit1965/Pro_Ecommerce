@@ -29,11 +29,10 @@ class Category
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
                     $categoryData[] = $data;
                 }
-
                 return $categoryData;
             }
         } catch (PDOException $e) {
-            echo $e->getMesssage();
+            echo $e->getMessage();
         }
     }
 

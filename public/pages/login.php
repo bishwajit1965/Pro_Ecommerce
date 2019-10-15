@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
     <head>
         <title>User log in</title>
         <!-- Required meta tags -->
