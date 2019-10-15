@@ -46,11 +46,9 @@ $table = 'tbl_cart';
                         }
                     }
                 }
-
                 ?>
-                <input type="text" class="form-control p-0 pl-1 red" placeholder="<?php if (!empty($sum)) :
-                                                                                            echo 'Qty : ' . $quantity . ' || ' . 'Price: ' . number_format($sum, 2, '.', '') . ' &#2547; '; ?>
-                <?php else :
+                <input type="text" class="form-control p-0 pl-1" placeholder="<?php if (!empty($sum)) : echo 'Qty : ' . $quantity . ' || ' . 'Price: ' . number_format($sum, 2, '.', '') . ' &#2547; '; ?>
+              <?php else :
                     echo "Empty cart"; ?>
                 <?php endif ?>">
 
@@ -87,11 +85,11 @@ $table = 'tbl_cart';
             </div>
         </div>
     </div>
-    <div class="float-right px-2" style="margin-left:auto;font-weight:bold;">
+    <div class="float-right px-2" style="margin-left:auto;font-weight:800;font-size:22px;color:#dbdbdb;text-shadow:1px 2px 3px #000;">
         <?php
         if (isset($_SESSION['login'])) {
             $sessionEmail = $_SESSION['login'];
-            echo isset($sessionEmail) ? 'Welcome !!! you are logged in ' . $sessionEmail : '';
+            echo isset($sessionEmail) ? 'Welcome !!! you are logged in - ' . $sessionEmail : ' ';
         }
         ?>
     </div>

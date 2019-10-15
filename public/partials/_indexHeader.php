@@ -64,4 +64,15 @@
             </div>
         </div>
     </div>
+    <div class="float-right px-2"
+        style="margin-left:auto;font-weight:800;font-size:22px;color:#dbdbdb;text-shadow:1px 2px 3px #000;">
+        <?php
+        if (isset($_SESSION['login'])) {
+            $sessionEmail = $_SESSION['login'];
+            echo isset($sessionEmail) ? 'Welcome !!! you are logged in - ' . $sessionEmail : ' ';
+        } else {
+            echo "You are not logged in !!!";
+        }
+        ?>
+    </div>
 </div>

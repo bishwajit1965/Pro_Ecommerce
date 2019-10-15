@@ -36,6 +36,7 @@ class Category
         }
     }
 
+
     // Insert data
     public function store($fields, $table3)
     {

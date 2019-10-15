@@ -36,15 +36,14 @@ $table = 'tbl_cart';
             <div class="col-sm-2">
                 <h3>
                     <span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i>
-                        <sup>
-                            <?php
-                            $numberOfItems = $cart->numberOfRows($table, $sessionId);
-                            if (!empty($numberOfItems)) {
-                                echo $numberOfItems;
-                            }
-                            ?>
+                        <sup class="badge badge-danger">
+                            <?php if (!empty($sum)) :
+                                echo $quantity; ?>
+                            <?php else :
+                                echo "0"; ?>
+                            <?php endif ?>
                         </sup>
-                    </span class="badge badge-secondary">
+                    </span>
                 </h3>
             </div>
         </div>

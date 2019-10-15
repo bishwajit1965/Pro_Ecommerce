@@ -46,7 +46,7 @@ class Gallery
             $query = "INSERT INTO $table ($columns) VALUES(:$placeholders)";
             $stmt = $this->conn->prepare($query);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
@@ -63,7 +63,7 @@ class Gallery
     public function updateView($id, $table)
     {
         try {
-            $sql ="SELECT * FROM $table WHERE id = :edit_id";
+            $sql = "SELECT * FROM $table WHERE id = :edit_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(":edit_id", $id);
             $stmt->execute();
@@ -90,20 +90,20 @@ class Gallery
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :".$key;
-                    $st = $st.$set;
+                    $set = "$key = :" . $key;
+                    $st = $st . $set;
                 } else {
-                    $set = "$key = :".$key.", ";
-                    $st = $st.$set;
+                    $set = "$key = :" . $key . ", ";
+                    $st = $st . $set;
                     $counter++;
                 }
             }
             $sql = "";
-            $sql.= "UPDATE $table SET ".$st;
-            $sql.= " WHERE id = ".$id;
+            $sql .= "UPDATE $table SET " . $st;
+            $sql .= " WHERE id = " . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
@@ -122,20 +122,20 @@ class Gallery
             $totalFields = count($fields);
             foreach ($fields as $key => $value) {
                 if ($counter === $totalFields) {
-                    $set = "$key = :".$key;
-                    $st = $st.$set;
+                    $set = "$key = :" . $key;
+                    $st = $st . $set;
                 } else {
-                    $set = "$key = :".$key. " , ";
-                    $st = $st.$set;
+                    $set = "$key = :" . $key . " , ";
+                    $st = $st . $set;
                     $counter++;
                 }
             }
             $sql = "";
-            $sql.= "UPDATE $table SET ".$st;
-            $sql.= " WHERE id = ".$id;
+            $sql .= "UPDATE $table SET " . $st;
+            $sql .= " WHERE id = " . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
-                $stmt->bindValue(':'.$key, $value);
+                $stmt->bindValue(':' . $key, $value);
             }
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
@@ -145,11 +145,11 @@ class Gallery
             echo $e->getMessage();
         }
     }
-     // View data to destroy
+    // View data to destroy
     public function destroyView($id, $table)
     {
         try {
-            $sql ="SELECT * FROM $table WHERE id = :delete_id";
+            $sql = "SELECT * FROM $table WHERE id = :delete_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(":delete_id", $id);
             $stmt->execute();

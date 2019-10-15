@@ -216,3 +216,7 @@ ul>li>a {
     background-color: white;
     overflow: hidden;
 }
+
+.red ::placeholder {
+    color: red;
+}

@@ -69,14 +69,14 @@
 
         .message {
             padding-top: 20px;
-            padding-bottom: 40px;
+            padding-bottom: 50px;
         }
         </style>
     </head>
 
     <body>
         <div class="container blink_me message">
-            <h1 class="not-foundh1"> Products Not Found !!! No product exists in this brand.</h1>
+            <h1 class="not-foundh1"> Products Not Found !!! No product exists in this option.</h1>
             <p class="not-found"><strong>SORRY !!!</strong> the products you were trying to view are not available yet.
             </p>
         </div>

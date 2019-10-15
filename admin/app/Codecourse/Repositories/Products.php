@@ -81,14 +81,49 @@ class Products
             $sql = "SELECT * FROM $table WHERE brand_id = :brand_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(":brand_id", $brandId);
-            $stmt->execute([':brand_id' => $_GET['brand_id']]);
+            $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    $displayBrandedData[] = $data;
+                    $displayIDWiseBrandedProduct[] = $data;
                 }
-                return $displayBrandedData;
-                var_dump($displayBrandedData);
-                die();
+                return $displayIDWiseBrandedProduct;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // Get category id wise data for index.php page
+    public function categoryIdWisePdoductData($table, $categoryId)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE cat_id = :category_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':category_id', $categoryId);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $categoryWiseProductData[] = $data;
+                }
+                return $categoryWiseProductData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    // Get category id wise data for index.php page
+    public function subCategoryIdWisePdoductData($table, $subCategoryId)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE sub_cat_id = :sub_category_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':sub_category_id', $subCategoryId);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $subCategoryWiseProductData[] = $data;
+                }
+                return $subCategoryWiseProductData;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
