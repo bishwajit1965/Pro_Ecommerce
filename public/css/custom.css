@@ -98,21 +98,25 @@ ul>li>a {
     text-transform: uppercase;
 }
 
-/** Category &sub category links
+/** Category & sub category links
  * =============================*/
-.category ul {
+.category ul,
+.panel ul {
     margin: 0;
     padding: 0;
     list-style: none;
+    width: 100%;
 }
 
-.category ul>li {
+.category ul>li,
+.panel ul>li {
     background-color: #DDD;
     border-bottom: 1px solid #999;
     border-top: 1px solid #FFF;
 }
 
-.category ul>li:last-child {
+.category ul>li:last-child,
+.panel ul>li:last-child {
     border-bottom: 0px solid #999;
 }
 
@@ -120,7 +124,8 @@ ul>li>a {
     border-top: 0px solid #999;
 }
 
-.category ul>li>a {
+.category ul>li>a,
+.panel ul>li.a {
     font-size: 15px;
     font-weight: 500;
     color: #494141;
@@ -169,5 +174,45 @@ ul>li>a {
 .brands ul>li>a:hover {
     background-color: #1a84db;
     color: #FFF;
-    text-align: center;
+    text-align: cent
+}
+
+/* Accordion
+* ==================*/
+.accordion-heading {
+    font-size: 25px;
+    margin-top: 5px;
+    font-weight: 800;
+    margin-bottom: 3px;
+}
+
+.accordion {
+    background-color: #DDD;
+    color: #444;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    border-bottom: 1px solid#999;
+    border-top: 1px solid#FFF;
+}
+
+.accordion:last-child {
+    border-bottom: 0px solid#999;
+}
+
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+.panel {
+    padding: 0 10px;
+    display: none;
+    background-color: white;
+    overflow: hidden;
 }

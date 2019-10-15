@@ -2,19 +2,31 @@
 include_once '../admin/app/start.php';
 
 use Codecourse\Repositories\Brand as Brand;
+use Codecourse\Repositories\Category as Category;
 use Codecourse\Repositories\FrontEnd as FrontEnd;
 use Codecourse\Repositories\Helpers as Helper;
+use Codecourse\Repositories\Products as MyProduct;
 use Codecourse\Repositories\Products;
 use Codecourse\Repositories\Session as Session;
+use Codecourse\Repositories\SubCategory as SubCategory;
 
+// starts session
 Session::init();
-
-$table = 'tbl_products';
+$sessionId = session_id();
+// Tables
 $table1 = 'tbl_brand';
-$helper = new Helper;
-$frontEnd = new FrontEnd;
+$table2 = 'tbl_sub_category';
+$table5 = 'tbl_cart';
+$table3 = 'tbl_category';
+$table = 'tbl_products';
+
+// Classes instantiated
 $brand = new Brand();
+$category = new Category();
+$frontEnd = new FrontEnd();
+$helper = new Helper();
 $pdoduct = new Products();
+$subCategory = new SubCategory();
 ?>
 <!doctype html>
 <html lang="en">
@@ -115,11 +127,11 @@ $pdoduct = new Products();
                                             </span>
                                             <?php
                                                 $rating = $product->pro_rating;
-                                            for ($i = 1; $i <= $rating; $i++) {
-                                                ?>
+                                                for ($i = 1; $i <= $rating; $i++) {
+                                                    ?>
                                                 <i class="fas fa-star rating-star"></i>
-                                                <?php
-                                            } ?>
+                                            <?php
+                                                } ?>
 
                                             <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                 <a href="#" class="btn btn-primary btn-sm">Add</a>
@@ -128,7 +140,7 @@ $pdoduct = new Products();
                                         </div>
                                     </div>
                                 </div>
-                                <?php
+                            <?php
                             }
                             ?>
                         </div>
@@ -145,7 +157,7 @@ $pdoduct = new Products();
                                         <a href="#">
                                             <img src="../admin/ecommerce/<?php echo $slider->photo; ?>" style="width:100%;height:316px;" class="img-cover" data-thumb="../admin/ecommerce/<?php echo $slider->photo; ?>" alt="<?php echo $slider->pro_name; ?>" title="<?php echo $slider->pro_name; ?>" />
                                         </a>
-                                        <?php
+                                    <?php
                                     }
                                     ?>
                                 </div>
@@ -206,12 +218,12 @@ $pdoduct = new Products();
                                                             <b>Rating:</b>
                                                         </span>
                                                         <?php
-                                                        $rating = $displayAllData->pro_rating;
-                                                        for ($i = 1; $i <= $rating; $i++) {
-                                                            ?>
+                                                                        $rating = $displayAllData->pro_rating;
+                                                                        for ($i = 1; $i <= $rating; $i++) {
+                                                                            ?>
                                                             <i class="fas fa-star rating-star"></i>
-                                                            <?php
-                                                        } ?>
+                                                        <?php
+                                                                        } ?>
 
                                                         <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                             <a href="#" class="btn btn-primary btn-sm">Add</a>
@@ -220,60 +232,60 @@ $pdoduct = new Products();
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php
+                                <?php
+                                            }
                                         }
+                                    } else {
+                                        include_once 'pages/notFound.php';
                                     }
                                 } else {
-                                    include_once 'pages/notFound.php';
-                                }
-                            } else {
-                                ?>
+                                    ?>
                                 <!-- Default branded data loading if brand not clicked ends-->
                                 <?php
-                                $products = $frontEnd->defaultFrontEndBrandedProducts($table);
-                                foreach ($products as $product) {
-                                    ?>
+                                    $products = $frontEnd->defaultFrontEndBrandedProducts($table);
+                                    foreach ($products as $product) {
+                                        ?>
                                     <div class="col-sm-3 p-1 products-data">
                                         <div class="card" style="">
                                             <img src="../admin/ecommerce/<?= isset($product->photo) ? $product->photo : ''; ?>" class="card-img-top cart-img img-cover" alt="Cart Image">
                                             <div class="card-body p-1 pt-3 pb-2">
                                                 <h6 class="card-title">
-                                                <?= isset($product->pro_name) ? $product->pro_name : ''; ?>
+                                                    <?= isset($product->pro_name) ? $product->pro_name : ''; ?>
                                                 </h6>
                                                 <p class="card-texts">
-                                                <?= isset($product->pro_description) ? $helper->textShorten(htmlspecialchars_decode($product->pro_description), 68)  : ''; ?>
+                                                    <?= isset($product->pro_description) ? $helper->textShorten(htmlspecialchars_decode($product->pro_description), 68)  : ''; ?>
                                                 </p>
                                                 <s>Price :
-                                                <?= isset($product->former_price) ? number_format($product->former_price, 2, '.', '') : ''; ?>
+                                                    <?= isset($product->former_price) ? number_format($product->former_price, 2, '.', '') : ''; ?>
                                                     <b>&#2547;</b>
                                                 </s>
                                                 <span style="font-weight:bold; display:block;">Price :
-                                                <?= isset($product->present_price) ? number_format($product->present_price, 2, '.', '') : ''; ?>
+                                                    <?= isset($product->present_price) ? number_format($product->present_price, 2, '.', '') : ''; ?>
                                                     <b>&#2547;</b>
                                                 </span>
 
                                                 <span style="font-weight:bold; display:block;">Brand :
-                                                <?php
-                                                $brandName = $brand->getBrand($table1);
-                                                if (!empty($brandName)) {
-                                                    foreach ($brandName as $b_data) {
-                                                        if ($b_data->brand_id == $product->brand_id) {
-                                                            echo $b_data->brand_name;
-                                                        }
-                                                    }
-                                                } ?>
+                                                    <?php
+                                                            $brandName = $brand->getBrand($table1);
+                                                            if (!empty($brandName)) {
+                                                                foreach ($brandName as $b_data) {
+                                                                    if ($b_data->brand_id == $product->brand_id) {
+                                                                        echo $b_data->brand_name;
+                                                                    }
+                                                                }
+                                                            } ?>
                                                 </span>
 
                                                 <span class="rating-star">
                                                     <b>Rating:</b>
                                                 </span>
                                                 <?php
-                                                $rating = $product->pro_rating;
-                                                for ($i = 1; $i <= $rating; $i++) {
-                                                    ?>
+                                                        $rating = $product->pro_rating;
+                                                        for ($i = 1; $i <= $rating; $i++) {
+                                                            ?>
                                                     <i class="fas fa-star rating-star"></i>
-                                                    <?php
-                                                } ?>
+                                                <?php
+                                                        } ?>
 
                                                 <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                     <a href="#" class="btn btn-primary btn-sm">Add</a>
@@ -282,7 +294,7 @@ $pdoduct = new Products();
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
+                            <?php
                                 }
                             }
                             ?>
@@ -291,23 +303,79 @@ $pdoduct = new Products();
                     </div>
                     <div class="col-sm-2 bg-light brands">
                         <div class="branded-product bg-secondary text-center p-2">
-                            <h2>Brands</h2>
+                            <h2>Prod Links</h2>
                         </div>
-                        <ul>
-                            <?php
-                            $brandedData = $brand->brandedItems($table1);
-                            if (!empty($brandedData)) {
-                                foreach ($brandedData as $brand) {
-                                    ?>
-                                    <li>
-                                        <a href="index.php?brand_id=<?= $brand->brand_id ?>">
-                                            <?= $brand->brand_name ?></a>
-                                    </li>
+                        <!-- Accordion begins -->
+                        <button class="accordion">
+                            <h2 class="accordion-heading">Brands</h2>
+                        </button>
+                        <div class="panel">
+                            <div class="row brands">
+                                <ul>
                                     <?php
-                                }
-                            }
-                            ?>
-                        </ul>
+                                    $brandedData = $brand->brandedItems($table1);
+                                    if (!empty($brandedData)) {
+                                        foreach ($brandedData as $brand) {
+                                            ?>
+                                            <li>
+                                                <a href="index.php?brand_id=<?= $brand->brand_id ?>">
+                                                    <?= $brand->brand_name ?></a>
+                                            </li>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <button class="accordion">
+                            <h2 class="accordion-heading">Categories</h2>
+                        </button>
+                        <div class="panel">
+                            <div class="row brands">
+                                <ul>
+                                    <?php
+                                    $categoryData = $category->index($table3);
+                                    if (!empty($categoryData)) {
+                                        foreach ($categoryData as $category) {
+                                            ?>
+                                            <li>
+                                                <a href="category.php?category_id=<?= $category->cat_id; ?>">
+                                                    <?= $category->cat_name; ?>
+                                                </a>
+                                            </li>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <button class="accordion">
+                            <h2 class="accordion-heading">Sub-cats</h2>
+                        </button>
+                        <div class="panel">
+                            <div class="row brands">
+                                <ul>
+                                    <?php
+                                    $subCategoryData = $subCategory->index($table2);
+                                    if (!empty($subCategoryData)) {
+                                        foreach ($subCategoryData as $subCategory) {
+                                            ?>
+                                            <li>
+                                                <a href="subCategory.php?sub_category_id=<?= $subCategory->sub_cat_id; ?>">
+                                                    <?= $subCategory->sub_cat_name; ?>
+                                                </a>
+                                            </li>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /Accordion ends -->
                     </div>
                 </div>
                 <!-- /Featured Products -->
@@ -328,6 +396,24 @@ $pdoduct = new Products();
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <?php include_once 'partials/_scripts.php'; ?>
+    <!-- Accordion -->
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+    <!-- /Accordion -->
 </body>
 
 </html>

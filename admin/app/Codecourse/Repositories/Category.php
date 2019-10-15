@@ -19,10 +19,10 @@ class Category
     }
 
     // View Data in Index page
-    public function index($table)
+    public function index($table3)
     {
         try {
-            $sql = "SELECT * FROM $table";
+            $sql = "SELECT * FROM $table3";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
@@ -37,12 +37,12 @@ class Category
     }
 
     // Insert data
-    public function store($fields, $table)
+    public function store($fields, $table3)
     {
         try {
             $columns = implode(', ', array_keys($fields));
             $placeholders = implode(', :', array_keys($fields));
-            $query = "INSERT INTO $table ($columns) VALUES(:$placeholders)";
+            $query = "INSERT INTO $table3 ($columns) VALUES(:$placeholders)";
             $stmt = $this->conn->prepare($query);
             foreach ($fields as $key => $value) {
                 $stmt->bindValue(':' . $key, $value);
@@ -58,10 +58,10 @@ class Category
     }
 
     // View data to update
-    public function updateView($id, $table)
+    public function updateView($id, $table3)
     {
         try {
-            $sql = "SELECT * FROM $table WHERE cat_id = :edit_id";
+            $sql = "SELECT * FROM $table3 WHERE cat_id = :edit_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':edit_id', $id);
             $stmt->execute();
@@ -79,7 +79,7 @@ class Category
     }
 
     // Update data i database
-    public function update($fields, $id, $table)
+    public function update($fields, $id, $table3)
     {
         try {
             $st = '';
@@ -96,7 +96,7 @@ class Category
                 }
             }
             $sql = '';
-            $sql .= "UPDATE $table SET " . $st;
+            $sql .= "UPDATE $table3 SET " . $st;
             $sql .= ' WHERE cat_id = ' . $id;
             $stmt = $this->conn->prepare($sql);
             foreach ($fields as $key => $value) {
@@ -143,13 +143,13 @@ class Category
     /**
      * Count rows from related table
      *
-     * @param [type] $table
+     * @param [type] $table3
      * @return void or countred data/rows
      */
 
-    public function numberOfRows($table)
+    public function numberOfRows($table3)
     {
-        $query = "SELECT FOUND_ROWS() FROM $table";
+        $query = "SELECT FOUND_ROWS() FROM $table3";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $rows = $stmt->rowCount();
@@ -161,10 +161,10 @@ class Category
     }
 
     // View data to destroy
-    public function destroyView($id, $table)
+    public function destroyView($id, $table3)
     {
         try {
-            $sql = "SELECT * FROM $table WHERE cat_id = :delete_id";
+            $sql = "SELECT * FROM $table3 WHERE cat_id = :delete_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':delete_id', $id);
             $stmt->execute();
@@ -178,10 +178,10 @@ class Category
     }
 
     // Delete data from database
-    public function destroy($id, $table)
+    public function destroy($id, $table3)
     {
         try {
-            $sql = "DELETE FROM $table WHERE cat_id = :id";
+            $sql = "DELETE FROM $table3 WHERE cat_id = :id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute([':id' => $_GET['delete_id']]);
             $stmt->bindValue(':id', $id);

@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
                                     $stmtExecute = $cart->preventDuplicateEntry($table5, $productId, $sessionId);
                                     if ($stmtExecute->pro_id == $productId && $stmtExecute->session_id == $sessionId) {
                                         $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
-                                        <strong>Look carefully !!!</strong> Your cart item has already been added previously. You can update it only.
+                                        <strong>LOOK CAREFULLY !!!</strong> Your cart item has already been added previously. You can now update or remove it only.
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -93,7 +93,7 @@ if (isset($_POST['submit'])) {
                             $id = $_POST['cart_id'];
                             $cart->destroy($id, $table5);
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
-                                <strong>LOOK !!!</strong> Cart data has been deleted!!!
+                                <strong>LOOK CAREFULLY !!!</strong> Cart data has been deleted!!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
