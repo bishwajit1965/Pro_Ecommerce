@@ -115,8 +115,9 @@
                                                     foreach ($categoryData as $category) {
                                                         ?>
                                                 <option <?php if ($result->cat_id == $category->cat_id) {
-                                                            ?> selected="selected" <?php
-                                                        } ?>
+                                                                            ?> selected="selected" <?php
+                                                                                                            }
+                                                                                                            ?>
                                                     value="<?= $category->cat_id; ?>">
                                                     <?= $category->cat_name; ?>
                                                 </option>
@@ -137,7 +138,7 @@
                                                 <option <?php
                                                                         if ($result->sub_cat_id == $subCategory->sub_cat_id) {
                                                                             ?> selected="selected" <?php
-                                                                        } ?>
+                                                                                                            } ?>
                                                     value="<?= $subCategory->sub_cat_id; ?>">
                                                     <?= $subCategory->sub_cat_name; ?>
                                                 </option>
@@ -191,8 +192,8 @@
                                                     foreach ($brandData as $brand) {
                                                         ?>
                                                 <option <?php if ($result->brand_id == $brand->brand_id) {
-                                                            ?> selected="selected" <?php
-                                                        } ?>
+                                                                            ?> selected="selected" <?php
+                                                                                                            } ?>
                                                     value="<?= $brand->brand_id; ?>">
                                                     <?= $brand->brand_name; ?>
                                                 </option>
@@ -210,7 +211,7 @@
                                                 <option <?php
                                                         if ($result->pro_status == 1) {
                                                             ?> selected="selected" ; <?php
-                                                        }
+                                                                                        }
                                                                                         ?>
                                                     value="<?= $result->pro_status; ?>">
                                                     <?= $result->pro_status; ?>
@@ -224,8 +225,7 @@
                                                     ?>
                                                 <option value="1"> Publish</option>
                                                 <?php
-                                                } else {
-                                                }
+                                                } else { }
                                                 ?>
                                             </select>
                                         </div>
