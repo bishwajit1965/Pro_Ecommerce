@@ -2,81 +2,196 @@
 require_once '../../admin/app/start.php';
 
 use Codecourse\Repositories\CustomerProfile as CustomerProfile;
+use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\Session as Session;
 
 $customerProfile = new CustomerProfile();
+$helpers = new Helpers();
 Session::init();
 
 $table = 'tbl_customer';
 
-
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];
     switch ($accessor) {
-        case 'add-to-cart':
+        case 'register':
             if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
                 if ($_REQUEST['action'] == 'verify') {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['submit'])) {
-                            if (isset($_POST['pro_id']) && $_POST['pro_id'] !== null) {
-                                $productId = $_POST['pro_id'];
-                                $quantity = $_POST['quantity'];
-                                if (session_id() !== null) {
-                                    $sessionId = session_id();
-                                    // Checks to prevent duplicate entry
-                                    $stmtExecute = $cart->preventDuplicateEntry($table5, $productId, $sessionId);
-                                    if ($stmtExecute->pro_id == $productId && $stmtExecute->session_id == $sessionId) {
-                                        $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
-                                        <strong>Look carefully !!!</strong> Your cart item has already been added previously. You can update it only.
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>';
+                            $first_name = $helpers->validation($_POST['first_name']);
+                            $last_name = $helpers->validation($_POST['last_name']);
+                            $email = $helpers->validation($_POST['email']);
+                            $phone = $helpers->validation($_POST['phone']);
+                            $address = $helpers->validation($_POST['address']);
+                            $zip_code = $helpers->validation($_POST['zip_code']);
+                            $country = $helpers->validation($_POST['country']);
+                            $password = $helpers->validation($_POST['password']);
+                            $confirm_password = $helpers->validation($_POST['confirm_password']);
+                            if ($_POST['password'] == $_POST['confirm_password']) {
+                                $password = $password;
+                                $password = md5($_POST['password']);
+                                $fields = [
+                                    'first_name' => $first_name,
+                                    'last_name' => $last_name,
+                                    'email' => $email,
+                                    'phone' => $phone,
+                                    'address' => $address,
+                                    'zip_code' => $zip_code,
+                                    'country' => $country,
+                                    'password' => $password,
+                                ];
+                                if (empty($first_name)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">SORRY !!!</h4>
+                                  <p class="mb-0"> First name empty !!!</p>
+                                </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'registerForm.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (empty($last_name)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">SORRY !!!</h4>
+                                  <p class="mb-0"> Last name empty !!!</p>
+                                </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'registerForm.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">SORRY !!!</h4>
+                                  <p class="mb-0"> Email address empty !!!</p>
+                                </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'registerForm.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (empty($password)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">SORRY !!!</h4>
+                                  <p class="mb-0"> Password field left empty !!!</p>
+                                </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'registerForm.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (strlen($password) < 6) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">SORRY !!!</h4>
+                                  <p class="mb-0"> Password should be at least 6 chars !!!</p>
+                                </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'registerForm.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (empty($confirm_password)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">SORRY !!!</h4>
+                                  <p class="mb-0"> Confirm password field left empty !!!</p>
+                                </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'registerForm.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (strlen($confirm_password) < 6) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                  <h4 class="alert-heading">SORRY !!!</h4>
+                                  <p class="mb-0"> Confirm password should be at least 6 chars !!!</p>
+                                </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'registerForm.php';
+                                    $customerProfile->redirect("$home_url");
+                                } else {
+                                    $customerProfileData = $customerProfile->store($fields, $table);
+                                    if ($customerProfileData) {
+                                        $message = '<div class="alert alert-success" role="alert">
+                                      <h4 class="alert-heading">SUCCESSFUL !!!</h4>
+                                      <p class="mb-0"> Data entered successfully !!!</p>
+                                    </div>';
                                         Session::set('message', $message);
-                                        $home_url = 'cart.php';
-                                        $product->redirect($home_url);
-                                    } else {
-                                        // If not added previously the data will be inserted
-                                        $lastId = $cart->addToCart($table5, $table3, $productId, $quantity, $sessionId);
-                                        $message = '<div class="alert alert-success alert-dismissible" role="alert"">
-                                        <strong>WOW !!!</strong> Cart item has been added successfully!!!
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>';
-                                        Session::set('message', $message);
-                                        $home_url = 'cart.php';
-                                        $product->redirect($home_url);
+                                        if ($customerProfileData) {
+                                            $home_url = 'registerForm.php';
+                                            Session::redirect("$home_url");
+                                        }
                                     }
                                 }
                             } else {
-                                $home_url = '404.php';
-                                $product->redirect($home_url);
+                                $message = '<div class="alert alert-success" role="alert">
+                                            <h4 class="alert-heading">SORRY !!!</h4>
+                                            <p class="mb-0"> Password mismatch !!!</p>
+                                            </div>';
+                                Session::set('message', $message);
+                                $home_url = 'registerForm.php';
+                                $customerProfile->redirect("$home_url");
                             }
                         }
                     }
                 }
             }
             break;
-        case 'update-cart-item':
+        case 'update-customer':
             if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
                 if ($_REQUEST['action'] == 'verify') {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['submit'])) {
-                            if (isset($_POST['pro_quantity'])) {
-                                $productId = $_POST['pro_id'];
-                                $productQuantity = $_POST['pro_quantity'];
-                                $updatedQuantity = $cart->updateCartQuantity($table5, $productQuantity, $productId);
-                                if ($productQuantity) {
-                                    $message = '<div class="alert alert-success alert-dismissible" role="alert"">
-                                        <strong>SUCCESSFUL !!!</strong> Your cart item quantity has been updated.
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                            if (isset($_POST['edit_customer_id'])) {
+                                $editCustomertId = $_POST['edit_customer_id'];
+                                $first_name = $helpers->validation($_POST['first_name']);
+                                $last_name = $helpers->validation($_POST['last_name']);
+                                $email = $helpers->validation($_POST['email']);
+                                $phone = $helpers->validation($_POST['phone']);
+                                $address = $helpers->validation($_POST['address']);
+                                $zip_code = $helpers->validation($_POST['zip_code']);
+                                $country = $helpers->validation($_POST['country']);
+                                $password = $password;
+                                $password = md5($_POST['password']);
+                                $fields = [
+                                    'first_name' => $first_name,
+                                    'last_name' => $last_name,
+                                    'email' => $email,
+                                    'phone' => $phone,
+                                    'address' => $address,
+                                    'zip_code' => $zip_code,
+                                    'country' => $country,
+                                    'password' => $password,
+                                ];
+                                if (empty($first_name)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                    <h4 class="alert-heading">SORRY !!!</h4>
+                                    <p class="mb-0"> First name empty !!!</p>
                                     </div>';
                                     Session::set('message', $message);
-                                    $home_url = 'cart.php';
-                                    $product->redirect($home_url);
+                                    $home_url = 'editCustomerProfile.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (empty($last_name)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                    <h4 class="alert-heading">SORRY !!!</h4>
+                                    <p class="mb-0"> Last name empty !!!</p>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'editCustomerProfile.php';
+                                    $customerProfile->redirect("$home_url");
+                                } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                    $message = '<div class="alert alert-success" role="alert">
+                                    <h4 class="alert-heading">SORRY !!!</h4>
+                                    <p class="mb-0"> Email address empty !!!</p>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'editCustomerProfile.php';
+                                    $customerProfile->redirect("$home_url");
+                                } else {
+                                    $customerProfileData = $customerProfile->updateWithoutPhoto($fields, $editCustomertId, $table);
+                                    if ($customerProfileData) {
+                                        $message =
+                                            '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                <span class="sr-only">Close</span>
+                                            </button>
+                                            <strong>WOW !</strong> Customer profile data has been updated successfully.
+                                            </div>';
+                                        Session::set('message', $message);
+                                        if ($customerProfileData) {
+                                            $home_url = 'customerProfileIndex.php';
+                                            Session::redirect("$home_url");
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -89,8 +204,8 @@ if (isset($_POST['submit'])) {
                 if ($_REQUEST['action'] == 'verify') {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['submit'])) {
-                            $id = $_POST['cart_id'];
-                            $cart->destroy($id, $table5);
+                            $id = $_POST['delete_customer_id'];
+                            $customerProfile->destroy($id, $table);
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
                                 <strong>LOOK !!!</strong> Cart data has been deleted!!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -98,8 +213,8 @@ if (isset($_POST['submit'])) {
                                 </button>
                             </div>';
                             Session::set('message', $message);
-                            $home_url = 'cart.php';
-                            $cart->redirect($home_url);
+                            $home_url = 'customerProfileIndex.php';
+                            $customerProfile->redirect($home_url);
                         }
                     }
                 }

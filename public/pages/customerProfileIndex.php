@@ -11,6 +11,7 @@ Session::checkSession();
 // Needed for inserting category id to products table
 $customerPro = new CustomerProfile();
 $helpers = new Helpers();
+
 // Needed table for fetching data
 $table12 = 'tbl_customer';
 
@@ -45,16 +46,27 @@ $table12 = 'tbl_customer';
     </div>
     <!-- Content area begins -->
     <div class="container">
+        <?php
+        // Will display all the messages vlidation/insert/update/delete
+        $message = Session::get('message');
+        if (!empty($message)) {
+            echo $message;
+            Session::set('message', null);
+        }
+        ?>
         <div class="row">
-
-            <table class="table table-light table-condensed table-bordered table-striped">
+            <table class="table table-light table-condensed table-condensed table-striped">
                 <thead class="thead-inverse">
                     <tr>
-                        <th width="5%">ID</th>
-                        <th width="26%">Name</th>
-                        <th width="27%">Email</th>
-                        <th width="27%">Created at</th>
-                        <th width="15%">Actions</th>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Countery</th>
+                        <th>Zip Code</th>
+                        <th>Created at</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,12 +82,25 @@ $table12 = 'tbl_customer';
                                 </td>
                                 <td><?php echo $customer->email; ?>
                                 </td>
+                                <td><?php echo $customer->phone; ?>
+                                </td>
+                                <td><?php echo $customer->address; ?>
+                                </td>
+                                <td><?php echo $customer->country; ?>
+                                </td>
+                                <td><?php echo $customer->zip_code; ?>
+                                </td>
                                 <td><?php echo $helpers->dateFormat($customer->created_at); ?>
                                 </td>
                                 <td>
-                                    <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></i> Edit</a>
 
-                                    <a href="deleteCustomerProfile.php?delete_customer_id=<?php echo $customer->id; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                                    <form action="processCustomerProfile.php" method="post">
+                                        <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit </a>
+
+                                        <input type="hidden" name="action" value="verify">
+                                        <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
+                                        <button type="submit" name="submit" onClick="return confirm('Afe you sure of deleting this dfata?')" class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i> Delete</button>
+                                    </form>
                                 </td>
                             </tr>
                     <?php

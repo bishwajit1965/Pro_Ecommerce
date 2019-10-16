@@ -26,57 +26,66 @@
                         </div>
                         <hr>
                         <?php
-                        require_once '../../admin/app/start.php';
 
-                        use Codecourse\Repositories\Session as Session;
+                    require_once '../../admin/app/start.php';
 
-                        Session::init();
-                        if (isset($_GET['registrationError'])) {
-                            $message = '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                            </button>
-                            <strong>SORRY!</strong> wrong email address or password !!!
-                            </div>';
-                            echo $message;
-                            header("Refresh:5, login.php");
-                        }
-                        $message = Session::get('message');
-                        if (!empty($message)) {
-                            echo $message;
-                            Session::set('message', null);
-                            header("Refresh:3");
-                        }
+                    use Codecourse\Repositories\Session as Session;
 
-                        ?>
+                    Session::init();
+                    if (isset($_GET['registrationError'])) {
+                        $message = '<div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                    </button>
+                                    <strong>SORRY!</strong> wrong email address or password !!!
+                                    </div>';
+                        echo $message;
+                        header("Refresh:5, login.php");
+                    }
+                    $message = Session::get('message');
+                    if (!empty($message)) {
+                        echo $message;
+                        Session::set('message', null);
+                        header("Refresh:3");
+                    }
+
+                    ?>
                         <div class="form-group">
-                            <!-- <label for="first_name">First name </label> -->
                             <input type="text" class="form-control form-control-sm bg-light" name="first_name" id=""
                                 placeholder="Insert first name..." ">
                         </div>
                         <div class=" form-group">
-                            <!-- <label for="last_name">Last name</label> -->
                             <input type="text" class="form-control form-control-sm" name="last_name" id=""
                                 placeholder="Insert last_name..." ">
                         </div>
-
                         <div class=" form-group">
-                            <!-- <label for="email">Email</label> -->
                             <input type="email" class="form-control form-control-sm" name="email" id=""
                                 placeholder="Insert email..." ">
                         </div>
                         <div class=" form-group">
-                            <!-- <label for="">Password</label> -->
-                            <input type="password" class="form-control form-control-sm" name="password" id=""
-                                placeholder="Insert password..." ">
-
+                            <input type="text" class="form-control form-control-sm" name="phone" id=""
+                                placeholder="Insert phone no ...">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm" name="address" id=""
+                                placeholder="Insert address...">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm" name="zip_code" id=""
+                                placeholder="Insert zip code...">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-sm" name="country" id=""
+                                placeholder="Insert country...">
                         </div>
                         <div class=" form-group">
-                            <!-- <label for="confirm_password">Confirm Password</label> -->
+                            <input type="password" class="form-control form-control-sm" name="password" id=""
+                                placeholder="Insert password..." ">
+                        </div>
+                        <div class=" form-group">
                             <input type="password" class="form-control form-control-sm" name="confirm_password" id=""
                                 placeholder="Confirm password..." ">
-
                         </div>
                         <div class=" register-link">
                             <input type="hidden" name="action" value="verify">
