@@ -2,8 +2,8 @@
 
 require_once '../app/start.php';
 
-use Codecourse\Repositories\Session as Session;
 use Codecourse\Repositories\Products as Products;
+use Codecourse\Repositories\Session as Session;
 
 $products = new Products();
 Session::init();
@@ -25,14 +25,17 @@ switch ($_POST['submit']) {
                         $sub_cat_id = $products->validate($_POST['sub_cat_id']);
                         $pro_company = $products->validate($_POST['pro_company']);
                         $brand_id = $products->validate($_POST['brand_id']);
+                        $pro_status = $products->validate($_POST['pro_status']);
+                        $pro_entry_date = $products->validate($_POST['pro_entry_date']);
+
                         $permitted = ['jpg', 'jpeg', 'png', 'gif'];
                         $file_name = $_FILES['photo']['name'];
                         $file_size = $_FILES['photo']['size'];
                         $file_temp = $_FILES['photo']['tmp_name'];
                         $div = explode('.', $file_name);
                         $file_ext = strtolower(end($div));
-                        $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-                        $photo = 'uploads/'.$unique_image;
+                        $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
+                        $photo = 'uploads/' . $unique_image;
                         // Sanitizing string data
                         if (!empty($file_name)) {
                             $fields = [
@@ -46,7 +49,9 @@ switch ($_POST['submit']) {
                                 'sub_cat_id' => $sub_cat_id,
                                 'pro_company' => $pro_company,
                                 'photo' => $photo,
-                                'brand_id' => $brand_id
+                                'brand_id' => $brand_id,
+                                'pro_status' => $pro_status,
+                                'pro_entry_date' => $pro_entry_date
                             ];
                             if (!empty($pro_name) && !empty($pro_description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);
@@ -177,7 +182,7 @@ switch ($_POST['submit']) {
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
                                 <strong> You can upload only </strong>&nbsp &nbsp
-                                '.implode(" , ", $permitted).'</div>';
+                                ' . implode(" , ", $permitted) . '</div>';
                                 Session::set('message', $message);
                                 $home_url = 'addProduct.php';
                                 $products->redirect($home_url);
@@ -208,7 +213,9 @@ switch ($_POST['submit']) {
                                 'cat_id' => $cat_id,
                                 'sub_cat_id' => $sub_cat_id,
                                 'pro_company' => $pro_company,
-                                'brand_id' => $brand_id
+                                'brand_id' => $brand_id,
+                                'pro_status' => $pro_status,
+                                'pro_entry_date' => $pro_entry_date
                             ];
                             if (!empty($pro_name) && !empty($description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);
@@ -342,6 +349,8 @@ switch ($_POST['submit']) {
                         $sub_cat_id = $products->validate($_POST['sub_cat_id']);
                         $pro_company = $products->validate($_POST['pro_company']);
                         $brand_id = $products->validate($_POST['brand_id']);
+                        $pro_status = $products->validate($_POST['pro_status']);
+                        $pro_entry_date = $products->validate($_POST['pro_entry_date']);
 
                         $permitted = ['jpg', 'jpeg', 'png', 'gif'];
                         $file_name = $_FILES['photo']['name'];
@@ -349,8 +358,8 @@ switch ($_POST['submit']) {
                         $file_temp = $_FILES['photo']['tmp_name'];
                         $div = explode('.', $file_name);
                         $file_ext = strtolower(end($div));
-                        $unique_image = substr(md5(time()), 0, 10).'.'.$file_ext;
-                        $photo = 'uploads/'.$unique_image;
+                        $unique_image = substr(md5(time()), 0, 10) . '.' . $file_ext;
+                        $photo = 'uploads/' . $unique_image;
                         // Confirms photo is selected
                         if (!empty($file_name)) {
                             $fields = [
@@ -365,7 +374,9 @@ switch ($_POST['submit']) {
                                 'sub_cat_id' => $sub_cat_id,
                                 'pro_company' => $pro_company,
                                 'photo' => $photo,
-                                'brand_id' => $brand_id
+                                'brand_id' => $brand_id,
+                                'pro_status' => $pro_status,
+                                'pro_entry_date' => $pro_entry_date
                             ];
                             if (!empty($pro_name) && !empty($pro_description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);
@@ -496,7 +507,7 @@ switch ($_POST['submit']) {
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span></button>
                                 <strong> You can upload only </strong>&nbsp &nbsp
-                                '.implode(" , ", $permitted).'</div>';
+                                ' . implode(" , ", $permitted) . '</div>';
                                 Session::set('message', $message);
                                 $home_url = 'editProduct.php';
                                 $products->redirect($home_url);
@@ -528,7 +539,9 @@ switch ($_POST['submit']) {
                                 'cat_id' => $cat_id,
                                 'sub_cat_id' => $sub_cat_id,
                                 'pro_company' => $pro_company,
-                                'brand_id' => $brand_id
+                                'brand_id' => $brand_id,
+                                'pro_status' => $pro_status,
+                                'pro_entry_date' => $pro_entry_date
                             ];
                             if (!empty($pro_name) && !empty($description)) {
                                 $pro_name = filter_var($pro_name, FILTER_SANITIZE_STRING);

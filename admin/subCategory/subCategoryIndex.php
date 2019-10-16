@@ -74,7 +74,7 @@
 
                     ?>
 
-                    <table id="example1" class="table table-bordered table-striped table-small">
+                    <table id="example1" class="table table-bordered table-condensed table-striped table-small">
                         <thead>
                             <tr>
                                 <th>Id</th>

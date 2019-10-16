@@ -44,7 +44,7 @@ class FrontEnd
     public function defaultFrontEndBrandedProducts($table)
     {
         try {
-            $sql = "SELECT * FROM $table WHERE brand_id != 0  ORDER BY pro_id DESC LIMIT 8";
+            $sql = "SELECT * FROM $table WHERE brand_id != 0 && pro_status = 1 && pro_entry_date <= Now() ORDER BY pro_id DESC LIMIT 8";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
@@ -79,7 +79,7 @@ class FrontEnd
     //Pagination begins
     public function paging($table, $records_per_page)
     {
-        $query = "SELECT * FROM $table";
+        $query = "SELECT * FROM $table WHERE pro_entry_date <= Now() && pro_status = 1";
         $starting_position = 0;
         if (isset($_GET["page_no"])) {
             $starting_position = ($_GET["page_no"] - 1) * $records_per_page;
@@ -97,7 +97,7 @@ class FrontEnd
      */
     public function paginglink($table, $records_per_page)
     {
-        $query = "SELECT * FROM $table";
+        $query = "SELECT * FROM $table WHERE pro_entry_date <= Now() && pro_status = 1";
         $self = $_SERVER['PHP_SELF'];
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
@@ -107,30 +107,30 @@ class FrontEnd
 
             <ul class="pagination">
                 <?php
-                            $total_no_of_pages = ceil($total_no_of_records / $records_per_page);
-                            $current_page = 1;
-                            if (isset($_GET["page_no"])) {
-                                $current_page = $_GET["page_no"];
-                            }
-                            if ($current_page != 1) {
-                                $previous = $current_page - 1;
-                                echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=1'>First</a></li>";
-                                echo "<li><a class='page-link' href='" . $self . "?page_no=" . $previous . "'>Previous</a></li>";
-                            }
-                            for ($i = 1; $i <= $total_no_of_pages; $i++) {
-                                if ($i == $current_page) {
-                                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'style='color:red; background-color:#D9EDF7;'> " . $i . "</a></li>";
-                                } else {
-                                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'>" . $i . "</a></li>";
-                                }
-                            }
-                            if ($current_page != $total_no_of_pages) {
-                                $next = $current_page + 1;
-                                echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $next . "'>Next</a></li>";
-                                echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $total_no_of_pages . "'>Last</a></li>";
-                            } ?>
+                $total_no_of_pages = ceil($total_no_of_records / $records_per_page);
+                $current_page = 1;
+                if (isset($_GET["page_no"])) {
+                    $current_page = $_GET["page_no"];
+                }
+                if ($current_page != 1) {
+                    $previous = $current_page - 1;
+                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=1'>First</a></li>";
+                    echo "<li><a class='page-link' href='" . $self . "?page_no=" . $previous . "'>Previous</a></li>";
+                }
+                for ($i = 1; $i <= $total_no_of_pages; $i++) {
+                    if ($i == $current_page) {
+                        echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'style='color:red; background-color:#D9EDF7;'> " . $i . "</a></li>";
+                    } else {
+                        echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'>" . $i . "</a></li>";
+                    }
+                }
+                if ($current_page != $total_no_of_pages) {
+                    $next = $current_page + 1;
+                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $next . "'>Next</a></li>";
+                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $total_no_of_pages . "'>Last</a></li>";
+                } ?>
             </ul>
-<?php
+            <?php
         }
     }
     /**

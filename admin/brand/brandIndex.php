@@ -86,7 +86,7 @@
                         }
                     }
                     ?>
-                    <table id="example1" class="table table-bordered table-striped table-small">
+                    <table id="example1" class="table table-bordered table-condensed table-striped table-small">
                         <thead>
                             <tr>
                                 <th width="10%">Id</th>
@@ -132,7 +132,7 @@
                                     <a class="btn btn-xs btn-danger"
                                         href="deleteBrand.php?delete_id=<?php echo $result->brand_id; ?>">
                                         <i class="fa fa-trash"></i> View & Delete</a>
-                                    <?php
+                                        <?php
                                     } else {
                                         ?>
                                     <a class="btn btn-xs btn-primary"
@@ -141,7 +141,7 @@
                                     } ?>
                                 </td>
                             </tr>
-                            <?php
+                                    <?php
                                 }
                             }
                             ?>

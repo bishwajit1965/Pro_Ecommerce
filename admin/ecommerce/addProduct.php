@@ -38,6 +38,7 @@
 
                     <?php
                     require_once '../app/start.php';
+
                     use Codecourse\Repositories\Session as Session;
                     use Codecourse\Repositories\Category as Category;
                     use Codecourse\Repositories\SubCategory as SubCategory;
@@ -84,9 +85,20 @@
                                     <input type="text" name="present_price" class="form-control form-control-sm"
                                         placeholder="Insert present price....">
                                 </div>
-                                <div class="form-group">
-                                    <label for="photo"> Photo:</label>
-                                    <input type="file" class="form-control" id="photo" name="photo">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="photo"> Photo:</label>
+                                            <input type="file" class="form-control" id="photo" name="photo">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="pro_entry_date">Date time:</label>
+                                            <input type="datetime-local" name="pro_entry_date" id=""
+                                                class="form-control" aria-describedby="helpId">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -103,8 +115,7 @@
                                         if (!empty($categoryData)) {
                                             foreach ($categoryData as $category) {
                                                 ?>
-                                        <option
-                                            value="<?= $category->cat_id; ?>">
+                                        <option value="<?= $category->cat_id; ?>">
                                             <?= $category->cat_name; ?>
                                         </option>
                                         <?php
@@ -121,8 +132,7 @@
                                         if (!empty($subCategoryData)) {
                                             foreach ($subCategoryData as $subCategory) {
                                                 ?>
-                                        <option
-                                            value="<?= $subCategory->sub_cat_id; ?>">
+                                        <option value="<?= $subCategory->sub_cat_id; ?>">
                                             <?= $subCategory->sub_cat_name; ?>
                                         </option>
                                         <?php
@@ -136,24 +146,38 @@
                                     <input type="text" name="pro_company" class="form-control"
                                         placeholder="Insert company....">
                                 </div>
-                                <div class="form-group">
-                                    <label for="name"> Brand:</label>
-                                    <select id="select" name="brand_id" class="form-control">
-                                        <?php
-                                        $brandData = $brand->index($table3);
-                                        if (!empty($brandData)) {
-                                            foreach ($brandData as $brand) {
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name"> Brand:</label>
+                                            <select id="select" name="brand_id" class="form-control">
+                                                <?php
+                                                $brandData = $brand->index($table3);
+                                                if (!empty($brandData)) {
+                                                    foreach ($brandData as $brand) {
+                                                        ?>
+                                                <option value="<?= $brand->brand_id; ?>">
+                                                    <?= $brand->brand_name; ?>
+                                                </option>
+                                                <?php
+                                                    }
+                                                }
                                                 ?>
-                                        <option
-                                            value="<?= $brand->brand_id; ?>">
-                                            <?= $brand->brand_name; ?>
-                                        </option>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </select>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="pro_status">Product status:</label>
+                                            <select class="form-control" name="pro_status" id="">
+                                                <option>Select product status</option>
+                                                <option value="0">Draft</option>
+                                                <option value="1">Publish</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="form-group">
                                     <input type="hidden" name="action" value="add">
                                 </div>

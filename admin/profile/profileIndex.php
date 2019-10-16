@@ -63,10 +63,6 @@
                         </div>';
                     }
                     ?>
-                    <?php
-
-
-                    ?>
                     <div class="table-responsive">
                         <table id="example1" class="table table-responsive table-striped table-condensed table-primary">
                             <thead class="thead-dark">
@@ -117,8 +113,8 @@
                                     </td>
                                     <td>
                                         <?php
-                                                        if ($_SESSION['userEmail'] == $user->getEmail()) {
-                                                            ?>
+                                        if ($_SESSION['userEmail'] == $user->getEmail()) {
+                                            ?>
                                         <a href="addProfile.php" class="btn btn-xs btn-primary"><i
                                                 class="fa fa-plus"></i> Add Profile</a>
 
@@ -130,36 +126,36 @@
                                             href="profileIndex.php?delete_id=<?php echo $profile->pro_id; ?>"
                                             onClick="return confirm('Do you really want to delete this data? If deleted it is lost for ever !!!');">
                                             <i class="fa fa-trash"></i> Delete</a>
-                                        <?php
-                                                        } elseif ($_SESSION['userEmail'] == $user->getEditorEmail()) {
-                                                            ?>
+                                            <?php
+                                        } elseif ($_SESSION['userEmail'] == $user->getEditorEmail()) {
+                                            ?>
                                         <a href="addProfile.php" class="btn btn-xs btn-primary"><i
                                                 class="fa fa-plus"></i> Add Profile</a>
                                         <a class="btn btn-xs btn-primary"
                                             href="editProfile.php?edit_id=<?php echo $profile->pro_id; ?>"><i
                                                 class="fa fa-pencil"></i> Edit</a>
 
-                                        <?php
-                                                        } elseif ($_SESSION['userEmail'] == $user->getAuthorEmail()) {
-                                                            ?>
+                                            <?php
+                                        } elseif ($_SESSION['userEmail'] == $user->getAuthorEmail()) {
+                                            ?>
                                         <a href="addProfile.php" class="btn btn-xs btn-primary"><i
                                                 class="fa fa-plus"></i> Add Profile</a>
                                         <a class="btn btn-xs btn-primary"
                                             href="editProfile.php?edit_id=<?php echo $profile->pro_id; ?>"><i
                                                 class="fa fa-pencil"></i> Edit</a>
-                                        <?php
-                                                        } else {
-                                                            ?>
+                                            <?php
+                                        } else {
+                                            ?>
                                         <a class="btn btn-xs btn-primary"
                                             href="editProfile.php?edit_id=<?php echo $profile->pro_id; ?>">
                                             <i class="fa fa-eye"></i> View</a>
-                                        <?php
-                                                        } ?>
+                                            <?php
+                                        } ?>
                                     </td>
 
                                 </tr>
 
-                                <?php
+                                        <?php
                                     }
                                 }
                                 ?>

@@ -74,7 +74,7 @@
 
                     ?>
 
-                    <table id="example1" class="table table-bordered table-striped table-small">
+                    <table id="example1" class="table table-bordered table-condensed table-striped table-small">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -123,7 +123,7 @@
                                         href="deleteCategory.php?delete_id=<?php echo $result->cat_id; ?>"
                                         onClick="return confirm('Do you really want to view this data?');">
                                         <i class="fa fa-trash"></i> View & Delete</a>
-                                    <?php
+                                        <?php
                                     } else {
                                         ?>
                                     <a class="btn btn-xs btn-primary" data-toggle="tooltip" title="View Product!"
@@ -133,7 +133,7 @@
                                     } ?>
                                 </td>
                             </tr>
-                            <?php
+                                    <?php
                                 }
                             }
                             ?>

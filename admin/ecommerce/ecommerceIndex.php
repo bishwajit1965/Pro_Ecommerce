@@ -38,11 +38,11 @@
                         <span class="label label-success">
                             Products </span><sup><span class="label label-danger">
                                 <?php
-                            if ($products->numberOfRows($table) == '') {
-                                echo "0";
-                            } else {
-                                echo $products->numberOfRows($table);
-                            }?>
+                                if ($products->numberOfRows($table) == '') {
+                                    echo "0";
+                                } else {
+                                    echo $products->numberOfRows($table);
+                                }?>
                         </sup>
                         </span>
                     </h3>
@@ -82,7 +82,7 @@
 
                     ?>
 
-                    <table id="example1" class="table table-bordered table-striped table-small table-compact">
+                    <table id="example1" class="table table-bordered table-sm table-condensed table-striped table-small table-compact">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -91,6 +91,7 @@
                                 <th>For Price</th>
                                 <th>Pre Price</th>
                                 <th>Pro Rating</th>
+                                <th>Pro Sratus</th>
                                 <th>Photo</th>
                                 <th>Cat Id</th>
                                 <th>Pro Ent Date</th>
@@ -118,25 +119,32 @@
                                 </td>
                                 <td>
                                     <?php
-                                            $price = $result->present_price;
+                                    $price = $result->present_price;
                                     echo number_format($price, 2, '.', '').' &#2547'; ?>
                                 </td>
                                 <td>
                                     <?php echo $result->pro_rating; ?>
                                 </td>
                                 <td>
+                                    <?php if ($result->pro_status == 1) {
+                                        echo "Published";
+                                    } elseif ($result->pro_status == 0) {
+                                        echo "Draft";
+                                    } ?>
+                                </td>
+                                <td>
                                     <?php
-                                            if (empty($result->photo)) {
-                                                ?>
+                                    if (empty($result->photo)) {
+                                        ?>
                                     <img src="../gallery/avatar/avatar.png" alt="Alternative Image"
                                         style="width:50px;height:50px;">
-                                    <?php
-                                            } else {
-                                                ?>
+                                        <?php
+                                    } else {
+                                        ?>
                                     <img src="<?php echo $result->photo; ?>" class="img-thumbnail"
                                         style="width:50px;height:50px;" alt="Product Photo">
-                                    <?php
-                                            } ?>
+                                        <?php
+                                    } ?>
                                 </td>
                                 <td><?php echo $result->cat_id; ?>
                                 </td>
@@ -145,32 +153,32 @@
                                 </td>
                                 <td>
                                     <?php
-                                            if ($_SESSION['userEmail'] == $user_home->getEmail()) {
-                                                ?>
-                                    <a class="btn btn-xs btn-primary buttons" data-toggle="tooltip" title="Edit data!"
-                                        href="editProduct.php?edit_id=<?php echo $result->pro_id; ?>"><i
-                                            class="fa fa-pencil"></i> </a>
+                                    if ($_SESSION['userEmail'] == $user_home->getEmail()) {
+                                        ?>
+                                        <a class="btn btn-xs btn-primary buttons" data-toggle="tooltip" title="Edit data!"
+                                            href="editProduct.php?edit_id=<?php echo $result->pro_id; ?>"><i
+                                                class="fa fa-pencil"></i> </a>
 
-                                    <a class="btn btn-xs btn-danger buttons" data-toggle="tooltip"
-                                        title="Delete data here!"
-                                        href="ecommerceIndex.php?delete_id=<?php echo $result->pro_id; ?>"
-                                        onClick="return confirm('Do you really want to delete this data? If deleted it is lost for ever !!!');"><i
-                                            class="fa fa-trash"></i> </a>
+                                        <a class="btn btn-xs btn-danger buttons" data-toggle="tooltip"
+                                            title="Delete data here!"
+                                            href="ecommerceIndex.php?delete_id=<?php echo $result->pro_id; ?>"
+                                            onClick="return confirm('Do you really want to delete this data? If deleted it is lost for ever !!!');"><i
+                                                class="fa fa-trash"></i> </a>
 
-                                    <a class="btn btn-xs btn-danger buttons" data-toggle="tooltip"
-                                        title="View then delete!"
-                                        href="deleteProduct.php?delete_id=<?php echo $result->pro_id; ?>">
-                                        <i class="fa fa-trash"></i> D-View</a>
-                                    <?php
-                                            } else {
-                                                ?>
-                                    <a class="btn btn-xs btn-primary buttons"
-                                        href="editProduct.php?edit_id=<?php echo $result->pro_id; ?>">
-                                        <i class="fa fa-eye"></i> View</a><?php
-                                            } ?>
+                                        <a class="btn btn-xs btn-danger buttons" data-toggle="tooltip"
+                                            title="View then delete!"
+                                            href="deleteProduct.php?delete_id=<?php echo $result->pro_id; ?>">
+                                            <i class="fa fa-trash"></i> D-View</a>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <a class="btn btn-xs btn-primary buttons"
+                                            href="editProduct.php?edit_id=<?php echo $result->pro_id; ?>">
+                                            <i class="fa fa-eye"></i> View</a><?php
+                                    } ?>
                                 </td>
                             </tr>
-                            <?php
+                                    <?php
                                 }
                             }
                             ?>
@@ -183,6 +191,7 @@
                                 <th>For Price</th>
                                 <th>Pre Price</th>
                                 <th>Pro Rating</th>
+                                <th>Pro Sratus</th>
                                 <th>Photo</th>
                                 <th>Cat Id</th>
                                 <th>Pro Ent Date</th>

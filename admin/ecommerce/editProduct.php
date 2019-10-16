@@ -74,27 +74,26 @@
                                 <div class="form-group">
                                     <label for="pro_name">Product Name:</label>
                                     <input type="text" name="pro_name" class="form-control form-control-sm"
-                                        value="<?= isset($result->pro_name) ? $result->pro_name : '';?>">
+                                        value="<?= isset($result->pro_name) ? $result->pro_name : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="pro_number">Product Number:</label>
                                     <input type="text" name="pro_number" class="form-control form-control-sm"
-                                        value="<?= isset($result->pro_number) ? $result->pro_number : '';?>">
+                                        value="<?= isset($result->pro_number) ? $result->pro_number : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="former_price">Former Price:</label>
                                     <input type="text" name="former_price" class="form-control form-control-sm"
-                                        value="<?= isset($result->former_price) ? $result->former_price : '';?>">
+                                        value="<?= isset($result->former_price) ? $result->former_price : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="present_price">Present Price:</label>
                                     <input type="text" name="present_price" class="form-control form-control-sm"
-                                        value="<?= isset($result->present_price) ? $result->present_price : '';?>">
+                                        value="<?= isset($result->present_price) ? $result->present_price : ''; ?>">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Company:</label>
-                                    <input type="text" name="pro_company"
-                                        value="<?= $result->pro_company;?>"
+                                    <input type="text" name="pro_company" value="<?= $result->pro_company; ?>"
                                         class="form-control">
                                 </div>
                             </div>
@@ -105,7 +104,7 @@
                                             <label for="pro_rating">Prod Rating:</label>
                                             <input type="number" name="pro_rating" min="1" max="5"
                                                 class="form-control form-control-sm"
-                                                value="<?= isset($result->pro_rating) ? $result->pro_rating : '';?>">
+                                                value="<?= isset($result->pro_rating) ? $result->pro_rating : ''; ?>">
                                         </div>
                                         <div class="form-group">
                                             <label for="name"> Category:</label>
@@ -115,14 +114,12 @@
                                                 if (!empty($categoryData)) {
                                                     foreach ($categoryData as $category) {
                                                         ?>
-                                                        <option <?php if ($result->cat_id == $category->cat_id) {
-                                                            ?>
-                                                            selected = "selected"
-                                                            <?php
-                                                            } ?>
-                                                            value="<?= $category->cat_id; ?>">
-                                                        <?= $category->cat_name; ?>
-                                                        </option>
+                                                <option <?php if ($result->cat_id == $category->cat_id) {
+                                                            ?> selected="selected" <?php
+                                                        } ?>
+                                                    value="<?= $category->cat_id; ?>">
+                                                    <?= $category->cat_name; ?>
+                                                </option>
                                                 <?php
                                                     }
                                                 }
@@ -138,11 +135,9 @@
                                                     foreach ($subCategoryData as $subCategory) {
                                                         ?>
                                                 <option <?php
-                                                        if ($result->sub_cat_id == $subCategory->sub_cat_id) {
-                                                            ?>
-                                                    selected = "selected"
-                                                    <?php
-                                                        } ?>
+                                                                        if ($result->sub_cat_id == $subCategory->sub_cat_id) {
+                                                                            ?> selected="selected" <?php
+                                                                        } ?>
                                                     value="<?= $subCategory->sub_cat_id; ?>">
                                                     <?= $subCategory->sub_cat_name; ?>
                                                 </option>
@@ -163,50 +158,88 @@
                                         <?php
                                         } else {
                                             ?>
-                                        <img src="<?= $result->photo; ?>"
-                                            class="img-cover"
+                                        <img src="<?= $result->photo; ?>" class="img-cover"
                                             style="width:100%;height:206px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
                                             alt="Product Image">
                                         <?php
                                         } ?>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="photo"> Photo:</label>
-                                    <input type="file" class="form-control" id="photo" name="photo">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="photo"> Photo:</label>
+                                            <input type="file" class="form-control" id="photo" name="photo">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="pro_entry_date">Date time:</label>
+                                            <input type="datetime-local" name="pro_entry_date" id=""
+                                                class="form-control" value="<?= $result->pro_entry_date; ?>">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name"> Brand:</label>
-                                    <select id="select" name="brand_id" class="form-control">
-                                        <?php
-                                        $brandData = $brand->index($table3);
-                                        if (!empty($brandData)) {
-                                            foreach ($brandData as $brand) {
-                                                ?>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name"> Brand:</label>
+                                            <select id="select" name="brand_id" class="form-control">
+                                                <?php
+                                                $brandData = $brand->index($table3);
+                                                if (!empty($brandData)) {
+                                                    foreach ($brandData as $brand) {
+                                                        ?>
                                                 <option <?php if ($result->brand_id == $brand->brand_id) {
-                                                    ?>
-                                                    selected = "selected"
-                                                    <?php
-                                                    } ?>
+                                                            ?> selected="selected" <?php
+                                                        } ?>
                                                     value="<?= $brand->brand_id; ?>">
-                                                <?= $brand->brand_name; ?>
+                                                    <?= $brand->brand_name; ?>
                                                 </option>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </select>
+                                                <?php
+                                                    }
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name"> Product status:</label>
+                                            <select id="select" name="pro_status" class="form-control">
+                                                <option <?php
+                                                        if ($result->pro_status == 1) {
+                                                            ?> selected="selected" ; <?php
+                                                        }
+                                                                                        ?>
+                                                    value="<?= $result->pro_status; ?>">
+                                                    <?= $result->pro_status; ?>
+                                                </option>
+                                                <?php
+                                                if ($result->pro_status == 1) {
+                                                    ?>
+                                                <option value="0"> Unpublish</option>
+                                                <?php
+                                                } elseif ($result->pro_status == 0) {
+                                                    ?>
+                                                <option value="1"> Publish</option>
+                                                <?php
+                                                } else {
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <textarea name="pro_description" id="editor1">
-                            <?= isset($result->pro_description) ? $result->pro_description : '';?>
+                            <?= isset($result->pro_description) ? $result->pro_description : ''; ?>
                         </textarea><br>
                         <?php
                         if ($_SESSION['userEmail'] == $user_home->getEmail()) {
                             ?>
-                        <input type="hidden" name="pro_id"
-                            value="<?php echo $result->pro_id; ?>">
+                        <input type="hidden" name="pro_id" value="<?php echo $result->pro_id; ?>">
                         <input type="hidden" name="action" value="update">
                         <button type="submit" name="submit" value="update" class="btn btn-sm btn-primary"><i
                                 class="fa fa-edit"></i> Update</button>
