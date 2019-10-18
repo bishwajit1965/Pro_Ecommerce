@@ -62,9 +62,7 @@
                             echo $message;
                             Session::set('message', null);
                         }
-
                         ?>
-
                         <form action="ProcessCategory.php" method="post">
                             <input type="hidden" name="cat_id" class="form-control"
                                 value="<?php echo $result->cat_id; ?>">
@@ -72,7 +70,7 @@
                             <div class="form-group">
                                 <label for="name">Category Name:</label>
                                 <input type="text" name="cat_name" class="form-control" class="form-control"
-                                    value="<?php echo isset($result->cat_name) ? $result->cat_name : '' ; ?>">
+                                    value="<?php echo isset($result->cat_name) ? $result->cat_name : ''; ?>">
                             </div>
 
                             <?php
@@ -81,8 +79,7 @@
                             <button type="submit" name="submit" value="update" class="btn btn-sm btn-primary">
                                 <i class="fa fa-edit"></i> Update</button>
 
-                            <input type="hidden" name="id"
-                                value="<?php echo $result->id; ?>">
+                            <input type="hidden" name="id" value="<?php echo $result->id; ?>">
 
                             <input type="hidden" name="action" value="update">
 

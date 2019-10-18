@@ -105,8 +105,7 @@ $result = $customerProfile->updateView($id, $table);
                             <i class="fas fa-edit"></i> Update</button>
 
                         <a href="customerProfileIndex.php" class="btn btn-sm btn-primary">
-                            <i class="fas fa-sign-in-alt"></i>
-                            Profile Index</a>
+                            <i class="fas fa-sign-in-alt"></i> Profile Index</a>
                         <a href=" ../index.php" class="btn btn-sm btn-primary"><i class="fas fa-fast-backward">
                             </i> Home page</a>
                     </div>

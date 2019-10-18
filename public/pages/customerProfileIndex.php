@@ -93,13 +93,12 @@ $table12 = 'tbl_customer';
                                 <td><?php echo $helpers->dateFormat($customer->created_at); ?>
                                 </td>
                                 <td>
-
                                     <form action="processCustomerProfile.php" method="post">
                                         <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit </a>
 
                                         <input type="hidden" name="action" value="verify">
                                         <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
-                                        <button type="submit" name="submit" onClick="return confirm('Afe you sure of deleting this dfata?')" class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i> Delete</button>
+                                        <button type="submit" name="submit" onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')" class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i> Delete</button>
                                     </form>
                                 </td>
                             </tr>

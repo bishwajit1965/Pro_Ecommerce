@@ -17,19 +17,26 @@ class LoginCustomer
         $dbConnection = $database->dbConnection();
         $this->conn = $dbConnection;
     }
-    public function logIn($email, $password, $table)
+    public function logIn($email, $table)
     {
         try {
             $stmt = $this->conn->prepare("SELECT * FROM $table WHERE email=:email");
             $stmt->execute([':email' => $email]);
             $customerData = $stmt->fetch(PDO::FETCH_OBJ);
             if ($stmt->rowCount() == 1) {
-                if (!empty($email) && !empty($password) && !empty($table)) {
+                if (!empty($customerData)) {
                     return $customerData;
+                } else {
+                    return false;
                 }
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+    // Redirect to desired page
+    public function redirect($url)
+    {
+        header("Location: $url");
     }
 }
