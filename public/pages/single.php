@@ -59,7 +59,7 @@ if (isset($_GET['single_id'])) {
         <!-- /Page title -->
     </div>
     <!-- Content area begins -->
-    <div class="container bg-light">
+    <div class="container-fluid bg-light">
         <div class="row">
             <div class="col-sm-9 content-area">
                 <div class="category bg-secondary py-2 mt-3 px-3 mb-3 text-white text-center">

@@ -62,8 +62,9 @@ s {
     font-weight: 500;
 }
 
-.container {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.container-fluid {
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    width: 100%;
 }
 
 .cart-add-link {
@@ -219,4 +220,10 @@ ul>li>a {
 
 .red ::placeholder {
     color: red;
+}
+
+/* Top footer area
+======================= */
+.top-social-links h5 {
+    border-bottom: 2px solid#999999;
 }

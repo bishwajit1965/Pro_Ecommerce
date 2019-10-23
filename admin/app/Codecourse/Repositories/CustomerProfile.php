@@ -20,10 +20,10 @@ class CustomerProfile
         $this->conn = $dbConnection;
     }
     // View Data in Index page
-    public function customerIndex($table12)
+    public function customerIndex($table)
     {
         try {
-            $sql = "SELECT * FROM $table12";
+            $sql = "SELECT * FROM $table";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {

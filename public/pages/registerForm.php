@@ -87,12 +87,12 @@
                 Session::init();
                 if (isset($_GET['registrationError'])) {
                     $message = '<div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                <span class="sr-only">Close</span>
-                                </button>
-                                <strong>SORRY!</strong> wrong email address or password !!!
-                            </div>';
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                            </button>
+                            <strong>SORRY!</strong> wrong email address or password !!!
+                        </div>';
                     echo $message;
                     header("Refresh:5, login.php");
                 }
@@ -102,7 +102,6 @@
                     Session::set('message', null);
                     header("Refresh:3");
                 }
-
                 ?>
                     <form action="processCustomerProfile.php" method="post">
                         <div class="row">
@@ -137,6 +136,12 @@
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="address" placeholder="Your address">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-address-book"></i> </span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="city" placeholder="Your city">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-address-book"></i> </span>
                             </div>

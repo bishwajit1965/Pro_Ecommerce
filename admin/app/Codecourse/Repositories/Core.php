@@ -36,7 +36,6 @@ class Core
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
                     $galleryData[] = $data;
                 }
-
                 return $galleryData;
             }
         } catch (PDOException $e) {

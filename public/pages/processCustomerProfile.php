@@ -1,15 +1,16 @@
 <?php
-require_once '../../admin/app/start.php';
+include_once 'ClassLoader.php';
+// require_once '../../admin/app/start.php';
 
-use Codecourse\Repositories\CustomerProfile as CustomerProfile;
-use Codecourse\Repositories\Helpers as Helpers;
+// use Codecourse\Repositories\CustomerProfile as CustomerProfile;
+// use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\Session as Session;
 
-$customerProfile = new CustomerProfile();
-$helpers = new Helpers();
+// $customerProfile = new CustomerProfile();
+// $helpers = new Helpers();
 Session::init();
 
-$table = 'tbl_customer';
+// $tableCustomer = 'tbl_customer';
 
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];
@@ -24,6 +25,7 @@ if (isset($_POST['submit'])) {
                             $email = $helpers->validation($_POST['email']);
                             $phone = $helpers->validation($_POST['phone']);
                             $address = $helpers->validation($_POST['address']);
+                            $city = $helpers->validation($_POST['city']);
                             $zip_code = $helpers->validation($_POST['zip_code']);
                             $country = $helpers->validation($_POST['country']);
                             $password = $helpers->validation($_POST['password']);
@@ -37,6 +39,7 @@ if (isset($_POST['submit'])) {
                                     'email' => $email,
                                     'phone' => $phone,
                                     'address' => $address,
+                                    'city' => $city,
                                     'zip_code' => $zip_code,
                                     'country' => $country,
                                     'password' => $password,
@@ -98,7 +101,7 @@ if (isset($_POST['submit'])) {
                                     $home_url = 'registerForm.php';
                                     $customerProfile->redirect("$home_url");
                                 } else {
-                                    $customerProfileData = $customerProfile->store($fields, $table);
+                                    $customerProfileData = $customerProfile->store($fields, $tableCustomer);
                                     if ($customerProfileData) {
                                         $message = '<div class="alert alert-success" role="alert">
                                       <h4 class="alert-heading">SUCCESSFUL !!!</h4>
@@ -137,6 +140,7 @@ if (isset($_POST['submit'])) {
                                 $email = $helpers->validation($_POST['email']);
                                 $phone = $helpers->validation($_POST['phone']);
                                 $address = $helpers->validation($_POST['address']);
+                                $city = $helpers->validation($_POST['city']);
                                 $zip_code = $helpers->validation($_POST['zip_code']);
                                 $country = $helpers->validation($_POST['country']);
                                 $password = $password;
@@ -147,6 +151,7 @@ if (isset($_POST['submit'])) {
                                     'email' => $email,
                                     'phone' => $phone,
                                     'address' => $address,
+                                    'city' => $city,
                                     'zip_code' => $zip_code,
                                     'country' => $country,
                                     'password' => $password,
@@ -176,7 +181,7 @@ if (isset($_POST['submit'])) {
                                     $home_url = 'editCustomerProfile.php';
                                     $customerProfile->redirect("$home_url");
                                 } else {
-                                    $customerProfileData = $customerProfile->updateWithoutPhoto($fields, $editCustomertId, $table);
+                                    $customerProfileData = $customerProfile->updateWithoutPhoto($fields, $editCustomertId, $tableCustomer);
                                     if ($customerProfileData) {
                                         $message =
                                             '<div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -205,7 +210,7 @@ if (isset($_POST['submit'])) {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['submit'])) {
                             $id = $_POST['delete_customer_id'];
-                            $customerProfile->destroy($id, $table);
+                            $customerProfile->destroy($id, $tableCustomer);
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
                                 <strong>LOOK !!!</strong> Cart data has been deleted!!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

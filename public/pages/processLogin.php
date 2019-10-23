@@ -1,14 +1,19 @@
 <?php
-require_once '../../admin/app/start.php';
+include_once 'ClassLoader.php';
+// require_once '../../admin/app/start.php';
 
-use Codecourse\Repositories\Helpers as Helpers;
-use Codecourse\Repositories\LoginCustomer as LoginCustomer;
+// use Codecourse\Repositories\Cart as Cart;
+// use Codecourse\Repositories\Helpers as Helpers;
+// use Codecourse\Repositories\LoginCustomer as LoginCustomer;
 use Codecourse\Repositories\Session as Session;
 
-$loginCustomer = new LoginCustomer();
-$helpers = new Helpers();
+// $loginCustomer = new LoginCustomer();
+// $helpers = new Helpers();
+// $cart = new Cart();
 Session::init();
-$table = 'tbl_customer';
+// $tableCustomer = 'tbl_customer';
+// $tableCart = 'tbl_cart';
+// include_once 'classes.php';
 
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];
@@ -20,9 +25,9 @@ if (isset($_POST['submit'])) {
                         if (isset($_POST['submit'])) {
                             try {
                                 $email = $_POST['email'];
-                                $email = $helpers->validation(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
+                                $email = $helpers->validation(filter_var($email, FILTER_VALIDATE_EMAIL));
                                 $password = $_POST['password'];
-                                $password = $helpers->validation($_POST['password']);
+                                $password = $helpers->validation($password);
                                 if (empty($_POST['email'])) {
                                     $message = '<div class="alert alert-danger" role="alert">
                                                 <span class="alert-heading">SORRY !!! Empty email field !</span>
@@ -38,11 +43,11 @@ if (isset($_POST['submit'])) {
                                     $url = 'login.php';
                                     $loginCustomer->redirect("$url");
                                 } else {
-                                    $customerData = $loginCustomer->logIn($email, $table);
+                                    $customerData = $loginCustomer->logIn($email, $tableCustomer);
                                     if ($customerData->email == $email && $customerData->password == md5($password)) {
                                         Session::init();
                                         Session::set('customerLogin', true);
-                                        Session::set('customerId', 'id');
+                                        Session::set('customerId', $customerData->id);
                                         $value = $_POST['email'];
                                         Session::set('login', $value);
                                         $home_url = '../index.php';
@@ -65,9 +70,13 @@ if (isset($_POST['submit'])) {
                 if ($_REQUEST['action'] == 'verify') {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['submit'])) {
+                            if (isset($_GET['session_id'])) {
+                                $sessionId = $_GET['session_id'];
+                            }
+                            $stmtExec = $cart->destroyDataFromCartTableOnLogOut($sessionId, $tableCart);
                             Session::destroy();
                             $home_url = 'login.php';
-                            Session::redirect($home_url);
+                            Session::redirect("$home_url");
                         }
                     }
                 }

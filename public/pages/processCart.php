@@ -1,16 +1,11 @@
 <?php
-require_once '../../admin/app/start.php';
+include_once 'ClassLoader.php';
 
-use Codecourse\Repositories\Cart as Cart;
-use Codecourse\Repositories\Products as Products;
 use Codecourse\Repositories\Session as Session;
 
-$product = new Products();
-$cart = new Cart();
 Session::init();
-$table3 = 'tbl_products';
-$table5 = 'tbl_cart';
 
+$sessionId = session_id();
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];
     switch ($accessor) {
@@ -25,7 +20,7 @@ if (isset($_POST['submit'])) {
                                 if (session_id() !== null) {
                                     $sessionId = session_id();
                                     // Checks to prevent duplicate entry
-                                    $stmtExecute = $cart->preventDuplicateEntry($table5, $productId, $sessionId);
+                                    $stmtExecute = $cart->preventDuplicateEntry($tableCart, $productId, $sessionId);
                                     if ($stmtExecute->pro_id == $productId && $stmtExecute->session_id == $sessionId) {
                                         $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
                                         <strong>LOOK CAREFULLY !!!</strong> Your cart item has already been added previously. You can now update or remove it only.
@@ -35,24 +30,24 @@ if (isset($_POST['submit'])) {
                                         </div>';
                                         Session::set('message', $message);
                                         $home_url = 'cart.php';
-                                        $product->redirect($home_url);
+                                        $products->redirect($home_url);
                                     } else {
                                         // If not added previously the data will be inserted
-                                        $lastId = $cart->addToCart($table5, $table3, $productId, $quantity, $sessionId);
+                                        $lastId = $cart->addToCart($tableCart, $tablePeoducts, $productId, $quantity, $sessionId);
                                         $message = '<div class="alert alert-success alert-dismissible" role="alert"">
-                                        <strong>WOW !!!</strong> Cart item has been added successfully!!!
+                                        <strong>WOW !!!</strong> Product has been added to cart successfully!!!
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                         </div>';
                                         Session::set('message', $message);
                                         $home_url = 'cart.php';
-                                        $product->redirect($home_url);
+                                        $products->redirect($home_url);
                                     }
                                 }
                             } else {
                                 $home_url = '404.php';
-                                $product->redirect($home_url);
+                                $products->redirect($home_url);
                             }
                         }
                     }
@@ -67,19 +62,40 @@ if (isset($_POST['submit'])) {
                             if (isset($_POST['pro_quantity'])) {
                                 $productId = $_POST['pro_id'];
                                 $productQuantity = $_POST['pro_quantity'];
-                                $updatedQuantity = $cart->updateCartQuantity($table5, $productQuantity, $productId);
+                                $updatedQuantity = $cart->updateCartQuantity($tableCart, $productQuantity, $productId);
                                 if ($productQuantity) {
                                     $message = '<div class="alert alert-success alert-dismissible" role="alert"">
-                                        <strong>SUCCESSFUL !!!</strong> Your cart item quantity has been updated.
+                                        <strong>SUCCESSFUL !!!</strong> Your cart product quantity has been updated.
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>';
                                     Session::set('message', $message);
                                     $home_url = 'cart.php';
-                                    $product->redirect($home_url);
+                                    $products->redirect($home_url);
                                 }
                             }
+                        }
+                    }
+                }
+            }
+            break;
+        case 'order':
+            if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+                if ($_REQUEST['action'] == 'verify') {
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        if (isset($_POST['submit'])) {
+                            $stmtExecuted = $cart->processOrder($tableCart, $sessionId, $tableOrders);
+                            $stmtExec = $cart->destroyDataFromCartTableOnLogOut($sessionId, $tableCart);
+                            $message = '<div class="alert alert-primary alert-dismissible" role="alert"">
+                                <strong>SUCCESS !!!</strong> Order has been placed successfully!!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>';
+                            Session::set('message', $message);
+                            $home_url = 'order.php';
+                            $cart->redirect("$home_url");
                         }
                     }
                 }
@@ -91,7 +107,7 @@ if (isset($_POST['submit'])) {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['submit'])) {
                             $id = $_POST['cart_id'];
-                            $cart->destroy($id, $table5);
+                            $cart->destroy($id, $tableCart);
                             $message = '<div class="alert alert-danger alert-dismissible" role="alert"">
                                 <strong>LOOK CAREFULLY !!!</strong> Cart data has been deleted!!!
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">

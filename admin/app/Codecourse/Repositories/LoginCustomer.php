@@ -20,7 +20,8 @@ class LoginCustomer
     public function logIn($email, $table)
     {
         try {
-            $stmt = $this->conn->prepare("SELECT * FROM $table WHERE email=:email");
+            $query = "SELECT * FROM $table WHERE email=:email";
+            $stmt = $this->conn->prepare($query);
             $stmt->execute([':email' => $email]);
             $customerData = $stmt->fetch(PDO::FETCH_OBJ);
             if ($stmt->rowCount() == 1) {

@@ -11,7 +11,7 @@ Session::checkSession();
 $sessionId = session_id();
 $cart = new Cart();
 $product = new Products();
-$table = 'tbl_cart';
+$tableCart = 'tbl_cart';
 ?>
 <div class="row pt-1 header-area">
     <div class="col-sm-3 d-flex flex-column justify-content-center">
@@ -34,7 +34,7 @@ $table = 'tbl_cart';
                     <span class="input-group-text bg-warning"><i class="fas fa-cart-plus px-2 py-1"></i></span>
                 </div>
                 <?php
-                $cartData = $cart->priceDisplay($table, $sessionId);
+                $cartData = $cart->priceDisplay($tableCart, $sessionId);
                 if (!empty($cartData)) {
                     $sum = 0;
                     $quantity = 0;
@@ -47,9 +47,12 @@ $table = 'tbl_cart';
                     }
                 }
                 ?>
-                <input type="text" class="form-control p-0 pl-1" placeholder="<?php if (!empty($sum)) : echo 'Qty : ' . $quantity . ' || ' . 'Price: ' . number_format($sum, 2, '.', '') . ' &#2547; '; ?>
-              <?php else :
-                    echo "Empty cart"; ?>
+                <input type="text" class="form-control p-0 pl-1" placeholder="<?php if (!empty($sum)) :
+                                                                                    echo 'Qty : ' . $quantity . ' || ' . 'Price: ' . number_format($sum, 2, '.', '') . ' &#2547; '; ?>
+                <?php
+                else :
+                    echo "Empty cart";
+                    ?>
                 <?php endif ?>">
 
             </div>
@@ -69,7 +72,8 @@ $table = 'tbl_cart';
                 if (Session::checkLogin() == true) { ?>
                     <form action="processLogin.php" method="post">
                         <input type="hidden" name="action" value="verify">
-                        <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger">Logout</button>
+                        <input type="hidden" name="session_id" value="<?php echo $carts->session_id; ?>">
+                        <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
                     </form>
                 <?php
                 } else {

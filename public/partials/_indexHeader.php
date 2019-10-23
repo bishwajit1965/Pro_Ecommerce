@@ -41,7 +41,8 @@
                 if ($session == true) { ?>
                 <form action="pages/processLogin.php" method="post">
                     <input type="hidden" name="action" value="verify">
-                    <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger">Logout</button>
+                    <button type="submit" name="submit" value="log_out" class="btn btn-sm btn-danger"><i
+                            class="fas fa-sign-out-alt"></i> Logout</button>
                 </form>
                 <?php
                 } else {

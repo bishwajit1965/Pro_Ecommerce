@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
     <head>
         <meta charset="utf-8">
         <title>Page Not Found</title>
@@ -73,7 +72,6 @@
         }
         </style>
     </head>
-
     <body>
         <div class="container blink_me message">
             <h1 class="not-foundh1"> Products Not Found !!! No product exists in this option.</h1>
@@ -81,5 +79,4 @@
             </p>
         </div>
     </body>
-
 </html>

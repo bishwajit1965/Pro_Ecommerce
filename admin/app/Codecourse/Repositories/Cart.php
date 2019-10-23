@@ -63,6 +63,44 @@ class Cart
             echo $e->getMessage();
         }
     }
+    // Insert ordered product to order table
+    public function processOrder($tableCart, $sessionId, $tableOrders)
+    {
+
+        try {
+            $sql = "SELECT * FROM $tableCart WHERE session_id = '$sessionId'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($cartResource = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $cartId = $cartResource->cart_id;
+                    $session_id = $cartResource->session_id;
+                    $pro_id = $cartResource->pro_id;
+                    $pro_name = $cartResource->pro_name;
+                    $pro_price = $cartResource->pro_price;
+                    $pro_quantity = $cartResource->pro_quantity;
+                    $photo = $cartResource->photo;
+
+                    $query = "INSERT INTO $tableOrders (cart_id, session_id, pro_id, pro_name, pro_price, pro_quantity , photo) VALUES ('$cartId', '$session_id', '$pro_id', '$pro_name', '$pro_price', '$pro_quantity' , '$photo')";
+
+                    $stmt = $this->conn->prepare($query);
+
+                    $stmt->bindParam(":$cartId", $cartId);
+                    $stmt->bindParam(":$session_id", $session_id);
+                    $stmt->bindParam(":$pro_id", $pro_id);
+                    $stmt->bindParam(":$pro_name", $pro_name);
+                    $stmt->bindParam(":$pro_price", $pro_price);
+                    $stmt->bindParam(":$pro_quantity", $pro_quantity);
+                    $stmt->bindParam(":$photo", $photo);
+                    $stmtExecuted = $stmt->execute();
+                }
+                return  $stmtExecuted;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        return $stmtExecuted;
+    }
 
     // Insert data
     public function addToCart($table5, $table3, $productId, $quantity, $sessionId)
@@ -144,6 +182,22 @@ class Cart
             $sql = "DELETE FROM $table WHERE cart_id = :cart_id";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':cart_id', $id);
+            $stmtExec = $stmt->execute();
+            if ($stmtExec) {
+                return $stmtExec ? true : false;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // Desyroy data from cart table as per session id
+    public function destroyDataFromCartTableOnLogOut($sessionId, $tableCart)
+    {
+        try {
+            $sql = "DELETE FROM $tableCart WHERE session_id = :session_id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':session_id', $sessionId);
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
                 return $stmtExec ? true : false;
