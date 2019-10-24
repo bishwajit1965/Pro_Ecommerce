@@ -155,15 +155,17 @@ if (isset($_GET['single_id'])) {
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="number" name="quantity" value="1" min="1" autofocus max="20" selected class="form-control input-sm mt-2 mb-2 bg-light" placeholder="Select">
+                                        <input type="number" name="quantity" value="1" min="1" autofocus max="20" selected class="form-control form-control-sm mt-2 mb-2 bg-light" placeholder="Select">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="hidden" name="action" value="verify">
                                     <input type="hidden" name="pro_id" value="<?= $single_product->pro_id; ?>">
                                     <input type="hidden" name="session_id" value="<?= $single_product->session_id; ?>">
-                                    <button type="submit" name="submit" value="add-to-cart" class="btn btn-primary btn-block mt-2 mb-2">
-                                        <i class="fas fa-cart-plus"></i> Add to Cart</button>
+                                    <button type="submit" name="submit" value="add-to-cart" class="btn btn-sm btn-primary mt-2 mb-2">
+                                        <i class="fas fa-cart-plus"></i> Buy Prod</button>
+
+                                    <a href="../index.php" class="btn btn-success btn-sm mt-2 mb-2"><i class=" fas fa-fast-backward"></i> Change Prod</a>
                                 </div>
                             </div>
                         </form>

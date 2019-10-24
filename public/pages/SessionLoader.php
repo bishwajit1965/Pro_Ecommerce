@@ -3,7 +3,6 @@ include_once '../../admin/app/start.php';
 
 use Codecourse\Repositories\Session as Session;
 
-Session::init();
 // Starts session
 Session::init();
 

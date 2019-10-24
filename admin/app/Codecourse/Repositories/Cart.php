@@ -63,43 +63,51 @@ class Cart
             echo $e->getMessage();
         }
     }
-    // Insert ordered product to order table
-    public function processOrder($tableCart, $sessionId, $tableOrders)
-    {
 
+    // Processes order to buy product and inserts data in 'tbl_orders'
+    public function processOrderToBuyProduct($tableCart, $sessionId, $tableOrders)
+    {
         try {
+            // selects all the data from cart table
             $sql = "SELECT * FROM $tableCart WHERE session_id = '$sessionId'";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                while ($cartResource = $stmt->fetch(PDO::FETCH_OBJ)) {
-                    $cartId = $cartResource->cart_id;
-                    $session_id = $cartResource->session_id;
-                    $pro_id = $cartResource->pro_id;
-                    $pro_name = $cartResource->pro_name;
-                    $pro_price = $cartResource->pro_price;
-                    $pro_quantity = $cartResource->pro_quantity;
-                    $photo = $cartResource->photo;
+                // fethAll() is important bacause feth() will fetch only one row
+                while ($productData = $stmt->fetchAll(PDO::FETCH_OBJ)) {
+                    // Looping through all the data available in cart table from'fetchAll()
+                    foreach ($productData as $cartProduct) {
+                        $cart_id = $cartProduct->cart_id;
+                        $customer_id = $cartProduct->customer_id;
+                        $session_id = $cartProduct->session_id;
+                        $pro_id = $cartProduct->pro_id;
+                        $pro_name = $cartProduct->pro_name;
+                        $pro_price = $cartProduct->pro_price;
+                        $pro_quantity = $cartProduct->pro_quantity;
+                        $total_price = $pro_price *  $pro_quantity;
+                        $photo = $cartProduct->photo;
 
-                    $query = "INSERT INTO $tableOrders (cart_id, session_id, pro_id, pro_name, pro_price, pro_quantity , photo) VALUES ('$cartId', '$session_id', '$pro_id', '$pro_name', '$pro_price', '$pro_quantity' , '$photo')";
+                        // Inserts dat to orders table
+                        $query = "INSERT INTO $tableOrders (cart_id, customer_id, session_id, pro_id, pro_name, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
 
-                    $stmt = $this->conn->prepare($query);
-
-                    $stmt->bindParam(":$cartId", $cartId);
-                    $stmt->bindParam(":$session_id", $session_id);
-                    $stmt->bindParam(":$pro_id", $pro_id);
-                    $stmt->bindParam(":$pro_name", $pro_name);
-                    $stmt->bindParam(":$pro_price", $pro_price);
-                    $stmt->bindParam(":$pro_quantity", $pro_quantity);
-                    $stmt->bindParam(":$photo", $photo);
-                    $stmtExecuted = $stmt->execute();
+                        $stmt = $this->conn->prepare($query);
+                        $stmt->bindParam(":$customer_id", $customer_id);
+                        $stmt->bindParam(":$cart_id", $cart_id);
+                        $stmt->bindParam(":$session_id", $session_id);
+                        $stmt->bindParam(":$pro_id", $pro_id);
+                        $stmt->bindParam(":$pro_name", $pro_name);
+                        $stmt->bindParam(":$pro_price", $pro_price);
+                        $stmt->bindParam(":$pro_quantity", $pro_quantity);
+                        $stmt->bindParam(":$total_price", $total_price);
+                        $stmt->bindParam(":$photo", $photo);
+                        $orderedProduct = $stmt->execute();
+                    }
                 }
-                return  $stmtExecuted;
+                return $orderedProduct;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
-        return $stmtExecuted;
     }
 
     // Insert data
@@ -112,17 +120,22 @@ class Cart
             $stmt->bindParam(':pro_id', $productId);
             $stmt->execute([':pro_id' => $productId]);
             $cartItem = $stmt->fetch(PDO::FETCH_OBJ);
-
-            // Insert inti cart table
-            $query = "INSERT INTO $table5 (session_id, pro_id, pro_name, pro_price, pro_quantity , photo) VALUES('$sessionId', '$productId', '$cartItem->pro_name', '$cartItem->present_price', '$quantity' , '$cartItem->photo')";
+            $customerId = Session::get('customerId');
+            $pro_name = $cartItem->pro_name;
+            $quantity = $quantity;
+            $pro_price = $cartItem->present_price;
+            $photo = $cartItem->photo;
+            // Insert into cart table
+            $query = "INSERT INTO $table5 (customer_id, session_id, pro_id, pro_name, pro_price, pro_quantity, photo) VALUES('$customerId', '$sessionId', '$productId', '$pro_name', '$pro_price', '$quantity', '$photo')";
 
             $stmt = $this->conn->prepare($query);
+            $stmt->bindValue(":$cartItem->id", $cartItem->id);
             $stmt->bindValue(":$sessionId", $sessionId);
             $stmt->bindValue(":$productId", $productId);
-            $stmt->bindValue(":$cartItem->pro_name", $cartItem->pro_name);
-            $stmt->bindValue(":$cartItem->present_price", $cartItem->present_price);
+            $stmt->bindValue(":$pro_name", $pro_name);
+            $stmt->bindValue(":$pro_price", $pro_price);
             $stmt->bindValue(":$quantity", $quantity);
-            $stmt->bindValue(":$cartItem->photo", $cartItem->photo);
+            $stmt->bindValue(":$photo", $photo);
             $stmtExec = $stmt->execute();
             if ($stmtExec) {
                 $lastId = $this->conn->lastInsertId();
@@ -173,6 +186,23 @@ class Cart
             return $updatedQuantity;
         } else {
             return false;
+        }
+    }
+    // Payable amount for ordered products
+    public function payableAmountForOrderedproducts($customerId, $tableOrders)
+    {
+        try {
+            $sql = "SELECT * FROM $tableOrders WHERE customer_id = '$customerId' && ordered_on = NOW()";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($ordrData = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $orderRelatedData[] = $ordrData;
+                }
+                return $orderRelatedData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
         }
     }
     // Delete data from database

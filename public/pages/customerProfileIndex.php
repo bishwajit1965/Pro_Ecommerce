@@ -45,70 +45,72 @@ Session::checkSession();
             Session::set('message', null);
         }
         ?>
-        <table class="table table-light table-condensed table-condensed table-sm table-striped">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>Countery</th>
-                    <th>Zip Code</th>
-                    <th>Created at</th>
-                    <th>Updated at</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $customerData = $customerProfile->customerIndex($tableCustomer);
-                foreach ($customerData as $customer) {
+        <div class="table-responsive p-0">
+            <table class="table table-light table-condensed table-sm table-striped">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Countery</th>
+                        <th>Zip Code</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $customerData = $customerProfile->customerIndex($tableCustomer);
+                    foreach ($customerData as $customer) {
 
+                        ?>
+                    <tr>
+                        <td><?php echo $customer->id; ?>
+                        </td>
+                        <td><?php echo $customer->first_name . ' ' . $customer->last_name; ?>
+                        </td>
+                        <td><?php echo $customer->email; ?>
+                        </td>
+                        <td><?php echo $customer->phone; ?>
+                        </td>
+                        <td><?php echo $customer->address; ?>
+                        </td>
+                        <td><?php echo $customer->city; ?>
+                        </td>
+                        <td><?php echo $customer->country; ?>
+                        </td>
+                        <td><?php echo $customer->zip_code; ?>
+                        </td>
+                        <td><?php echo $helpers->dateFormat($customer->created_at); ?>
+                        </td>
+                        <td><?php echo $helpers->dateFormat($customer->updated_at); ?>
+                        </td>
+                        <td>
+                            <?php if (Session::get('login') ==  $customer->email) { ?>
+                            <form action="processCustomerProfile.php" method="post">
+                                <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>"
+                                    class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit </a>
+
+                                <input type="hidden" name="action" value="verify">
+                                <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
+                                <button type="submit" name="submit"
+                                    onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')"
+                                    class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i>
+                                    Delete</button>
+                            </form>
+                            <?php  } ?>
+                        </td>
+                    </tr>
+                    <?php
+                    }
                     ?>
-                <tr>
-                    <td><?php echo $customer->id; ?>
-                    </td>
-                    <td><?php echo $customer->first_name . ' ' . $customer->last_name; ?>
-                    </td>
-                    <td><?php echo $customer->email; ?>
-                    </td>
-                    <td><?php echo $customer->phone; ?>
-                    </td>
-                    <td><?php echo $customer->address; ?>
-                    </td>
-                    <td><?php echo $customer->city; ?>
-                    </td>
-                    <td><?php echo $customer->country; ?>
-                    </td>
-                    <td><?php echo $customer->zip_code; ?>
-                    </td>
-                    <td><?php echo $helpers->dateFormat($customer->created_at); ?>
-                    </td>
-                    <td><?php echo $helpers->dateFormat($customer->updated_at); ?>
-                    </td>
-                    <td>
-                        <?php if (Session::get('login') ==  $customer->email) { ?>
-                        <form action="processCustomerProfile.php" method="post">
-                            <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>"
-                                class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit </a>
-
-                            <input type="hidden" name="action" value="verify">
-                            <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
-                            <button type="submit" name="submit"
-                                onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')"
-                                class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i>
-                                Delete</button>
-                        </form>
-                        <?php  } ?>
-                    </td>
-                </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
     <!-- /Content area ends -->
 

@@ -20,6 +20,14 @@ $table2 = 'tbl_sub_category';
 $table3 = 'tbl_category';
 $table5 = 'tbl_cart';
 
+$tableBrand = 'tbl_brand';
+$tableCategory = 'tbl_category';
+$tableSubCategory = 'tbl_sub_category';
+$tableCustomer = 'tbl_customer';
+$tableCart = 'tbl_cart';
+$tablePeoducts = 'tbl_products';
+$tableOrders = 'tbl_orders';
+
 // Classes instantiated
 $brand = new Brand();
 $category = new Category();
@@ -530,7 +538,6 @@ $subCategory = new SubCategory();
                                     <?php
                                         }
                                     }
-
                                     ?>
                                 </ul>
                             </div>

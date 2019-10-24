@@ -189,6 +189,7 @@
                         </div>
                         <div class=" register-link">
                             <input type="hidden" name="action" value="verify">
+                            <input type="hidden" name="customer_id" value="<?= Session::get('customerId'); ?>">
                             <button type="submit" name="submit" value="register" class="btn btn-sm btn-info"><i
                                     class="fas fa-users">
                                 </i> Register</button>

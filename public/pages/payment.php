@@ -18,7 +18,7 @@
         <div class="row text-center bg-info text-white">
             <div class="col-sm-2"></div>
             <div class="col-sm-8">
-                <h2>Your Single Product in Detail</h2>
+                <h2>Choose a payment option</h2>
             </div>
             <div class="col-sm-2">
                 <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span
@@ -30,9 +30,8 @@
     <!-- Content area begins -->
     <div class="container-fluid bg-light">
         <div class="row d-flex justify-content-center ">
-            <div class="col-sm-10">
-                <h1 class="text-center bg-info py-3 text-white">Choose payment option</h1>
-                <div class="payment-option d-flex justify-content-between mt-3 mb-3 bg-dark">
+            <div class="col-sm-4 py-4">
+                <div class="payment-option d-flex justify-content-between mt-3 mb-3">
                     <a href="paymentOnLine.php" class="btn btn-lg btn-primary"><i class="fas fa-signal"></i> Online
                         payment</a>
                     <a href="paymentOffLine.php" class="btn btn-lg btn-info"><i class="fas fa-receipt"></i> Offline

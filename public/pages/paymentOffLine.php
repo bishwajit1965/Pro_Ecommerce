@@ -1,34 +1,10 @@
 <?php
 require_once 'Classloader.php';
 
-// use Codecourse\Repositories\Brand as Brand;
-// use Codecourse\Repositories\Category as Category;
-// use Codecourse\Repositories\Helpers as Helpers;
-// use Codecourse\Repositories\Products as MyProduct;
 use Codecourse\Repositories\Session as Session;
-// use Codecourse\Repositories\SubCategory as SubCategory;
 
 Session::init();
 Session::checkSession();
-
-// Needed for inserting category id to products table
-// $category = new Category;
-// $subCategory = new SubCategory;
-// $product = new MyProduct();
-// $helper = new Helpers();
-// $brand = new Brand();
-
-// Needed table for fetching data
-// table = 'tbl_category';
-// $table2 = 'tbl_sub_category';
-// $table3 = 'tbl_products';
-// $table4 = 'tbl_brand';
-// $table5 = 'tbl_cart';
-
-// Get single product id to fetch data
-if (isset($_GET['single_id'])) {
-    $id = $_GET['single_id'];
-}
 ?>
 <?php include_once '../partials/_head.php'; ?>
 
@@ -158,16 +134,18 @@ if (isset($_GET['single_id'])) {
                                                 <form action="processCart.php" method="post">
                                                     <input type="hidden" name="action" value="verify">
                                                     <button type="submit" name="submit" value="order"
-                                                        class="btn btn-sm btn-danger"> Order now</button>
+                                                        class="btn btn-sm btn-danger"><i class="fas fa-folder-plus"></i>
+                                                        Order now</button>
                                                 </form>
-                                                <?php
-                                                } else { }
-                                                ?>
                                                 <form action="cart.php" method="post">
                                                     <button type="submit" name="submit" class="btn btn-sm btn-info"><i
                                                             class="fas fa-cart-plus"> </i>
                                                         Cart </button>
                                                 </form>
+                                                <?php
+                                                } else { }
+                                                ?>
+
                                             </div>
 
                                         </div>
@@ -308,9 +286,7 @@ if (isset($_GET['single_id'])) {
                     </tbody>
                     <tfoot class="thead-inverse">
                         <tr>
-                            <th colspan="3" class="text-center py-2">
-
-                            </th>
+                            <th colspan="3" class="text-center py-2"></th>
                         </tr>
                     </tfoot>
                 </table>

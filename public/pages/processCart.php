@@ -85,7 +85,7 @@ if (isset($_POST['submit'])) {
                 if ($_REQUEST['action'] == 'verify') {
                     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if (isset($_POST['submit'])) {
-                            $stmtExecuted = $cart->processOrder($tableCart, $sessionId, $tableOrders);
+                            $orderedProduct = $cart->processOrderToBuyProduct($tableCart, $sessionId, $tableOrders);
                             $stmtExec = $cart->destroyDataFromCartTableOnLogOut($sessionId, $tableCart);
                             $message = '<div class="alert alert-primary alert-dismissible" role="alert"">
                                 <strong>SUCCESS !!!</strong> Order has been placed successfully!!!
