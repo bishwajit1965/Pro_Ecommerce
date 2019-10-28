@@ -1,11 +1,3 @@
-<?php
-// require_once 'Classloader.php';
-
-// use Codecourse\Repositories\Session as Session;
-
-// Session::init();
-// Session::checkSession();
-?>
 <?php include_once '../partials/_head.php'; ?>
 
 <body>

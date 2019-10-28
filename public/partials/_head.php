@@ -15,6 +15,9 @@ use Codecourse\Repositories\SubCategory as SubCategory;
 // Starts session
 Session::init();
 
+// Checks if logged in or not
+Session::checkLogin();
+
 // Verifies if the customer logged in or not
 Session::checkSession();
 
@@ -23,6 +26,9 @@ $sessionId = session_id();
 
 // Session based individual customer Id
 $customerId = Session::get('customerId');
+
+// Detecte file name
+$current_page = basename($_SERVER['SCRIPT_FILENAME'], '.php');
 
 // Class objects instantiated
 $brand = new Brand();
@@ -36,13 +42,12 @@ $subCategory = new SubCategory;
 
 // Tables listed for use where necessary
 $tableBrand = 'tbl_brand';
+$tableCart = 'tbl_cart';
 $tableCategory = 'tbl_category';
 $tableSubCategory = 'tbl_sub_category';
 $tableCustomer = 'tbl_customer';
-$tableCart = 'tbl_cart';
 $tablePeoducts = 'tbl_products';
 $tableOrders = 'tbl_orders';
-
 ?>
 
 <!DOCTYPE html>

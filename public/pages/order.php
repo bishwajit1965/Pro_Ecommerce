@@ -1,14 +1,3 @@
-<?php
-include_once 'ClassLoader.php';
-
-use Codecourse\Repositories\Session as Session;
-
-// Initiates session
-Session::init();
-// Verifies if logged in or not
-Session::checkSession();
-
-?>
 <?php include_once '../partials/_head.php'; ?>
 
 <body>
@@ -29,7 +18,7 @@ Session::checkSession();
         <div class="row text-center bg-info text-white">
             <div class="col-sm-2"></div>
             <div class="col-sm-8 pt-2">
-                <h2>Price details</h2>
+                <h2>Your orderedpPrice details</h2>
             </div>
             <div class="col-sm-2">
                 <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
@@ -67,7 +56,7 @@ Session::checkSession();
                 $grandTotal = $sum + $vat;
                 ?>
                 <p class="total-amount">
-                    Your total payable amount including 15% vat [<span style="color:red;">(15% vat) <?= $vat !== null ?  number_format($vat, 2, '.', '') : ''; ?> + <?= $sum !== null ? number_format($sum, 2, '.', '') : ''; ?> (Price)</span> ] <span style="color:#0070df;font-size:26px;font-weight:900;">=<?= $grandTotal !== null ? number_format($grandTotal, 2, '.', '') : ''; ?><b>&#2547;</b></span>
+                    Your total payable amount including 15% vat [ <span style="color:red;">(15% vat) <?= $vat !== null ?  number_format($vat, 2, '.', '') : ''; ?> + <?= $sum !== null ? number_format($sum, 2, '.', '') : ''; ?> (Price)</span> ] <span style="color:#0070df;font-size:26px;font-weight:900;">=<?= $grandTotal !== null ? number_format($grandTotal, 2, '.', '') : ''; ?> <b>&#2547;</b> </span>
                 </p>
             <?php } ?>
             <p class="greeting-message">

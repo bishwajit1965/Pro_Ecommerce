@@ -4,6 +4,7 @@ include_once '../admin/app/start.php';
 use Codecourse\Repositories\Brand as Brand;
 use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Category as Category;
+use Codecourse\Repositories\CustomerProfileIndex as CustomerProfileIndex;
 use Codecourse\Repositories\FrontEnd as FrontEnd;
 use Codecourse\Repositories\Helpers as Helper;
 use Codecourse\Repositories\Products;

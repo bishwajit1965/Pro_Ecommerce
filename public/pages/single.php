@@ -1,17 +1,7 @@
-<?php
-$tableBrand = 'tbl_brand';
-$tableCategory = 'tbl_category';
-$tableSubCategory = 'tbl_sub_category';
-$tableCustomer = 'tbl_customer';
-$tableCart = 'tbl_cart';
-$tablePeoducts = 'tbl_products';
-$tableOrders = 'tbl_orders';
-
-?>
 <?php include_once '../partials/_head.php'; ?>
 <?php
 if (isset($_GET['single_id'])) {
-    $id = $_GET['single_id'];
+    $id = $helpers->validation($_GET['single_id']);
 }
 ?>
 
@@ -45,12 +35,12 @@ if (isset($_GET['single_id'])) {
     <div class="container-fluid bg-light">
         <div class="row">
             <div class="col-sm-9 content-area">
-                <div class="category bg-secondary py-2 mt-3 px-3 mb-3 text-white text-center">
+                <div class="category bg-secondary py- mt-3 px-3 mb-3 text-white text-center">
                     <h3>Product details</h3>
                 </div>
                 <div class="row">
                     <?php
-                    $single_product = $product->getSingleProduct($id, $tablePeoducts);
+                    $single_product = $products->getSingleProduct($id, $tablePeoducts);
                     ?>
                     <div class="col-sm-6">
                         <img src="../../admin/ecommerce/<?= $single_product->photo; ?>" class="card-img-top cart-img img-cover" alt="Cart Image" style="height:292px;">
@@ -133,7 +123,7 @@ if (isset($_GET['single_id'])) {
                         </form>
                     </div>
                 </div>
-                <div class="category bg-secondary py-2 mt-4 px-3 mb-3 text-white text-center">
+                <div class="category bg-secondary py- mt-4 px-3 mb-3 text-white text-center">
                     <h3>Product details</h3>
                 </div>
                 <div class="product-details">

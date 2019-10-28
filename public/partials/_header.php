@@ -1,19 +1,7 @@
 <?php
 require_once '../../admin/app/start.php';
 
-use Codecourse\Repositories\Cart as Cart;
-use Codecourse\Repositories\Products as Products;
 use Codecourse\Repositories\Session as Session;
-
-Session::init();
-Session::checkSession();
-
-$sessionId = session_id();
-$customerId = Session::get('customerId');
-$cart = new Cart();
-$product = new Products();
-$tableCart = 'tbl_cart';
-$tableOrders = 'tbl_orders';
 ?>
 <div class="row pt-1 header-area">
     <div class="col-sm-3 d-flex flex-column justify-content-center">
@@ -36,10 +24,6 @@ $tableOrders = 'tbl_orders';
                     <span class="input-group-text bg-warning pb-2 px-2"><i class="fas fa-cart-plus"></i></span>
                 </div>
                 <?php
-                // Will find the name of the file
-                $path = $_SERVER['SCRIPT_FILENAME'];
-                $current_page = basename($path, '.php');
-                // Will swith over to code chunk as per file name
                 switch ($current_page) {
                     case 'cart':
                         $cartData = $cart->priceDisplay($tableCart, $sessionId);
