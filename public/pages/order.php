@@ -32,8 +32,7 @@ Session::checkSession();
                 <h2>Price details</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span
-                        class="badge badge-secondary"></h3>
+                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -42,36 +41,34 @@ Session::checkSession();
     <div class="container">
         <div class="row d-flex justify-content-center">
             <style>
-            .total-amount {
-                font-size: 20px;
-                font-weight: 700;
-                color: #000;
-                border-bottom: 3px solid#00d9d9;
-                margin-top: 30px;
-            }
+                .total-amount {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #000;
+                    border-bottom: 3px solid#00d9d9;
+                    margin-top: 30px;
+                }
 
-            .greeting-message {
-                font-size: 20px;
-                font-weight: 500;
-                color: #444;
-            }
+                .greeting-message {
+                    font-size: 20px;
+                    font-weight: 500;
+                    color: #444;
+                }
             </style>
             <?php
-            $orderRelatedData = $cart->payableAmountForOrderedproducts($customerId, $tableOrders);
-            if ($orderRelatedData) {
+            $customerOrderDetails = $cart->customerOrderDetails($tableOrders, $customerId);
+            if ($customerOrderDetails) {
                 $sum = 0;
-                foreach ($orderRelatedData as $orderPrice) {
+                foreach ($customerOrderDetails as $orderPrice) {
                     $price =  $orderPrice->total_price;
                     $sum = $sum + $price;
                 }
                 $vat = $sum * 0.15;
                 $grandTotal = $sum + $vat;
                 ?>
-            <p class="total-amount">
-                Your total payable amount (including 15% vat) is : <span style="color:#DA0A0A;">
-                    <?= number_format($grandTotal, 2, '.', ''); ?></span>
-                <b>&#2547;</b>
-            </p>
+                <p class="total-amount">
+                    Your total payable amount including 15% vat [<span style="color:red;">(15% vat) <?= $vat !== null ?  number_format($vat, 2, '.', '') : ''; ?> + <?= $sum !== null ? number_format($sum, 2, '.', '') : ''; ?> (Price)</span> ] <span style="color:#0070df;font-size:26px;font-weight:900;">=<?= $grandTotal !== null ? number_format($grandTotal, 2, '.', '') : ''; ?><b>&#2547;</b></span>
+                </p>
             <?php } ?>
             <p class="greeting-message">
                 Thanks for ordering. Your order will be processed soon. Yo will be informed

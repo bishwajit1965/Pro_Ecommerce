@@ -9,9 +9,11 @@ Session::init();
 Session::checkSession();
 
 $sessionId = session_id();
+$customerId = Session::get('customerId');
 $cart = new Cart();
 $product = new Products();
 $tableCart = 'tbl_cart';
+$tableOrders = 'tbl_orders';
 ?>
 <div class="row pt-1 header-area">
     <div class="col-sm-3 d-flex flex-column justify-content-center">
@@ -34,27 +36,100 @@ $tableCart = 'tbl_cart';
                     <span class="input-group-text bg-warning pb-2 px-2"><i class="fas fa-cart-plus"></i></span>
                 </div>
                 <?php
-                $cartData = $cart->priceDisplay($tableCart, $sessionId);
-                if (!empty($cartData)) {
-                    $sum = 0;
-                    $quantity = 0;
-                    foreach ($cartData as $carts) {
-                        $total = $carts->pro_price * $carts->pro_quantity;
-                        if ($sum !== null) {
-                            $sum = $sum + $total;
-                            $quantity = $quantity + $carts->pro_quantity;
-                        }
-                    }
+                // Will find the name of the file
+                $path = $_SERVER['SCRIPT_FILENAME'];
+                $current_page = basename($path, '.php');
+                // Will swith over to code chunk as per file name
+                switch ($current_page) {
+                    case 'cart':
+                        $cartData = $cart->priceDisplay($tableCart, $sessionId);
+                        if (!empty($cartData)) {
+                            $sum = 0;
+                            $quantity = 0;
+                            foreach ($cartData as $carts) {
+                                $total = $carts->pro_price * $carts->pro_quantity;
+                                if ($sum !== null) {
+                                    $sum = $sum + $total;
+                                    $quantity = $quantity + $carts->pro_quantity;
+                                }
+                            }
+                        } else { }
+                        break;
+                    case 'payment':
+                        $cartData = $cart->priceDisplay($tableCart, $sessionId);
+                        if (!empty($cartData)) {
+                            $sum = 0;
+                            $quantity = 0;
+                            foreach ($cartData as $carts) {
+                                $total = $carts->pro_price * $carts->pro_quantity;
+                                if ($sum !== null) {
+                                    $sum = $sum + $total;
+                                    $quantity = $quantity + $carts->pro_quantity;
+                                }
+                            }
+                        } else { }
+                        break;
+                    case 'paymentOffLine':
+                        $cartData = $cart->priceDisplay($tableCart, $sessionId);
+                        if (!empty($cartData)) {
+                            $sum = 0;
+                            $quantity = 0;
+                            foreach ($cartData as $carts) {
+                                $total = $carts->pro_price * $carts->pro_quantity;
+                                if ($sum !== null) {
+                                    $sum = $sum + $total;
+                                    $quantity = $quantity + $carts->pro_quantity;
+                                }
+                            }
+                        } else { }
+                        break;
+                    case 'order':
+                        $customerOrderDetails = $cart->customerOrderDetails($tableOrders, $customerId);
+                        if (!empty($customerOrderDetails)) {
+                            $sum = 0;
+                            $quantity = 0;
+                            foreach ($customerOrderDetails as $carts) {
+                                $total = $carts->pro_price * $carts->pro_quantity;
+                                if ($sum !== null) {
+                                    $sum = $sum + $total;
+                                    $quantity = $quantity + $carts->pro_quantity;
+                                }
+                            }
+                        } else { }
+                        break;
+                    case 'orderDetails':
+                        $customerOrderDetails = $cart->customerOrderDetails($tableOrders, $customerId);
+                        if (!empty($customerOrderDetails)) {
+                            $sum = 0;
+                            $quantity = 0;
+                            foreach ($customerOrderDetails as $carts) {
+                                $total = $carts->pro_price * $carts->pro_quantity;
+                                if ($sum !== null) {
+                                    $sum = $sum + $total;
+                                    $quantity = $quantity + $carts->pro_quantity;
+                                }
+                            }
+                        } else { }
+                        break;
+                    case 'customerProfileIndex':
+                        $message = "You can only update your profile!";
+                        break;
+                    case 'single':
+                        $message = "Place order now !";
+                        break;
+                    default:
+                        $message = "Place order";
+                        break;
                 }
                 ?>
-                <input type="text" class="form-control form-control-sm" placeholder="<?php if (!empty($sum)) :
-                                                                                            echo 'Qty : ' . $quantity . ' || ' . 'Price: ' . number_format($sum, 2, '.', '') . ' &#2547; '; ?>
-                <?php
-                else :
-                    echo "Empty cart";
-                    ?>
-                <?php endif ?>">
 
+                    <input type="text" disabled="disabled" class="form-control form-control-sm" placeholder="<?php
+                                                                                                                if (isset($sum)  && isset($quantity)) {
+                                                                                                                    echo "Qty:" . $quantity . '|' . "Pri:" . number_format($sum, 2, '.', '') . ' + Vat due (15%)' . '&#2547; ';
+                                                                                                                } else {
+                                                                                                                    echo $message;
+                                                                                                                }
+                                                                                                                ?>">
             </div>
         </form>
     </div>

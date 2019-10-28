@@ -42,7 +42,7 @@
                 <input type="text" name="total_price" class="form-control form-control-sm" placeholder="<?php if (!empty($quantity) && !empty($grandTotal)) {
                                                                                                             echo 'Q:' . $quantity . '|P :' . number_format($grandTotal, 2, '.', '') . '&#2547;';
                                                                                                         } else {
-                                                                                                            echo "Log in please";
+                                                                                                            echo "No orders found !!!";
                                                                                                         } ?>">
             </div>
         </form>

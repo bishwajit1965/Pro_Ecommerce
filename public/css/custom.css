@@ -1,10 +1,10 @@
 #active {
-    background-color: #4f4f4f;
+    background-color: #3a3a3a;
     color: #FFF;
     font-weight: 700;
     padding: 8px 15px;
-    border: 1px solid#c0c0c0;
     border-radius: 8px;
+    border-bottom: 3px solid #0080ff;
 }
 
 #heading {
@@ -51,7 +51,7 @@
 .input-group ::placeholder {
     color: red;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 ::placeholder {
@@ -110,11 +110,11 @@ h1::first-letter {
 }
 
 h2::first-letter {
-    font-size: 155%;
+    font-size: 160%;
     color: #DA0A0A;
     text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
-    line-height: 40px;
-    padding-top:15px;
+    line-height: 30px;
+    padding-top: 15px;
 }
 
 h3::first-letter {
@@ -259,7 +259,6 @@ ul>li>a {
 .red ::placeholder {
     color: red;
 }
-
 
 /* Top footer area
 ======================= */
