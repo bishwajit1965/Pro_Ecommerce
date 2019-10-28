@@ -25,12 +25,11 @@ Session::checkSession();
         <!-- Page title -->
         <div class="row text-center bg-info text-white">
             <div class="col-sm-2"></div>
-            <div class="col-sm-8">
-                <h2>Customer Profile Index</h2>
+            <div class="col-sm-8 pt-2">
+                <h2>Customer Profile Index</h4>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span
-                        class="badge badge-secondary"></h3>
+                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -45,8 +44,8 @@ Session::checkSession();
             Session::set('message', null);
         }
         ?>
-        <div class="table-responsive p-0">
-            <table class="table table-light table-condensed table-sm table-striped">
+        <div class="table-responsive-sm p-0">
+            <table class="table table-condensed table-sm table-striped">
                 <thead class="thead-inverse">
                     <tr>
                         <th>ID</th>
@@ -68,43 +67,41 @@ Session::checkSession();
                     foreach ($customerData as $customer) {
 
                         ?>
-                    <tr>
-                        <td><?php echo $customer->id; ?>
-                        </td>
-                        <td><?php echo $customer->first_name . ' ' . $customer->last_name; ?>
-                        </td>
-                        <td><?php echo $customer->email; ?>
-                        </td>
-                        <td><?php echo $customer->phone; ?>
-                        </td>
-                        <td><?php echo $customer->address; ?>
-                        </td>
-                        <td><?php echo $customer->city; ?>
-                        </td>
-                        <td><?php echo $customer->country; ?>
-                        </td>
-                        <td><?php echo $customer->zip_code; ?>
-                        </td>
-                        <td><?php echo $helpers->dateFormat($customer->created_at); ?>
-                        </td>
-                        <td><?php echo $helpers->dateFormat($customer->updated_at); ?>
-                        </td>
-                        <td>
-                            <?php if (Session::get('login') ==  $customer->email) { ?>
-                            <form action="processCustomerProfile.php" method="post">
-                                <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>"
-                                    class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit </a>
+                        <tr>
+                            <td><?php echo $customer->id; ?>
+                            </td>
+                            <td><?php echo $customer->first_name . ' ' . $customer->last_name; ?>
+                            </td>
+                            <td><?php echo $customer->email; ?>
+                            </td>
+                            <td><?php echo $customer->phone; ?>
+                            </td>
+                            <td><?php echo $customer->address; ?>
+                            </td>
+                            <td><?php echo $customer->city; ?>
+                            </td>
+                            <td><?php echo $customer->country; ?>
+                            </td>
+                            <td><?php echo $customer->zip_code; ?>
+                            </td>
+                            <td><?php echo $helpers->dateFormat($customer->created_at); ?>
+                            </td>
+                            <td><?php echo $helpers->dateFormat($customer->updated_at); ?>
+                            </td>
+                            <td>
+                                <?php if (Session::get('login') ==  $customer->email) { ?>
+                                    <form action="processCustomerProfile.php" method="post">
+                                        <input type="hidden" name="action" value="verify">
+                                        <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
 
-                                <input type="hidden" name="action" value="verify">
-                                <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
-                                <button type="submit" name="submit"
-                                    onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')"
-                                    class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i>
-                                    Delete</button>
-                            </form>
-                            <?php  } ?>
-                        </td>
-                    </tr>
+                                        <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> </a>
+
+                                        <button type="submit" name="submit" onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')" class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                <?php  } ?>
+                            </td>
+                        </tr>
                     <?php
                     }
                     ?>

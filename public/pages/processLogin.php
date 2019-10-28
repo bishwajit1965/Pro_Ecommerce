@@ -1,19 +1,9 @@
 <?php
 include_once 'ClassLoader.php';
-// require_once '../../admin/app/start.php';
 
-// use Codecourse\Repositories\Cart as Cart;
-// use Codecourse\Repositories\Helpers as Helpers;
-// use Codecourse\Repositories\LoginCustomer as LoginCustomer;
 use Codecourse\Repositories\Session as Session;
 
-// $loginCustomer = new LoginCustomer();
-// $helpers = new Helpers();
-// $cart = new Cart();
 Session::init();
-// $tableCustomer = 'tbl_customer';
-// $tableCart = 'tbl_cart';
-// include_once 'classes.php';
 
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];

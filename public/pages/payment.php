@@ -17,12 +17,11 @@
         <!-- Page title -->
         <div class="row text-center bg-info text-white">
             <div class="col-sm-2"></div>
-            <div class="col-sm-8">
+            <div class="col-sm-8 pt-2">
                 <h2>Choose a payment option</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span
-                        class="badge badge-secondary"></h3>
+                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
             </div>
         </div>
         <!-- /Page title -->

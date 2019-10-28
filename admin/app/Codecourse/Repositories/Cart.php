@@ -110,7 +110,7 @@ class Cart
         }
     }
 
-    // Insert data
+    // Insert data to cart table
     public function addToCart($table5, $table3, $productId, $quantity, $sessionId)
     {
         try {
@@ -200,6 +200,41 @@ class Cart
                     $orderRelatedData[] = $ordrData;
                 }
                 return $orderRelatedData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // Checks if customer id is emp0ty or not
+    public function checksCustomerIdInOrdersTable($customerId, $tableOrders)
+    {
+        try {
+            $sql = "SELECT * FROM $tableOrders WHERE customer_id = '$customerId'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($ordrData = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $orderRelatedCustomerIdData[] = $ordrData;
+                }
+                return $orderRelatedCustomerIdData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    // To display customer order details
+    public function customerOrderDetails($tableOrders, $customerId)
+    {
+        try {
+            $sql = "SELECT * FROM $tableOrders WHERE customer_id = '$customerId'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($customerOrder = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $customerOrderDetails[] = $customerOrder;
+                }
+                return $customerOrderDetails;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

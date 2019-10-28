@@ -1,6 +1,6 @@
 <div class="row text-white justify-content-center" style="background-color:#404040;">
     <div class="container-fluid top-footer py-2 text-white" style="margin-bottom:0;background:#000;">
-        <div class="row">
+        <div class="row top-footer">
             <div class="col-sm-3">
                 <h5 class="text-uppercase">Information</h5>
             </div>
@@ -20,7 +20,7 @@
                     <a href=""><i class="fab fa-github text-white"></i></a>
                 </div>
                 <div class="facebook justify-content-around">
-                    <a href=""><img src="../img/logo/facebookProfile.jpg" class="img-fluid img-thumbnail"
+                    <a href=""><img src="img/logo/facebookProfile.jpg" class="img-fluid img-thumbnail"
                             alt="Facebook"></a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
     </div>
     <!-- Bottom footer bar -->
     <div class="container-fluid d-flex justify-content-center" style="background-color:#1f1f1f;">
-        <div class="bottom-footer-bar">
+        <div class="bottom-footer-bar pt-3">
             <?php echo date('Y'); ?> All rights reserved
         </div>
     </div>

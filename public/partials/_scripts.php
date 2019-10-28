@@ -13,6 +13,26 @@
 <!-- Nivo slider -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="nivo-slider/jquery.nivo.slider.js"></script>
+<script src="js/scrolltop.js"></script>
+
+<!-- Sticky navbar -->
+<script>
+window.onscroll = function() {
+    myFunction()
+};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+    if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+    } else {
+        navbar.classList.remove("sticky");
+    }
+}
+</script>
+<!-- /Sticky navbar -->
 
 <script type="text/javascript">
 $(window).load(function() {

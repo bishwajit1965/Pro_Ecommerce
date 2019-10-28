@@ -1,16 +1,9 @@
 <?php
 include_once 'ClassLoader.php';
-// require_once '../../admin/app/start.php';
 
-// use Codecourse\Repositories\CustomerProfile as CustomerProfile;
-// use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\Session as Session;
 
-// $customerProfile = new CustomerProfile();
-// $helpers = new Helpers();
 Session::init();
-
-// $tableCustomer = 'tbl_customer';
 
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];

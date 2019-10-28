@@ -33,7 +33,7 @@ $result = $customerProfile->updateView($id, $table);
         <!-- Page title -->
         <div class="row text-center bg-info text-white">
             <div class="col-sm-2"></div>
-            <div class="col-sm-8">
+            <div class="col-sm-8 pt-2">
                 <h2>Edit customer Detail</h2>
             </div>
             <div class="col-sm-2">

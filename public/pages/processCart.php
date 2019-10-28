@@ -4,8 +4,8 @@ include_once 'ClassLoader.php';
 use Codecourse\Repositories\Session as Session;
 
 Session::init();
-
 $sessionId = session_id();
+
 if (isset($_POST['submit'])) {
     $accessor = $_POST['submit'];
     switch ($accessor) {

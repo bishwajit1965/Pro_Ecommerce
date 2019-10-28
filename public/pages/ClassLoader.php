@@ -1,6 +1,7 @@
 <?php
 include_once '../../admin/app/start.php';
 
+// Classes included for global use
 use Codecourse\Repositories\Brand as Brand;
 use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Category as Category;
@@ -14,11 +15,14 @@ use Codecourse\Repositories\SubCategory as SubCategory;
 // Starts session
 Session::init();
 
-// Verifies if logged in or not
+// Verifies if the customer logged in or not
 Session::checkSession();
 
 // Session id for individual customer
 $sessionId = session_id();
+
+// Session based individual customer Id
+$customerId = Session::get('customerId');
 
 // Class objects instantiated
 $brand = new Brand();

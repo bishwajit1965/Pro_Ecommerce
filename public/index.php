@@ -2,6 +2,7 @@
 include_once '../admin/app/start.php';
 
 use Codecourse\Repositories\Brand as Brand;
+use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Category as Category;
 use Codecourse\Repositories\FrontEnd as FrontEnd;
 use Codecourse\Repositories\Helpers as Helper;
@@ -9,16 +10,23 @@ use Codecourse\Repositories\Products;
 use Codecourse\Repositories\Session as Session;
 use Codecourse\Repositories\SubCategory as SubCategory;
 
+$cart = new Cart();
+
+$session = Session::checkLogin();
+$sessionId = session_id();
 // starts session
 Session::init();
 $sessionId = session_id();
 
+// Gets the file name to show whether it is active or not
+$fileName = basename($_SERVER["SCRIPT_FILENAME"], '.php');
+
 // Tables
-$table = 'tbl_products';
 $table1 = 'tbl_brand';
-$table2 = 'tbl_sub_category';
-$table3 = 'tbl_category';
 $table5 = 'tbl_cart';
+$table3 = 'tbl_category';
+$table = 'tbl_products';
+$table2 = 'tbl_sub_category';
 
 $tableBrand = 'tbl_brand';
 $tableCategory = 'tbl_category';
@@ -80,15 +88,81 @@ $subCategory = new SubCategory();
         <?php include_once 'partials/_indexHeader.php'; ?>
         <!-- /Header ends -->
         <!-- Navbar -->
-        <?php include_once 'partials/_navbar_index.php'; ?>
+        <nav class="row navbar navbar-expand-lg navbar-dark bg-dark clearfix" id="navbar">
+            <a <?php
+                if ($fileName == 'index') {
+                    echo 'id="active"';
+                }  ?> class="navbar-brand" href="index.php" style="font-size:16px;">HOME</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/products.php">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/topBrands.php">Top Brands</a>
+                    </li>
+                    <?php
+
+                    if ($session == true) {
+                        ?>
+                        <?php
+                            if ($cart->checkCartTable($table5, $sessionId)) {
+                                ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pages/cart.php">Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pages/payment.php">Payment</a>
+                            </li>
+                        <?php
+                            } ?>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/customerProfileIndex.php">Profile</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/contact.php">Contact</a>
+                    </li>
+                    <?php
+                    $customerId = Session::get('customerId');
+                    $orderRelatedCustomerIdData = $cart->checksCustomerIdInOrdersTable($customerId, $tableOrders);
+                    if (!empty($orderRelatedCustomerIdData)) {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/orderDetails.php"> Order List</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <!-- /Navbar ends -->
         <!-- Page title -->
-        <div class="row text-center bg-info text-white">
+        <div class="row text-center  bg-info text-white">
             <div class="col-sm-2"></div>
-            <div class="col-sm-8">
+            <div class="col-sm-8 pt-2">
                 <h2> Cart Home</h2>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 d-flex flex-row justify-content-center pt-0">
                 <h3>
                     <span class="badge badge-info">
                         <i class="fas fa-cart-plus">&nbsp;</i>
@@ -107,6 +181,8 @@ $subCategory = new SubCategory();
                     <div class="col-sm-8">
                         <div class="row">
                             <?php
+                            // $file_name = basename($_SERVER["SCRIPT_FILENAME"], '.php');
+                            // echo $file_name;
                             $records_per_page = 4;
                             $productsData = $frontEnd->paging($table, $records_per_page);
                             $products = $frontEnd->frontEndDataAndPagination($productsData);
@@ -555,56 +631,13 @@ $subCategory = new SubCategory();
         <!-- Footer top -->
         <?php include_once 'partials/_top-footer.php'; ?>
         <!-- /Footer top -->
+
         <!-- Footer -->
-        <div class="row text-white justify-content-center" style="background-color:#404040;">
-            <div class="container-fluid top-footer py-2 text-white" style="margin-bottom:0;background:#000;">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <h5>Recent posts</h5>
-                        <div class="recent-posts">
-                            <div class="post-details">
-                                <h6></h6>
-                                <small>Author: Bishwajit Paul &nbsp;||</small>
-                                <small>Publkished on: 20 May 2019 12.00 PM &nbsp;||</small>
-                                <small>Category: Php</small>
-                            </div>
-                            <div class="recent-post-image">
-                                <img src="img/slider_images/banner5.jpg" style="width:100px; height:60px;float:left; margin-right:10px;" class="img-fluid" alt="Recent post image">
-                            </div>
-                            <div class="recent-post-content">
-                                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit totam quibusdam
-                                    illo.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4 ">
-                        <!-- code here -->
-                    </div>
-                    <div class="col-sm-4">
-                        <h5>Social sites links</h5>
-                        <div class="top-social-links  d-flex justify-content-between mb-4">
-                            <a href=""><i class="fab fa-facebook text-white"></i></a>
-                            <a href=""><i class="fab fa-linkedin text-white"></i></a>
-                            <a href=""><i class="fab fa-twitter text-white"></i></a>
-                            <a href=""><i class="fab fa-google-plus text-white"></i></a>
-                            <a href=""><i class="fab fa-github text-white"></i></a>
-                        </div>
-                        <div class="facebook justify-content-around">
-                            <a href="">
-                                <img src="img/logo/facebookProfile.jpg" class="img-fluid img-thumbnail" alt="Facebook"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="copyright container-fluid bottom-footer py-2 text-white text-center" style="margin-bottom:0;background:#151515;">
-                &copy;<?php echo date('Y'); ?> All rights reserved
-            </div>
-        </div>
+        <?php include_once 'partials/_indexFooter.php'; ?>
         <!-- /Footer ends -->
     </div>
     <!-- /Footer area ends -->
-    <!-- Optional JavaScript -->
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <?php include_once 'partials/_scripts.php'; ?>
     <!-- Accordion -->

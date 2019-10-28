@@ -24,7 +24,7 @@
                     <?= $category->cat_name; ?>
                 </a>
             </li>
-                    <?php
+            <?php
                 }
             }
             ?>
@@ -36,7 +36,7 @@
     <div class="category d-block mb-3">
         <ul>
             <?php
-            $subCategoryData = $subCategory->index($table2);
+            $subCategoryData = $subCategory->index($tableSubCategory);
             if (!empty($subCategoryData)) {
                 foreach ($subCategoryData as $subCategory) {
                     ?>
@@ -45,7 +45,7 @@
                     <?= $subCategory->sub_cat_name; ?>
                 </a>
             </li>
-                    <?php
+            <?php
                 }
             }
             ?>

@@ -1,3 +1,12 @@
+#active {
+    background-color: #4f4f4f;
+    color: #FFF;
+    font-weight: 700;
+    padding: 8px 15px;
+    border: 1px solid#c0c0c0;
+    border-radius: 8px;
+}
+
 #heading {
     font-size: 42px;
     font-weight: bold;
@@ -6,7 +15,19 @@
 }
 
 .header-area {
-    background-color: #6CE6F9;
+    background-color: #000;
+    background-image: url(../img/background/web-banner.jpg);
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #FFF;
+}
+
+.social-links>a>i {
+    color: #FFF;
+    font-size: 26px;
 }
 
 .img-class {
@@ -25,6 +46,12 @@
     font-size: 16px;
     margin-bottom: 0px;
     padding-top: 0px;
+}
+
+.input-group ::placeholder {
+    color: red;
+    font-weight: 700;
+    font-size: 15px;
 }
 
 ::placeholder {
@@ -77,14 +104,24 @@ s {
 }
 
 h1::first-letter {
-    font-size: 200%;
+    font-size: 150%;
     color: #8A2BE2;
+    padding-top: 20px;
 }
 
 h2::first-letter {
-    font-size: 200%;
+    font-size: 155%;
     color: #DA0A0A;
     text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
+    line-height: 40px;
+    padding-top:15px;
+}
+
+h3::first-letter {
+    font-size: 155%;
+    color: #DA0A0A;
+    text-shadow: 1px 2px 3px rgba(255, 255, 255, 0.589);
+    line-height: 40px;
 }
 
 h1,
@@ -92,7 +129,7 @@ h2,
 h3 {
     font-family: 'Allura', cursive;
     font-weight: 800;
-    line-height: 18px;
+    line-height: 26px;
     color:
 }
 
@@ -226,6 +263,26 @@ ul>li>a {
 
 /* Top footer area
 ======================= */
-.top-social-links h5 {
+.top-footer h5 {
     border-bottom: 2px solid#999999;
+}
+
+.fab {
+    font-size: 26px;
+}
+
+/* Sticky navbar
+===================== */
+.navbar {
+    z-index: 999;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.sticky+.content {
+    padding-top: 60px;
 }

@@ -1,36 +1,19 @@
 <?php
-require_once '../../admin/app/start.php';
+$tableBrand = 'tbl_brand';
+$tableCategory = 'tbl_category';
+$tableSubCategory = 'tbl_sub_category';
+$tableCustomer = 'tbl_customer';
+$tableCart = 'tbl_cart';
+$tablePeoducts = 'tbl_products';
+$tableOrders = 'tbl_orders';
 
-use Codecourse\Repositories\Brand as Brand;
-use Codecourse\Repositories\Category as Category;
-use Codecourse\Repositories\Helpers as Helpers;
-use Codecourse\Repositories\Products as MyProduct;
-use Codecourse\Repositories\Session as Session;
-use Codecourse\Repositories\SubCategory as SubCategory;
-
-Session::init();
-Session::checkSession();
-
-// Needed for inserting category id to products table
-$category = new Category;
-$subCategory = new SubCategory;
-$product = new MyProduct();
-$helper = new Helpers();
-$brand = new Brand();
-
-// Needed table for fetching data
-$table = 'tbl_category';
-$table2 = 'tbl_sub_category';
-$table3 = 'tbl_products';
-$table4 = 'tbl_brand';
-$table5 = 'tbl_cart';
-
-// Get single product id to fetch data
+?>
+<?php include_once '../partials/_head.php'; ?>
+<?php
 if (isset($_GET['single_id'])) {
     $id = $_GET['single_id'];
 }
 ?>
-<?php include_once '../partials/_head.php'; ?>
 
 <body>
     <div class="container-fluid">
@@ -65,30 +48,9 @@ if (isset($_GET['single_id'])) {
                 <div class="category bg-secondary py-2 mt-3 px-3 mb-3 text-white text-center">
                     <h3>Product details</h3>
                 </div>
-                <!-- Error message will be displayed -->
-                <?php
-                if (isset($_GET['error'])) {
-                    $message = '<div class="alert alert-danger alert-dismissible" role="alert">
-                    <strong> SORRY !</strong> Something went wrong!!! Please check out !!!
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    </div>';
-                    echo $message;
-                }
-                ?>
-                <!-- /Error message will be displayed -->
                 <div class="row">
                     <?php
-                    // Will display all the messages vlidation/insert/update/delete
-                    $message = Session::get('message');
-                    if (!empty($message)) {
-                        echo $message;
-                        Session::set('message', null);
-                    }
-                    ?>
-                    <?php
-                    $single_product = $product->getSingleProduct($id, $table3);
+                    $single_product = $product->getSingleProduct($id, $tablePeoducts);
                     ?>
                     <div class="col-sm-6">
                         <img src="../../admin/ecommerce/<?= $single_product->photo; ?>" class="card-img-top cart-img img-cover" alt="Cart Image" style="height:292px;">
@@ -99,7 +61,7 @@ if (isset($_GET['single_id'])) {
                             <?= $single_product->pro_name; ?>
                         </h4>
                         <p class="card-text" style="text-align:justify;">
-                            <?= $helper->textShorten(htmlspecialchars_decode($single_product->pro_description), 277); ?>
+                            <?= $helpers->textShorten(htmlspecialchars_decode($single_product->pro_description), 277); ?>
                         </p>
                         <div class="row ">
                             <div class="col-sm-6">
@@ -130,7 +92,7 @@ if (isset($_GET['single_id'])) {
                                     <?= $single_product->pro_company; ?>
                                 </span>
                                 <?php
-                                $brandData = $brand->index($table4);
+                                $brandData = $brand->index($tableBrand);
                                 if (!empty($brandData)) {
                                     foreach ($brandData as $brand) {
                                         if ($brand->brand_id == $single_product->brand_id) {
@@ -179,7 +141,8 @@ if (isset($_GET['single_id'])) {
                         <?= htmlspecialchars_decode($single_product->pro_description); ?>
                     </p>
                 </div>
-                <a href=" ../index.php" class="btn btn-sm btn-primary mb-2"><i class="fas fa-fast-backward"> </i> Home page</a>
+                <a href=" ../index.php" class="btn btn-sm btn-primary mb-2"><i class="fas fa-fast-backward"> </i> Home
+                    page</a>
             </div>
             <!-- Right Sidebar -->
             <?php include_once '../partials/_rightSidebar.php'; ?>
