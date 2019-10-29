@@ -1,4 +1,4 @@
-<?php include_once '../partials/_head.php'; ?>
+<?php include_once 'partials/_head.php'; ?>
 
 <body>
     <div class="container-fluid">
@@ -7,11 +7,11 @@
         <!-- /Header Border -->
 
         <!-- Header -->
-        <?php include_once '../partials/_header.php'; ?>
+        <?php include_once 'partials/_header.php'; ?>
         <!-- /Header ends -->
 
         <!-- Navbar -->
-        <?php include_once '../partials/_navbar.php'; ?>
+        <?php include_once 'partials/_navbar.php'; ?>
         <!-- /Navbar ends -->
 
         <!-- Page title -->
@@ -21,7 +21,17 @@
                 <h2>Choose a payment option</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
+                <h3>
+                    <span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i>
+                        <sup class="badge badge-danger">
+                            <?php if (!empty($sum)) :
+                                echo $quantity; ?>
+                            <?php else :
+                                echo "0"; ?>
+                            <?php endif ?>
+                        </sup>
+                    </span>
+                </h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -48,18 +58,18 @@
     <!-- Footer area begins -->
     <div class="container-fluid">
         <!-- Footer top -->
-        <?php include_once '../partials/_top-footer.php'; ?>
+        <?php include_once 'partials/_top-footer.php'; ?>
         <!-- /Footer top -->
 
         <!-- Footer -->
-        <?php include_once '../partials/_footer.php'; ?>
+        <?php include_once 'partials/_footer.php'; ?>
         <!-- /Footer ends -->
     </div>
     <!-- /Footer area ends -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <?php include_once '../partials/_scripts.php'; ?>
+    <?php include_once 'partials/_scripts.php'; ?>
 </body>
 
 </html>

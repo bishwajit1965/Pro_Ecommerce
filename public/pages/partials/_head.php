@@ -1,11 +1,14 @@
 <?php
 ob_start();
+
 include_once '../../admin/app/start.php';
+
 // Classes included for global use
 use Codecourse\Repositories\Brand as Brand;
 use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Category as Category;
 use Codecourse\Repositories\CustomerProfile as CustomerProfile;
+use Codecourse\Repositories\FrontEnd as FrontEnd;
 use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\LoginCustomer as LoginCustomer;
 use Codecourse\Repositories\Products as Products;
@@ -20,7 +23,7 @@ Session::checkLogin();
 
 // Verifies if the customer logged in or not
 Session::checkSession();
-
+$session = Session::checkSession();
 // Session id for individual customer
 $sessionId = session_id();
 
@@ -35,6 +38,7 @@ $brand = new Brand();
 $cart = new Cart();
 $category = new Category;
 $customerProfile = new CustomerProfile();
+$frontEnd = new FrontEnd();
 $helpers = new Helpers();
 $loginCustomer = new LoginCustomer();
 $products = new Products();
@@ -44,10 +48,10 @@ $subCategory = new SubCategory;
 $tableBrand = 'tbl_brand';
 $tableCart = 'tbl_cart';
 $tableCategory = 'tbl_category';
-$tableSubCategory = 'tbl_sub_category';
 $tableCustomer = 'tbl_customer';
-$tablePeoducts = 'tbl_products';
 $tableOrders = 'tbl_orders';
+$tablePeoducts = 'tbl_products';
+$tableSubCategory = 'tbl_sub_category';
 ?>
 
 <!DOCTYPE html>

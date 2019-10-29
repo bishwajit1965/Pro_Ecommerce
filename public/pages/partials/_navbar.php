@@ -62,7 +62,9 @@
             ?>
 
             <li class="nav-item">
-                <a class="nav-link" href="topBrands.php">Top Brands</a>
+                <a <?php if ($current_page == 'brandCategorySubCategory') {
+                        echo 'id="active"';
+                    } ?>class="nav-link" href="brandCategorySubCategory.php">View products</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

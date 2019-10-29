@@ -1,4 +1,4 @@
-<?php include_once '../partials/_head.php'; ?>
+<?php include_once 'partials/_head.php'; ?>
 
 <body>
     <div class="container-fluid">
@@ -7,11 +7,11 @@
         <!-- /Header Border -->
 
         <!-- Header -->
-        <?php include_once '../partials/_header.php'; ?>
+        <?php include_once 'partials/_header.php'; ?>
         <!-- /Header ends -->
 
         <!-- Navbar -->
-        <?php include_once '../partials/_navbar.php'; ?>
+        <?php include_once 'partials/_navbar.php'; ?>
         <!-- /Navbar ends -->
 
         <!-- Page title -->
@@ -21,7 +21,17 @@
                 <h2>Your Single Product in Detail</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
+                <h3>
+                    <span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i>
+                        <sup class="badge badge-danger">
+                            <?php if (!empty($sum)) :
+                                echo $quantity; ?>
+                            <?php else :
+                                echo "0"; ?>
+                            <?php endif ?>
+                        </sup>
+                    </span>
+                </h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -31,9 +41,9 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="wrapper" style="border:1px solid#DDD;">
-                    <div class="table-responsive-sm p-0">
+                    <div class="table-responsive-sm">
                         <table class="table table-condensed table-sm table-striped mb-0">
-                            <thead class="thead-inverse">
+                            <thead class="thead-inverse py-3">
                                 <tr>
                                     <th>ID</th>
                                     <th>Pro Name</th>
@@ -52,7 +62,7 @@
                                     foreach ($cartData as $cart) {
                                         $i++; ?>
                                         <tr>
-                                            <td scope="row"><?= $i; ?></td>
+                                            <td><?= $i; ?></td>
                                             <td cope="row"><?= isset($cart->pro_name) ? $cart->pro_name : ''; ?></td>
                                             <td><img class="" src="../../admin/ecommerce/<?= $cart->photo; ?>" alt="<?= $cart->pro_name; ?>" style="width:45px;height:35px;"></td>
                                             <td style="display:block;text-align:right;">
@@ -176,12 +186,12 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="table-responsive-md">
-                    <table class="table table-condensed  table-sm table-striped mb-0 p-3">
+                <div class="table-responsive-sm">
+                    <table class="table table-condensed  table-sm table-striped mb-0">
                         <thead class="thead-inverse">
                             <tr>
-                                <th colspan="3" class="text-center py-">
-                                    <h3>Customer Profile Data</h3>
+                                <th colspan="3" class="text-center py-0">
+                                    <h4>Customer Profile Data</h4>
                                 </th>
                             </tr>
                         </thead>
@@ -279,18 +289,18 @@
     <!-- Footer area begins -->
     <div class="container-fluid">
         <!-- Footer top -->
-        <?php include_once '../partials/_top-footer.php'; ?>
+        <?php include_once 'partials/_top-footer.php'; ?>
         <!-- /Footer top -->
 
         <!-- Footer -->
-        <?php include_once '../partials/_footer.php'; ?>
+        <?php include_once 'partials/_footer.php'; ?>
         <!-- /Footer ends -->
     </div>
     <!-- /Footer area ends -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <?php include_once '../partials/_scripts.php'; ?>
+    <?php include_once 'partials/_scripts.php'; ?>
 </body>
 
 </html>

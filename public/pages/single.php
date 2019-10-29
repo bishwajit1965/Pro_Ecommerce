@@ -1,4 +1,4 @@
-<?php include_once '../partials/_head.php'; ?>
+<?php include_once 'partials/_head.php'; ?>
 <?php
 if (isset($_GET['single_id'])) {
     $id = $helpers->validation($_GET['single_id']);
@@ -12,11 +12,11 @@ if (isset($_GET['single_id'])) {
         <!-- /Header Border -->
 
         <!-- Header -->
-        <?php include_once '../partials/_header.php'; ?>
+        <?php include_once 'partials/_header.php'; ?>
         <!-- /Header ends -->
 
         <!-- Navbar -->
-        <?php include_once '../partials/_navbar.php'; ?>
+        <?php include_once 'partials/_navbar.php'; ?>
         <!-- /Navbar ends -->
 
         <!-- Page title -->
@@ -135,7 +135,7 @@ if (isset($_GET['single_id'])) {
                     page</a>
             </div>
             <!-- Right Sidebar -->
-            <?php include_once '../partials/_rightSidebar.php'; ?>
+            <?php include_once 'partials/_rightSidebar.php'; ?>
             <!-- /Right Sidebar -->
         </div>
     </div>
@@ -144,18 +144,18 @@ if (isset($_GET['single_id'])) {
     <!-- Footer area begins -->
     <div class="container-fluid">
         <!-- Footer top -->
-        <?php include_once '../partials/_top-footer.php'; ?>
+        <?php include_once 'partials/_top-footer.php'; ?>
         <!-- /Footer top -->
 
         <!-- Footer -->
-        <?php include_once '../partials/_footer.php'; ?>
+        <?php include_once 'partials/_footer.php'; ?>
         <!-- /Footer ends -->
     </div>
     <!-- /Footer area ends -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <?php include_once '../partials/_scripts.php'; ?>
+    <?php include_once 'partials/_scripts.php'; ?>
 </body>
 
 </html>
