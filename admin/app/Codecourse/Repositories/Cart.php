@@ -227,7 +227,25 @@ class Cart
     public function customerOrderDetails($tableOrders, $customerId)
     {
         try {
-            $sql = "SELECT * FROM $tableOrders WHERE customer_id = '$customerId'";
+            $sql = "SELECT * FROM $tableOrders WHERE customer_id = '$customerId' ORDER BY ordered_on DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($customerOrder = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $customerOrderDetails[] = $customerOrder;
+                }
+                return $customerOrderDetails;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // To display customer order details in admin order inbox
+    public function customerOrders($tableOrders)
+    {
+        try {
+            $sql = "SELECT * FROM $tableOrders ORDER BY ordered_on DESC";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {

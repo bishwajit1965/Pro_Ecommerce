@@ -55,8 +55,8 @@
                 $vat = $sum * 0.15;
                 $grandTotal = $sum + $vat;
                 ?>
-                <div class="message d-flex justify-content-md-center">
-                    <h1 style="font-weight:900;">WOW !!! order has been placed successfully !!!</h1>
+                <div class="message d-flex justify-content-sm-center">
+                    <h1 class="mb-1" style="font-weight:900;">WOW !!! order has been placed successfully !!!</h1>
                 </div>
                 <p class="total-amount">
                     Your total payable amount including 15% vat [ <span style="color:red;">(15% vat) <?= $vat !== null ?  number_format($vat, 2, '.', '') : ''; ?> + <?= $sum !== null ? number_format($sum, 2, '.', '') : ''; ?> (Price)</span> ] <span style="color:#0070df;font-size:26px;font-weight:900;">=<?= $grandTotal !== null ? number_format($grandTotal, 2, '.', '') : ''; ?> <b>&#2547;</b> </span>

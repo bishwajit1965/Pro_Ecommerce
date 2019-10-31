@@ -37,7 +37,9 @@ use Codecourse\Repositories\Session as Session;
                                     $quantity = $quantity + $carts->pro_quantity;
                                 }
                             }
-                        } else { }
+                        } else {
+                            $message = "Empty cart. You may place order.";
+                        }
                         break;
                     case 'payment':
                         $cartData = $cart->priceDisplay($tableCart, $sessionId);
@@ -51,7 +53,9 @@ use Codecourse\Repositories\Session as Session;
                                     $quantity = $quantity + $carts->pro_quantity;
                                 }
                             }
-                        } else { }
+                        } else {
+                            $message = "Empty cart. You may place order.";
+                        }
                         break;
                     case 'paymentOffLine':
                         $cartData = $cart->priceDisplay($tableCart, $sessionId);
@@ -65,7 +69,9 @@ use Codecourse\Repositories\Session as Session;
                                     $quantity = $quantity + $carts->pro_quantity;
                                 }
                             }
-                        } else { }
+                        } else {
+                            $message = "Empty cart. You may place order.";
+                        }
                         break;
                     case 'order':
                         $customerOrderDetails = $cart->customerOrderDetails($tableOrders, $customerId);
@@ -79,7 +85,9 @@ use Codecourse\Repositories\Session as Session;
                                     $quantity = $quantity + $carts->pro_quantity;
                                 }
                             }
-                        } else { }
+                        } else {
+                            $message = "Empty cart. You may place order.";
+                        }
                         break;
                     case 'orderDetails':
                         $customerOrderDetails = $cart->customerOrderDetails($tableOrders, $customerId);

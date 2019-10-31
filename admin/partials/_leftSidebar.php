@@ -16,8 +16,7 @@
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
-                            class="fa fa-search"></i>
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                     </button>
                 </span>
             </div>
@@ -26,6 +25,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <?php
         require_once '../app/start.php';
+
         use Codecourse\Repositories\User as User;
         use Codecourse\Repositories\Session as Session;
 
@@ -35,7 +35,7 @@
         if ($_SESSION['userEmail'] == $user->getEmail()) {
             ?>
 
-            <?php
+        <?php
         }
         ?>
         <ul class="sidebar-menu" data-widget="tree">
@@ -90,7 +90,7 @@
                     <li><a href="../category/categoryIndex.php"><i class="fa fa-circle-o"></i> Category index</a></li>
                 </ul>
             </li>
-             <li class="treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-files-o"></i>
                     <span>Subb Category Options</span>
@@ -124,6 +124,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="../ecommerce/ecommerceIndex.php"><i class="fa fa-circle-o"></i> Ecommerce index</a></li>
+                    <li><a href="../ecommerce/inbox.php"><i class="fa fa-circle-o"></i> Orders</a></li>
                 </ul>
             </li>
         </ul>

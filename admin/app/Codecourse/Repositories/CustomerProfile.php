@@ -36,6 +36,24 @@ class CustomerProfile
             echo $e->getMessage();
         }
     }
+
+    // Get order specific customer data for customer.php in ecommerce folder
+    public function orderSpecificCustomerAddtess($table, $customerId)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE id = '$customerId'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($result = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $customerData[] = $result;
+                }
+                return $customerData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
     // Insert data
     public function store($fields, $table)
     {

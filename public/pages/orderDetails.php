@@ -71,38 +71,29 @@
                                                 <b>&#2547;</b></td>
                                             <td style="text-align:right;">
 
-                                                <?php
-                                                        if ($cart->status == '1') {
-                                                            ?>
+                                                <?php if ($cart->status == '1') { ?>
                                                     <span style="color:#333;font-weight:700;"><?= "Processed"; ?></span>
-                                                <?php
-
-                                                        } else {
-                                                            ?>
+                                                <?php } else { ?>
                                                     <span style="color:#cd1f05;font-weight:700;"><?= "Pending"; ?></span>
-                                                <?php
-                                                        }
-                                                        ?>
-
+                                                <?php } ?>
                                             </td>
                                             <td style="text-align:right;">
-                                                <?php
-                                                        echo  $helpers->dateFormat($cart->ordered_on); ?>
+                                                <?php echo  $helpers->dateFormat($cart->ordered_on); ?>
                                             </td>
                                             <td style="text-align:right;">
-                                                <a href="">Edit</a>
-                                                <a href="">Delete</a>
+                                                <?php if ($cart->status == '0') {
+                                                            echo 'N/A';
+                                                        } else { ?>
+                                                    <a href="?delete_id=<?= $cart->order_id; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
-
-                                    <?php
-                                            // Grand tgotal calculation
-                                            if ($sum !== null) {
+                                        <!-- Grand tgotal calculation -->
+                                    <?php if ($sum !== null) {
                                                 $sum = $sum + $total;
                                             }
                                         }
-                                    } else {
-                                        ?>
+                                    } else { ?>
 
                                     <div class="alert alert-primary alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -111,9 +102,7 @@
                                         </button>
                                         <strong>SORRY !!!</strong> There is no product avaiable in the cart at present.
                                     </div>
-                                <?php
-                                }
-                                ?>
+                                <?php } ?>
                                 <tr>
                                     <td colspan="9">
                                         <div class="row">
@@ -129,32 +118,26 @@
                                                 <div class="price-calculation" style="padding-right:64.5%;">
                                                     <span style="display:block;text-align:right;font-weight:bold;color:#000;font-size:16px;">
                                                         Sub total :
-                                                        <?php
-                                                        if (!empty($sum)) {
+                                                        <?php if (!empty($sum)) {
                                                             echo number_format($sum, 2, '.', '');
-                                                        }
-                                                        ?>
+                                                        } ?>
                                                         <b>&#2547;</b>
                                                     </span>
                                                     <span style="margin-left:auto;">+</span>
                                                     <span style="display:block;text-align:right;font-weight:bold;color:#000;margin-bottom:10px;border-bottom:3px solid #a6a6a6;font-size:16px;">
                                                         Vat - 15% :
-                                                        <?php
-                                                        if (!empty($sum)) {
+                                                        <?php if (!empty($sum)) {
                                                             $vat = $sum * 0.15;
                                                             echo number_format($vat, 2, '.', '');
-                                                        }
-                                                        ?>
+                                                        } ?>
                                                         <b>&#2547;</b>
                                                     </span>
                                                     <span style="display:block;text-align:right;font-weight:800;font-size:18px;color:#000;">
                                                         Grand total :
-                                                        <?php
-                                                        if (!empty($sum) && !empty($vat)) {
+                                                        <?php if (!empty($sum) && !empty($vat)) {
                                                             $grandTotal = $sum + $vat;
                                                             echo number_format($grandTotal, 2, '.', '');
-                                                        }
-                                                        ?>
+                                                        } ?>
                                                         <b> &#2547; </b></span>
                                                 </div>
                                             </div>
