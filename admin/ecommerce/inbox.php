@@ -51,6 +51,29 @@
                 </div>
                 <div class="box-body">
                     <!-- Code below -->
+                    <style>
+                        * {
+                            box-sizing: border-box;
+                        }
+
+                        .zoom {
+                            padding: 1px;
+                            background-color: #DDD;
+                            transition: transform .2s;
+                            width: 50px;
+                            height: 52px;
+                            margin: 0 auto;
+                            border-radius: 5px;
+                        }
+
+                        .zoom:hover {
+                            -ms-transform: scale(5.5);
+                            /* IE 9 */
+                            -webkit-transform: scale(5.5);
+                            /* Safari 3-8 */
+                            transform: scale(5.5);
+                        }
+                    </style>
                     <?php
                     // Will display all the messages vlidation/insert/update/delete
                     $message = Session::get('message');
@@ -87,6 +110,7 @@
                                     <th>Quantity</th>
                                     <th>Total Price</th>
                                     <th>CustomerId</th>
+                                    <th>Order Status</th>
                                     <th>Address</th>
                                     <th>Photo</th>
                                     <th>Actions</th>
@@ -120,23 +144,76 @@
                                                 <?php echo $result->customer_id; ?>
                                             </td>
                                             <td>
-                                                <a href="customer.php?customer_id=<?= $result->customer_id; ?>"> View details</a>
+                                                <?php if ($result->status == '0') { ?>
+                                                    <span style="color:#cd1f05;font-weight:700;"><?= "Pending"; ?></span>
+                                                <?php } elseif ($result->status == '1') { ?>
+                                                    <span style="color:#000;font-weight:700;"><?= "Processed"; ?></span>
+                                                <?php } elseif ($result->status == '2') { ?>
+                                                    <span style="color:#7600ec;font-weight:700;"><?= "Confirmed"; ?></span>
+                                                <?php } else { } ?>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-xs btn-info" href="customer.php?customer_id=<?= $result->customer_id; ?>"> View details</a>
                                             </td>
                                             <td>
                                                 <?php if (empty($result->photo)) { ?>
-                                                    <img src="../gallery/avatar/avatar.png" alt="Alternative Image" style="width:50px;height:50px;">
+                                                    <div class="zoom">
+                                                        <img id="image" src="../gallery/avatar/avatar.png" alt="Alternative Image" style="width:50px;height:50px;"></div>
                                                 <?php } else { ?>
-                                                    <img src="<?php echo $result->photo; ?>" class="img-thumbnail" style="width:50px;height:50px;" alt="Product Photo">
+                                                    <div class="zoom">
+                                                        <img id="image" src="<?php echo $result->photo; ?>" class="img-thumbnail" style="width:50px;height:50px;" alt="Product Photo"></div>
                                                 <?php } ?>
                                             </td>
 
                                             <td>
                                                 <?php if ($_SESSION['userEmail'] == $user_home->getEmail()) { ?>
                                                     <?php if ($result->status == '0') { ?>
-                                                        <a class="btn btn-sm btn-primary buttons" data-toggle="tooltip" title="Shift order data" href="?shifting_id=<?php echo $result->order_id; ?> && price=<?= $result->pro_price; ?> && date=<?= $result->ordered_on; ?>"><i class="fa fa-paper-plane"></i> Shift</a>
+                                                        <form action="processOrders.php" method="post">
+
+                                                            <input type="hidden" name="order_id" value="<?php echo $result->order_id; ?>">
+
+                                                            <input type="hidden" name="pro_price" value="<?= $result->pro_price; ?>">
+
+                                                            <input type="hidden" name="ordered_on" value="<?= $result->ordered_on; ?>">
+
+                                                            <input type="hidden" name="status" value="<?= $result->status; ?>">
+
+                                                            <input type="hidden" name="action" value="verify">
+
+                                                            <button type="submit" name="submit" value="update-status" class="btn btn-xs btn-primary"><i class="fa fa-paper-plane"></i> Shift order</button>
+                                                        </form>
+                                                    <?php } elseif ($result->status == '1') { ?>
+                                                        <form action="processOrders.php" method="post">
+
+                                                            <input type="hidden" name="order_id" value="<?php echo $result->order_id; ?>">
+
+                                                            <input type="hidden" name="pro_price" value="<?= $result->pro_price; ?>">
+
+                                                            <input type="hidden" name="ordered_on" value="<?= $result->ordered_on; ?>">
+
+                                                            <input type="hidden" name="status" value="<?= $result->status; ?>">
+
+                                                            <input type="hidden" name="action" value="verify">
+
+                                                            <button type="submit" name="submit" value="revoke_status" class="btn btn-xs btn-info"><i class="fa fa-paper-plane"></i> Revoke Order</button>
+                                                        </form>
+                                                    <?php } elseif ($result->status == '2') { ?>
+                                                        <form action="processOrders.php" method="post">
+
+                                                            <input type="hidden" name="action" value="verify">
+
+                                                            <input type="hidden" name="order_id" value="<?php echo $result->order_id; ?>">
+
+                                                            <input type="hidden" name="customer_id" value="<?php echo $result->customer_id; ?>">
+
+                                                            <input type="hidden" name="ordered_on" value="<?php echo $result->ordered_on; ?>">
+
+                                                            <input type="hidden" name="status" value="<?php echo $result->status; ?>">
+
+                                                            <button type="submit" class="btn btn-xs btn-danger buttons" data-toggle="tooltip" title="Remove order" name="submit" value="delete_order"> <i class="fa fa-trash"></i> Remove order</button>
+                                                        </form>
                                                     <?php } else { ?>
 
-                                                        <a class="btn btn-sm btn-danger buttons" data-toggle="tooltip" title="Remove order" href="?shifting_id=<?php echo $result->order_id; ?> && price=<?= $result->pro_price; ?> && date=<?= $result->ordered_on; ?>"><i class="fa fa-trash"></i> Remove</a>
                                             </td>
                                         <?php } ?>
 
@@ -159,6 +236,7 @@
                                     <th>Quantity</th>
                                     <th>Total Price</th>
                                     <th>CustomerId</th>
+                                    <th>Order Status</th>
                                     <th>Address</th>
                                     <th>Photo</th>
                                     <th>Actions</th>

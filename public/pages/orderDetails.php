@@ -31,6 +31,18 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="wrapper" style="border:1px solid#DDD;">
+                    <?php
+                    include_once '../../admin/app/start.php';
+
+                    use Codecourse\Repositories\Session as Session;
+
+                    // Will display all the messages vlidation/insert/update/delete
+                    $message = Session::get('message');
+                    if (!empty($message)) {
+                        echo $message;
+                        Session::set('message', null);
+                    }
+                    ?>
                     <div class="table-responsive-sm">
                         <table class="table table-condensed table-sm mb-0">
                             <thead class="thead-inverse">
@@ -52,39 +64,52 @@
                                 if (!empty($customerOrderDetails)) {
                                     $i = 0;
                                     $sum = 0;
-                                    foreach ($customerOrderDetails as $cart) {
+                                    foreach ($customerOrderDetails as $order) {
                                         $i++; ?>
                                         <tr>
                                             <td><?= $i; ?></td>
-                                            <td><?= isset($cart->pro_name) ? $cart->pro_name : ''; ?></td>
-                                            <td><img class="" src="../../admin/ecommerce/<?= $cart->photo; ?>" alt="<?= $cart->pro_name; ?>" style="width:45px;height:35px;"></td>
+                                            <td><?= isset($order->pro_name) ? $order->pro_name : ''; ?></td>
+                                            <td><img class="" src="../../admin/ecommerce/<?= $order->photo; ?>" alt="<?= $order->pro_name; ?>" style="width:45px;height:35px;"></td>
                                             <td style="text-align:right;">
-                                                <?= isset($cart->pro_price) ? number_format($cart->pro_price, 2, '.', '') : ''; ?>
+                                                <?= isset($order->pro_price) ? number_format($order->pro_price, 2, '.', '') : ''; ?>
                                                 <b> &#2547;</b></td>
                                             <td style="text-align:right;">
-                                                <?= isset($cart->pro_quantity) ? $cart->pro_quantity : ''; ?>
+                                                <?= isset($order->pro_quantity) ? $order->pro_quantity : ''; ?>
                                             </td>
 
                                             <td style="text-align:right;">
-                                                <?php $total = $cart->pro_price * $cart->pro_quantity;
+                                                <?php $total = $order->pro_price * $order->pro_quantity;
                                                         echo isset($total) ? number_format($total, 2, '.', '') : ''; ?>
                                                 <b>&#2547;</b></td>
                                             <td style="text-align:right;">
 
-                                                <?php if ($cart->status == '1') { ?>
+                                                <?php if ($order->status == '1') { ?>
                                                     <span style="color:#333;font-weight:700;"><?= "Processed"; ?></span>
+                                                <?php } elseif ($order->status == '2') { ?>
+                                                    <span style="color:#333;font-weight:700;"><?= "Confirmed"; ?></span>
                                                 <?php } else { ?>
                                                     <span style="color:#cd1f05;font-weight:700;"><?= "Pending"; ?></span>
                                                 <?php } ?>
                                             </td>
                                             <td style="text-align:right;">
-                                                <?php echo  $helpers->dateFormat($cart->ordered_on); ?>
+                                                <?php echo  $helpers->dateFormat($order->ordered_on); ?>
                                             </td>
                                             <td style="text-align:right;">
-                                                <?php if ($cart->status == '0') {
+                                                <?php if ($order->status == '0') {
                                                             echo 'N/A';
-                                                        } else { ?>
-                                                    <a href="?delete_id=<?= $cart->order_id; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                                                        } elseif ($order->status == '1') { ?>
+                                                    <form action="processCart.php" method="post">
+                                                        <input type="hidden" name="action" value="varify">
+
+                                                        <input type="hidden" name="order_id" value="<?= $order->order_id; ?>">
+                                                        <input type="hidden" name="customer_id" value="<?= $order->customer_id; ?>">
+                                                        <input type="hidden" name="status" value="<?= $order->status; ?>">
+
+                                                        <input type="hidden" name="ordered_on" value="<?= $order->ordered_on; ?>">
+                                                        <button type="submit" name="submit" value="confirm_order" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Confirm</button>
+                                                    </form>
+                                                <?php } else { ?>
+                                                    <a href="?delete_id=<?= $order->order_id; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
                                                 <?php } ?>
                                             </td>
                                         </tr>

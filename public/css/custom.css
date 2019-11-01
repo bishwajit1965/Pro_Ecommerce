@@ -285,3 +285,29 @@ ul>li>a {
 .sticky+.content {
     padding-top: 60px;
 }
+
+/* Image zoom effect
+=================== */
+* {
+    box-sizing: border-box;
+}
+/* Just add this class to a div containg the image */
+.zoom {
+    padding: 1px;
+    background-color: #DDD;
+    transition: transform .2s;
+    width: 50px;
+    height: 52px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.zoom:hover {
+    -ms-transform: scale(5.5);
+    /* IE 9 */
+    -webkit-transform: scale(5.5);
+    /* Safari 3-8 */
+    transform: scale(5.5);
+}
+/* Image zoom effect ends
+======================== */

@@ -64,76 +64,66 @@
                                 <?php
                                 $customerData = $customerProfile->orderSpecificCustomerAddtess($tableCustomer, $customerId);
                                 foreach ($customerData as $customer) {
-                                    if (Session::get('login') ==  $customer->email) {
-                                        ?>
-                                        <tr>
-                                            <th style="width:100px;">ID</th>
-                                            <td>:</td>
-                                            <td><?php echo $customer->id; ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Name</th>
-                                            <td>:</td>
-                                            <td><?php echo $customer->first_name . ' ' . $customer->last_name; ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Email</th>
-                                            <td>:</td>
-                                            <td><?php echo $customer->email; ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Phone</th>
-                                            <td>:</td>
-                                            <td><?php echo $customer->phone; ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Address</th>
-                                            <td>:</td>
-                                            <td><?php echo $customer->address; ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Countery</th>
-                                            <td>:</td>
-                                            <td><?php echo $customer->country; ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Zip Code</th>
-                                            <td>:</td>
-                                            <td><?php echo $customer->zip_code; ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Created at</th>
-                                            <td>:</td>
-                                            <td><?php echo $helpers->dateFormat($customer->created_at); ?>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Actions</th>
-                                            <td>:</td>
-                                            <td>
-                                                <form action="processCustomerProfile.php" method="post">
-                                                    <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Edit </a>
-
-                                                    <input type="hidden" name="action" value="verify">
-                                                    <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
-
-                                                    <button type="submit" name="submit" onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')" class="btn btn-sm btn-danger" value="delete"> <i class="fa fa-trash"></i>
-                                                        Delete</button>
-
-                                                    <a href="inbox.php" class="btn btn-sm btn-primary"><i class="fa fa-fast-backward"></i> Order inbox</a>
-                                                </form>
-                                            </td>
-                                        </tr>
+                                    // if (Session::get('login') ==  $customer->email) {
+                                    ?>
+                                    <tr>
+                                        <th style="width:100px;">ID</th>
+                                        <td>:</td>
+                                        <td><?php echo $customer->id; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>:</td>
+                                        <td><?php echo $customer->first_name . ' ' . $customer->last_name; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>:</td>
+                                        <td><?php echo $customer->email; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone</th>
+                                        <td>:</td>
+                                        <td><?php echo $customer->phone; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address</th>
+                                        <td>:</td>
+                                        <td><?php echo $customer->address; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Countery</th>
+                                        <td>:</td>
+                                        <td><?php echo $customer->country; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Zip Code</th>
+                                        <td>:</td>
+                                        <td><?php echo $customer->zip_code; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Created at</th>
+                                        <td>:</td>
+                                        <td><?php echo $helpers->dateFormat($customer->created_at); ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Actions</th>
+                                        <td>:</td>
+                                        <td>
+                                            <a href="inbox.php" class="btn btn-sm btn-primary"><i class="fa fa-fast-backward"></i> Order inbox</a>
+                                        </td>
+                                    </tr>
                                 <?php
-                                    }
                                 }
+                                // }
                                 ?>
                             </tbody>
                             <tfoot class="thead-inverse">

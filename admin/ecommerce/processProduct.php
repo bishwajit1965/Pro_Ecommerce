@@ -2,12 +2,15 @@
 
 require_once '../app/start.php';
 
+use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Products as Products;
 use Codecourse\Repositories\Session as Session;
 
+$cart = new Cart();
 $products = new Products();
 Session::init();
 $table = 'tbl_products';
+$tableOrders = 'tbl_orders';
 
 switch ($_POST['submit']) {
     case 'insert':
@@ -674,6 +677,34 @@ switch ($_POST['submit']) {
                             Session::set('message', $message);
                             $home_url = 'ecommerceIndex.php';
                             $products->redirect($home_url);
+                        }
+                    }
+                }
+            }
+        }
+        break;
+    case 'update-status':
+        if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+            if ($_REQUEST['action'] == 'verify') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['submit'])) {
+                        if (!empty($_POST['order_id']) && !empty($_POST['pro_price']) && !empty($_POST['ordered_on'])) {
+                            $order_id = $cart->validate($_POST['order_id']);
+                            $pro_price = $cart->validate($_POST['pro_price']);
+                            $ordered_on = $cart->validate($_POST['ordered_on']);
+                            $ordered_status = $cart->validate($_POST['status']);
+                            $updatedStatus = $cart->updateOrderStatus($tableOrders, $order_id, $pro_price, $ordered_on, $ordered_status);
+                            if ($updatedStatus == true) {
+                                $message = '<div class="alert alert-danger alert-dismissible " role="alert">
+                                <strong> WOW !</strong> Ordered data has successfully been shifted !!!
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>';
+                                Session::set('message', $message);
+                                $home_url = 'inbox.php';
+                                $cart->redirect("$home_url");
+                            }
                         }
                     }
                 }

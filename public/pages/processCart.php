@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
                                     } else {
                                         // If not added previously the data will be inserted
                                         $lastId = $cart->addToCart($tableCart, $tablePeoducts, $productId, $quantity, $sessionId);
-                                        $message = '<div class="alert alert-success alert-dismissible" role="alert"">
+                                        $message = '<div class="alert alert-success alert-dismissible mb-0" role="alert"">
                                         <strong>WOW !!!</strong> Product has been added to cart successfully!!!
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -96,6 +96,39 @@ if (isset($_POST['submit'])) {
                             Session::set('message', $message);
                             $home_url = 'order.php';
                             $cart->redirect("$home_url");
+                        }
+                    }
+                }
+            }
+            break;
+        case 'confirm_order':
+            if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+                if ($_REQUEST['action'] == 'varify') {
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        if (isset($_POST['submit'])) {
+                            if (isset($_POST['submit'])) {
+                                if (isset($_POST['order_id']) && isset($_POST['customer_id']) && isset($_POST['ordered_on']) && isset($_POST['status'])) {
+                                    // Verifies and matches all the fields then updates
+                                    $order_id = $cart->validate($_POST['order_id']);
+                                    $customer_id = $cart->validate($_POST['customer_id']);
+                                    $ordered_on = $cart->validate($_POST['ordered_on']);
+                                    $ordered_status = $cart->validate($_POST['status']);
+                                    // Confirms staus in orders table
+                                    $confirmOrderStatus = $cart->confirmOrderStatus($tableOrders, $order_id, $customer_id, $ordered_on, $ordered_status);
+                                    // validation messages and page redirects
+                                    if ($confirmOrderStatus) {
+                                        $message = '<div class="alert alert-success alert-dismissible " role="alert">
+                                    <strong> WOW !</strong> Ordered status has been confirmed successfully !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                        Session::set('message', $message);
+                                        $home_url = 'orderDetails.php';
+                                        $cart->redirect("$home_url");
+                                    }
+                                }
+                            }
                         }
                     }
                 }

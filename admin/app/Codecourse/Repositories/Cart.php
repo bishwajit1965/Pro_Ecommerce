@@ -125,6 +125,7 @@ class Cart
             $quantity = $quantity;
             $pro_price = $cartItem->present_price;
             $photo = $cartItem->photo;
+
             // Insert into cart table
             $query = "INSERT INTO $table5 (customer_id, session_id, pro_id, pro_name, pro_price, pro_quantity, photo) VALUES('$customerId', '$sessionId', '$productId', '$pro_name', '$pro_price', '$quantity', '$photo')";
 
@@ -253,6 +254,72 @@ class Cart
                     $customerOrderDetails[] = $customerOrder;
                 }
                 return $customerOrderDetails;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // Update order status in orders table by admin from admin
+    public function updateOrderStatus($tableOrders, $order_id, $pro_price, $ordered_on, $ordered_status)
+    {
+        $sql = "UPDATE $tableOrders SET status = '1' WHERE status = '$ordered_status' && order_id = '$order_id' && pro_price = '$pro_price' && ordered_on = '$ordered_on'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':$order_id', $order_id);
+        $stmt->bindValue(':$pro_price', $pro_price);
+        $stmt->bindValue(':$ordered_on', $ordered_on);
+        $stmt->bindValue(':$ordered_status', $ordered_status);
+        $statusUpdated = $stmt->execute();
+        if ($statusUpdated) {
+            return $statusUpdated;
+        } else {
+            return false;
+        }
+    }
+
+    // Revke order status in orders table by admin from admin
+    public function revokeOrderStatus($tableOrders, $order_id, $pro_price, $ordered_on, $ordered_status)
+    {
+        $sql = "UPDATE $tableOrders SET status = '0' WHERE status = '$ordered_status' && order_id = '$order_id' && pro_price = '$pro_price' && ordered_on = '$ordered_on'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':$order_id', $order_id);
+        $stmt->bindValue(':$pro_price', $pro_price);
+        $stmt->bindValue(':$ordered_on', $ordered_on);
+        $stmt->bindValue(':$ordered_status', $ordered_status);
+        $statusUpdated = $stmt->execute();
+        if ($statusUpdated) {
+            return $statusUpdated;
+        } else {
+            return false;
+        }
+    }
+
+    // Confirm order status in orders table by admin from admin
+    public function confirmOrderStatus($tableOrders, $order_id, $customer_id, $ordered_on, $ordered_status)
+    {
+        $sql = "UPDATE $tableOrders SET status = '2' WHERE status = '$ordered_status' && order_id = '$order_id' && customer_id = '$customer_id' && ordered_on = '$ordered_on'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':$order_id', $order_id);
+        $stmt->bindValue(':$customer_id', $customer_id);
+        $stmt->bindValue(':$ordered_on', $ordered_on);
+        $stmt->bindValue(':$ordered_status', $ordered_status);
+        $confirmOrderStatus = $stmt->execute();
+        if ($confirmOrderStatus) {
+            return $confirmOrderStatus;
+        } else {
+            return false;
+        }
+    }
+    // Delete order data
+    public function deleteOrder($tableOrders, $order_id, $customer_id, $ordered_on, $ordered_status)
+    {
+        try {
+            $sql = "DELETE FROM $tableOrders WHERE order_id = '$order_id' && customer_id = '$customer_id' && ordered_on = '$ordered_on' && status = '$ordered_status'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':$order_id', $order_id);
+            $stmtExec = $stmt->execute();
+            if ($stmtExec) {
+                return $stmtExec ? true : false;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

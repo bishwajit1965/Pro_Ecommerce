@@ -196,6 +196,7 @@ $subCategory = new SubCategory();
                                 ?>
                                 <div class="col-sm-3 p-1 products-data">
                                     <div class="card" style="">
+
                                         <img src="../admin/ecommerce/<?= isset($product->photo) ? $product->photo : ''; ?>" class="card-img-top cart-img img-cover" alt="Cart Image">
                                         <div class="card-body p-1 pt-3 pb-2">
                                             <h6 class="card-title">
@@ -328,8 +329,7 @@ $subCategory = new SubCategory();
                                                             <b>&#2547;</b>
                                                         </span>
                                                         <span style="font-weight:bold; display:block;">Brand :
-                                                            <?php
-                                                                            $brandName = $brand->getBrand($table1);
+                                                            <?php $brandName = $brand->getBrand($table1);
                                                                             if (!empty($brandName)) {
                                                                                 foreach ($brandName as $b_data) {
                                                                                     if ($b_data->brand_id == $displayAllData->brand_id) {
@@ -342,8 +342,7 @@ $subCategory = new SubCategory();
                                                         <span class="rating-star">
                                                             <b>Rating:</b>
                                                         </span>
-                                                        <?php
-                                                                        $rating = $displayAllData->pro_rating;
+                                                        <?php $rating = $displayAllData->pro_rating;
                                                                         for ($i = 1; $i <= $rating; $i++) {
                                                                             ?>
                                                             <i class="fas fa-star rating-star"></i>
@@ -391,8 +390,7 @@ $subCategory = new SubCategory();
                                                         </span>
 
                                                         <span style="font-weight:bold; display:block;">Brand :
-                                                            <?php
-                                                                            $brandName = $brand->getBrand($table1);
+                                                            <?php $brandName = $brand->getBrand($table1);
                                                                             if (!empty($brandName)) {
                                                                                 foreach ($brandName as $b_data) {
                                                                                     if ($b_data->brand_id == $categoryProduct->brand_id) {
@@ -405,8 +403,7 @@ $subCategory = new SubCategory();
                                                         <span class="rating-star">
                                                             <b>Rating:</b>
                                                         </span>
-                                                        <?php
-                                                                        $rating = $categoryProduct->pro_rating;
+                                                        <?php $rating = $categoryProduct->pro_rating;
                                                                         for ($i = 1; $i <= $rating; $i++) {
                                                                             ?>
                                                             <i class="fas fa-star rating-star"></i>
@@ -453,8 +450,7 @@ $subCategory = new SubCategory();
                                                             <b>&#2547;</b>
                                                         </span>
                                                         <span style="font-weight:bold; display:block;">Brand :
-                                                            <?php
-                                                                            $brandName = $brand->getBrand($table1);
+                                                            <?php $brandName = $brand->getBrand($table1);
                                                                             if (!empty($brandName)) {
                                                                                 foreach ($brandName as $b_data) {
                                                                                     if ($b_data->brand_id == $subCategoryProduct->brand_id) {
@@ -466,8 +462,7 @@ $subCategory = new SubCategory();
                                                         <span class="rating-star">
                                                             <b>Rating:</b>
                                                         </span>
-                                                        <?php
-                                                                        $rating = $subCategoryProduct->pro_rating;
+                                                        <?php $rating = $subCategoryProduct->pro_rating;
                                                                         for ($i = 1; $i <= $rating; $i++) {
                                                                             ?>
                                                             <i class="fas fa-star rating-star"></i>
@@ -514,8 +509,7 @@ $subCategory = new SubCategory();
                                                 </span>
 
                                                 <span style="font-weight:bold; display:block;">Brand :
-                                                    <?php
-                                                            $brandName = $brand->getBrand($table1);
+                                                    <?php $brandName = $brand->getBrand($table1);
                                                             if (!empty($brandName)) {
                                                                 foreach ($brandName as $b_data) {
                                                                     if ($b_data->brand_id == $product->brand_id) {
