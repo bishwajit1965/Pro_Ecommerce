@@ -1,6 +1,8 @@
 <?php
+// Loader of cl;ass files
 include_once '../admin/app/start.php';
 
+// Classes are included
 use Codecourse\Repositories\Brand as Brand;
 use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Category as Category;

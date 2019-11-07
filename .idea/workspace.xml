@@ -15,6 +15,7 @@
     </execution>
   </component>
   <component name="Git.Settings">
+    <option name="PATH_TO_GIT" value="C:\Users\User\Downloads\Programs\Git-2.18.0-64-bit_2\Git-2.18.0-64-bit_2.exe" />
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,7 +29,7 @@
   <component name="ProjectId" id="1THeOKxrOJBkDelVGKzt3bpmBd4" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Programs/Git-2.18.0-64-bit_2" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -56,7 +57,12 @@
       <option name="presentableId" value="Default" />
       <updated>1573121414236</updated>
       <workItem from="1573121415985" duration="699000" />
-      <workItem from="1573122207560" duration="1006000" />
+      <workItem from="1573122207560" duration="1520000" />
+      <workItem from="1573124499128" duration="1170000" />
+      <workItem from="1573126444117" duration="51000" />
+      <workItem from="1573126556665" duration="1098000" />
+      <workItem from="1573127745879" duration="218000" />
+      <workItem from="1573128070422" duration="700000" />
     </task>
     <servers />
   </component>
