@@ -70,8 +70,9 @@
             </p>
             <a href="orderDetails.php" class="btn btn-sm btn-info mt-4 mr-1 mb-4"><i class="fas fa-eye"></i>
                 View order details</a>
-            <a href="../index.php" class="btn btn-sm btn-success mt-4 ml-1 mb-4"><i class="fas fa-fast-backward"></i>
-                Home page</a>
+
+            <a href="../index.php" class="btn btn-sm btn-primary mt-4 mb-4"><i class="fas fa-cart-plus"></i>
+                Continue shopping</a>
         </div>
     </div><!-- /Content area ends -->
 

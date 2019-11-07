@@ -46,10 +46,11 @@
                             <thead class="thead-inverse py-3">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Pro Name</th>
-                                    <th>Pro Image</th>
-                                    <th style="text-align:right;">Pro price</th>
-                                    <th style="text-align:left;">Pro Qunty</th>
+                                    <th>Name</th>
+                                    <th>Number</th>
+                                    <th>Image</th>
+                                    <th style="text-align:right;">Price</th>
+                                    <th style="text-align:left;">Qunty</th>
                                     <th style="text-align:right;">Total Price</th>
                                 </tr>
                             </thead>
@@ -64,6 +65,7 @@
                                         <tr>
                                             <td><?= $i; ?></td>
                                             <td cope="row"><?= isset($cart->pro_name) ? $cart->pro_name : ''; ?></td>
+                                            <td cope="row"><?= isset($cart->pro_number) ? $cart->pro_number : ''; ?></td>
                                             <td><img class="" src="../../admin/ecommerce/<?= $cart->photo; ?>" alt="<?= $cart->pro_name; ?>" style="width:45px;height:35px;"></td>
                                             <td style="display:block;text-align:right;">
                                                 <?= isset($cart->pro_price) ? number_format($cart->pro_price, 2, '.', '') : ''; ?>
@@ -72,7 +74,7 @@
                                                 <!-- <?= isset($cart->pro_quantity) ? $cart->pro_quantity : ''; ?> -->
                                                 <div>
                                                     <form action="processCart.php" method="post">
-                                                        <div class="row">
+                                                        <div class="row p-0 no-gutters">
                                                             <div class="col-sm-6">
                                                                 <input type="number" name="pro_quantity" value="<?= isset($cart->pro_quantity) ? $cart->pro_quantity : ''; ?>" min="1" max="25" class="form-control form-control-sm" placeholder="Select" selected="selected">
                                                             </div>

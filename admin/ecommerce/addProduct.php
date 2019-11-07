@@ -27,10 +27,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Title</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                            title="Collapse"><i class="fa fa-minus"></i></button>
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
-                            title="Remove"> <i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"> <i class="fa fa-times"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
@@ -65,100 +63,118 @@
                     <form action="processProduct.php" method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="pro_name">Product Name:</label>
-                                    <input type="text" name="pro_name" class="form-control form-control-sm"
-                                        placeholder="Insert product name....">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="pro_name">Product Name:</label>
+                                            <input type="text" name="pro_name" class="form-control form-control-sm" placeholder="Insert product name....">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="pro_number">Product Number:</label>
+                                            <input type="text" name="pro_number" class="form-control form-control-sm" placeholder="Insert product number....">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="pro_number">Product Number:</label>
-                                    <input type="text" name="pro_number" class="form-control form-control-sm"
-                                        placeholder="Insert product number....">
-                                </div>
-                                <div class="form-group">
-                                    <label for="former_price">Former Price:</label>
-                                    <input type="text" name="former_price" class="form-control form-control-sm"
-                                        placeholder="Insert former price....">
-                                </div>
-                                <div class="form-group">
-                                    <label for="present_price">Present Price:</label>
-                                    <input type="text" name="present_price" class="form-control form-control-sm"
-                                        placeholder="Insert present price....">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="former_price">Former Price:</label>
+                                            <input type="text" name="former_price" class="form-control form-control-sm" placeholder="Insert former price....">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="present_price">Present Price:</label>
+                                            <input type="text" name="present_price" class="form-control form-control-sm" placeholder="Insert present price....">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="photo"> Photo:</label>
-                                            <input type="file" class="form-control" id="photo" name="photo">
+                                            <input type="file" class="form-control form-control-sm" id="photo" name="photo">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="pro_entry_date">Date time:</label>
-                                            <input type="datetime-local" name="pro_entry_date" id=""
-                                                class="form-control" aria-describedby="helpId">
+                                            <input type="datetime-local" name="pro_entry_date" id="" class="form-control form-control-sm" aria-describedby="helpId">
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="pro_rating">Prod Rating:</label>
-                                    <input type="number" name="pro_rating" min="1" max="5"
-                                        class="form-control form-control-sm" placeholder="Insert product rating....">
-                                </div>
-                                <div class="form-group">
-                                    <label for="name"> Category:</label>
-                                    <select id="select" name="cat_id" class="form-control">
-                                        <?php
-                                        $categoryData = $category->index($table);
-                                        if (!empty($categoryData)) {
-                                            foreach ($categoryData as $category) {
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="pro_rating">Prod Rating:</label>
+                                            <input type="number" name="pro_rating" min="1" max="5" class="form-control form-control-sm" placeholder="Insert product rating....">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name"> Category:</label>
+                                            <select id="select" name="cat_id" class="form-control">
+                                                <option value="">Select category</option>
+                                                <?php
+                                                $categoryData = $category->index($table);
+                                                if (!empty($categoryData)) {
+                                                    foreach ($categoryData as $category) {
+                                                        ?>
+                                                        <option value="<?= $category->cat_id; ?>">
+                                                            <?= $category->cat_name; ?>
+                                                        </option>
+                                                <?php
+                                                    }
+                                                }
                                                 ?>
-                                        <option value="<?= $category->cat_id; ?>">
-                                            <?= $category->cat_name; ?>
-                                        </option>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </select>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="name">Sub Category:</label>
-                                    <select id="select" name="sub_cat_id" class="form-control">
-                                        <?php
-                                        $subCategoryData = $subCategory->index($table2);
-                                        if (!empty($subCategoryData)) {
-                                            foreach ($subCategoryData as $subCategory) {
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name">Sub Category:</label>
+                                            <select id="select" name="sub_cat_id" class="form-control">
+                                                <option value="">Select sub category</option>
+                                                <?php
+                                                $subCategoryData = $subCategory->index($table2);
+                                                if (!empty($subCategoryData)) {
+                                                    foreach ($subCategoryData as $subCategory) {
+                                                        ?>
+                                                        <option value="<?= $subCategory->sub_cat_id; ?>">
+                                                            <?= $subCategory->sub_cat_name; ?>
+                                                        </option>
+                                                <?php
+                                                    }
+                                                }
                                                 ?>
-                                        <option value="<?= $subCategory->sub_cat_id; ?>">
-                                            <?= $subCategory->sub_cat_name; ?>
-                                        </option>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Company:</label>
-                                    <input type="text" name="pro_company" class="form-control"
-                                        placeholder="Insert company....">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">Company:</label>
+                                            <input type="text" name="pro_company" class="form-control form-control-sm" placeholder="Insert company....">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="name"> Brand:</label>
-                                            <select id="select" name="brand_id" class="form-control">
+                                            <select id="select" name="brand_id" class="form-control form-control-sm">
+                                                <option value="">Select brand</option>
                                                 <?php
                                                 $brandData = $brand->index($table3);
                                                 if (!empty($brandData)) {
                                                     foreach ($brandData as $brand) {
                                                         ?>
-                                                <option value="<?= $brand->brand_id; ?>">
-                                                    <?= $brand->brand_name; ?>
-                                                </option>
+                                                        <option value="<?= $brand->brand_id; ?>">
+                                                            <?= $brand->brand_name; ?>
+                                                        </option>
                                                 <?php
                                                     }
                                                 }
@@ -169,7 +185,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="pro_status">Product status:</label>
-                                            <select class="form-control" name="pro_status" id="">
+                                            <select class="form-control form-control-sm" name="pro_status" id="">
                                                 <option>Select product status</option>
                                                 <option value="0">Draft</option>
                                                 <option value="1">Publish</option>
@@ -177,17 +193,19 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="pro_status">Product description:</label>
+                                <textarea name="pro_description" id="editor1"></textarea>
                                 <div class="form-group">
                                     <input type="hidden" name="action" value="add">
                                 </div>
                             </div>
                         </div>
-                        <textarea name="pro_description" id="editor1">
 
-                        </textarea><br>
                         <button type="submit" name="submit" value="insert" class="btn btn-sm btn-primary">
                             <i class="fa fa-upload"></i> Insert</button>
+
                         <a href="ecommerceIndex.php" class="btn btn-sm btn-warning">
                             <i class="fa fa-fast-backward"></i> Product Index</a>
                     </form>

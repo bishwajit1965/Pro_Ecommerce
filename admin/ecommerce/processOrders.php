@@ -7,7 +7,9 @@ use Codecourse\Repositories\Session as Session;
 
 $cart = new Cart();
 Session::init();
+$sessionId = session_id();
 $tableOrders = 'tbl_orders';
+$tableOrderArchive = 'tbl_order_archive';
 
 switch ($_POST['submit']) {
     case 'update-status':
@@ -74,24 +76,26 @@ switch ($_POST['submit']) {
             }
         }
         break;
-    case 'delete_order':
+    case 'move_to_archive_and_delete':
         if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
             if ($_REQUEST['action'] == 'verify') {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if (isset($_POST['submit'])) {
                         if (isset($_POST['submit'])) {
+                            // Move order to table_archive
+                            $orderedProduct = $cart->shiftOrderToArchive($tableOrders, $sessionId, $tableOrderArchive);
                             if (isset($_POST['order_id']) && isset($_POST['customer_id']) && isset($_POST['ordered_on']) && isset($_POST['status'])) {
-                                // Verifies and matches all the fields then updates
+                                // Revoke staus in orders table
+                                // Verifies and matches all the fields then deletes
                                 $order_id = $cart->validate($_POST['order_id']);
                                 $customer_id = $cart->validate($_POST['customer_id']);
                                 $ordered_on = $cart->validate($_POST['ordered_on']);
                                 $ordered_status = $cart->validate($_POST['status']);
-                                // Revoke staus in orders table
                                 $statusUpdated = $cart->deleteOrder($tableOrders, $order_id, $customer_id, $ordered_on, $ordered_status);
                                 // validation messages and page redirects
                                 if (statusUpdated) {
-                                    $message = '<div class="alert alert-warning alert-dismissible " role="alert">
-                                    <strong> WOW !</strong> Order has been rovoked successfully !!!
+                                    $message = '<div class="alert alert-info alert-dismissible " role="alert">
+                                    <strong> WOW !</strong> Order has been archived successfully !!!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                     </button>
@@ -107,6 +111,42 @@ switch ($_POST['submit']) {
             }
         }
         break;
+    case 'delete':
+        if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+            if ($_REQUEST['action'] == 'verify') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['submit'])) {
+                        if (isset($_POST['submit'])) {
+                            // Move order to table_archive
+                            $orderedProduct = $cart->shiftOrderToArchive($tableOrders, $sessionId, $tableOrderArchive);
+                            if (isset($_POST['order_id']) && isset($_POST['customer_id']) && isset($_POST['ordered_on']) && isset($_POST['status'])) {
+                                // Revoke staus in orders table
+                                // Verifies and matches all the fields then deletes
+                                $order_id = $cart->validate($_POST['order_id']);
+                                $customer_id = $cart->validate($_POST['customer_id']);
+                                $ordered_on = $cart->validate($_POST['ordered_on']);
+                                $ordered_status = $cart->validate($_POST['status']);
+                                $statusUpdated = $cart->deleteOrder($tableOrderArchive, $order_id, $customer_id, $ordered_on, $ordered_status);
+                                // validation messages and page redirects
+                                if (statusUpdated) {
+                                    $message = '<div class="alert alert-info alert-dismissible " role="alert">
+                                    <strong> WOW !</strong> Order archived data has been deleted successfully !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'orderArchive.php';
+                                    $cart->redirect("$home_url");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        break;
+
 
     default:
         // code...

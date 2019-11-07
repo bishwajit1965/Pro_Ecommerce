@@ -22,6 +22,7 @@ $user_home = new User();
 $tableCustomer = 'tbl_customer';
 $table = 'tbl_products';
 $tableOrders = 'tbl_orders';
+$tableOrdersArchive = 'tbl_order_archive';
 
 // Checks if logged in or not
 if (!$user_home->is_logged_in()) {

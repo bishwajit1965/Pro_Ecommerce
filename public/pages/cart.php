@@ -35,17 +35,30 @@
     </div>
     <!-- Content area begins -->
     <div class="container-fluid bg-light">
-        <div class="table-responsive-sm p-0">
+        <?php
+        include_once '../../admin/app/start.php';
+
+        use Codecourse\Repositories\Session as Session;
+
+        // Will display all the messages vlidation/insert/update/delete
+        $message = Session::get('message');
+        if (!empty($message)) {
+            echo $message;
+            Session::set('message', null);
+        }
+        ?>
+        <div class="table-responsive-sm">
             <table class="table table-striped table-condensed table-responsive table-sm  mb-0">
                 <thead class="thead-inverse">
                     <tr>
                         <th width="2%">Id</th>
-                        <th width="20%">Prod Name</th>
-                        <th width="15%">Prod Image</th>
-                        <th width="18%">Pro Price</th>
+                        <th width="15%">Prod Name</th>
+                        <th width="13%">Prod Image</th>
+                        <th width="13%">Prod Number</th>
+                        <th width="17%">Pro Price</th>
                         <th width="15%">Pro Quantity</th>
-                        <th width="20%">Total Price</th>
-                        <th width="10%">Actions</th>
+                        <th width="15%" style="text-align:right;">Total Price</th>
+                        <th width="10%" style="text-align:right;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,9 +74,13 @@
                                 <td><?= isset($cart->pro_name) ? $cart->pro_name : ''; ?>
                                 </td>
                                 <td><img class="" src="../../admin/ecommerce/<?= $cart->photo; ?>" alt="<?= $cart->pro_name; ?>" style="width:45px;height:35px;"></td>
-                                <td style="display:block;text-align:right;padding-right:150px;">
+                                <td>
+                                    <?= isset($cart->pro_number) ? $cart->pro_number : ''; ?>
+                                </td>
+                                <td style="">
                                     <?= isset($cart->pro_price) ? number_format($cart->pro_price, 2, '.', '') : ''; ?>
                                     <b> &#2547;</b></td>
+
                                 <td>
                                     <form action="processCart.php" method="post">
                                         <div class="row">
@@ -84,7 +101,7 @@
                                     <?php $total = $cart->pro_price * $cart->pro_quantity;
                                             echo isset($total) ? number_format($total, 2, '.', '') : ''; ?>
                                     <b>&#2547;</b></td>
-                                <td>
+                                <td style="text-align:right;">
                                     <form action="processCart.php" method="post">
                                         <input type="hidden" name="action" value="verify">
                                         <input type="hidden" name="cart_id" value="<?= $cart->cart_id; ?>">
@@ -113,7 +130,7 @@
                     }
                     ?>
                     <tr>
-                        <td colspan="7" class="bg-light">
+                        <td colspan="8" class="bg-light">
                             <div class="row">
                                 <div class="col-sm-8" style="padding-top:35px;">
                                     <div class="row d-dlex flex-row justify-content-around">

@@ -82,13 +82,14 @@ class Cart
                         $session_id = $cartProduct->session_id;
                         $pro_id = $cartProduct->pro_id;
                         $pro_name = $cartProduct->pro_name;
+                        $pro_number = $cartProduct->pro_number;
                         $pro_price = $cartProduct->pro_price;
                         $pro_quantity = $cartProduct->pro_quantity;
                         $total_price = $pro_price *  $pro_quantity;
                         $photo = $cartProduct->photo;
 
                         // Inserts dat to orders table
-                        $query = "INSERT INTO $tableOrders (cart_id, customer_id, session_id, pro_id, pro_name, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
+                        $query = "INSERT INTO $tableOrders (cart_id, customer_id, session_id, pro_id, pro_name,pro_number, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_number', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
 
                         $stmt = $this->conn->prepare($query);
                         $stmt->bindParam(":$customer_id", $customer_id);
@@ -96,12 +97,59 @@ class Cart
                         $stmt->bindParam(":$session_id", $session_id);
                         $stmt->bindParam(":$pro_id", $pro_id);
                         $stmt->bindParam(":$pro_name", $pro_name);
+                        $stmt->bindParam(":$pro_number", $pro_number);
                         $stmt->bindParam(":$pro_price", $pro_price);
                         $stmt->bindParam(":$pro_quantity", $pro_quantity);
                         $stmt->bindParam(":$total_price", $total_price);
                         $stmt->bindParam(":$photo", $photo);
                         $orderedProduct = $stmt->execute();
                     }
+                }
+                return $orderedProduct;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    // Processes order to buy product and inserts data in 'tbl_orders'
+    public function shiftOrderToArchive($tableOrders, $sessionId, $tableOrderArchive)
+    {
+        try {
+            // selects all the data from cart table
+            $sql = "SELECT * FROM $tableOrders WHERE session_id = '$sessionId'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                // Retrieves data from orders table
+                while ($cartProduct = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $cart_id = $cartProduct->cart_id;
+                    $customer_id = $cartProduct->customer_id;
+                    $session_id = $cartProduct->session_id;
+                    $pro_id = $cartProduct->pro_id;
+                    $pro_name = $cartProduct->pro_name;
+                    $pro_number = $cartProduct->pro_number;
+                    $pro_price = $cartProduct->pro_price;
+                    $pro_quantity = $cartProduct->pro_quantity;
+                    $total_price = $pro_price *  $pro_quantity;
+                    $photo = $cartProduct->photo;
+
+                    // Inserts dat to order archive table table
+                    $query = "INSERT INTO $tableOrderArchive (cart_id, customer_id, session_id, pro_id, pro_name,pro_number, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_number', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
+
+                    $stmt = $this->conn->prepare($query);
+                    $stmt->bindParam(":$customer_id", $customer_id);
+                    $stmt->bindParam(":$cart_id", $cart_id);
+                    $stmt->bindParam(":$session_id", $session_id);
+                    $stmt->bindParam(":$pro_id", $pro_id);
+                    $stmt->bindParam(":$pro_name", $pro_name);
+                    $stmt->bindParam(":$pro_number", $pro_number);
+                    $stmt->bindParam(":$pro_price", $pro_price);
+                    $stmt->bindParam(":$pro_quantity", $pro_quantity);
+                    $stmt->bindParam(":$total_price", $total_price);
+                    $stmt->bindParam(":$photo", $photo);
+                    $orderedProduct = $stmt->execute();
+                    // }
                 }
                 return $orderedProduct;
             }
@@ -122,17 +170,19 @@ class Cart
             $cartItem = $stmt->fetch(PDO::FETCH_OBJ);
             $customerId = Session::get('customerId');
             $pro_name = $cartItem->pro_name;
+            $pro_number = $cartItem->pro_number;
             $quantity = $quantity;
             $pro_price = $cartItem->present_price;
             $photo = $cartItem->photo;
 
             // Insert into cart table
-            $query = "INSERT INTO $table5 (customer_id, session_id, pro_id, pro_name, pro_price, pro_quantity, photo) VALUES('$customerId', '$sessionId', '$productId', '$pro_name', '$pro_price', '$quantity', '$photo')";
+            $query = "INSERT INTO $table5 (customer_id, session_id, pro_id, pro_number, pro_name, pro_price, pro_quantity, photo) VALUES('$customerId', '$sessionId', '$productId', '$pro_number', '$pro_name', '$pro_price', '$quantity', '$photo')";
 
             $stmt = $this->conn->prepare($query);
             $stmt->bindValue(":$cartItem->id", $cartItem->id);
             $stmt->bindValue(":$sessionId", $sessionId);
             $stmt->bindValue(":$productId", $productId);
+            $stmt->bindValue(":$pro_number", $pro_number);
             $stmt->bindValue(":$pro_name", $pro_name);
             $stmt->bindValue(":$pro_price", $pro_price);
             $stmt->bindValue(":$quantity", $quantity);
@@ -242,6 +292,24 @@ class Cart
         }
     }
 
+    // To display customer order details
+    public function customersOrdersArchive($tableOrdersArchive)
+    {
+        try {
+            $sql = "SELECT * FROM $tableOrdersArchive WHERE status='3' ORDER BY ordered_on DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($customerOrder = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $customerOrderArchive[] = $customerOrder;
+                }
+                return $customerOrderArchive;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     // To display customer order details in admin order inbox
     public function customerOrders($tableOrders)
     {
@@ -315,6 +383,21 @@ class Cart
     {
         try {
             $sql = "DELETE FROM $tableOrders WHERE order_id = '$order_id' && customer_id = '$customer_id' && ordered_on = '$ordered_on' && status = '$ordered_status'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':$order_id', $order_id);
+            $stmtExec = $stmt->execute();
+            if ($stmtExec) {
+                return $stmtExec ? true : false;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    // Delete archived orders data
+    public function deleteArchivedOrders($table, $order_id, $customer_id, $ordered_on, $ordered_status)
+    {
+        try {
+            $sql = "DELETE FROM $table WHERE order_id = '$order_id' && customer_id = '$customer_id' && ordered_on = '$ordered_on' && status = '$ordered_status'";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindValue(':$order_id', $order_id);
             $stmtExec = $stmt->execute();

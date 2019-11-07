@@ -44,17 +44,18 @@
                     }
                     ?>
                     <div class="table-responsive-sm">
-                        <table class="table table-condensed table-sm mb-0">
+                        <table class="table table-condensed ">
                             <thead class="thead-inverse">
                                 <tr>
                                     <th>ID</th>
                                     <th>Pro Name</th>
                                     <th>Pro Image</th>
+                                    <th style="text-align:right;">Pro Number</th>
                                     <th style="text-align:right;">Pro price</th>
                                     <th style="text-align:right;">Pro Qunty</th>
                                     <th style="text-align:right;">Total Price</th>
-                                    <th style="text-align:right;">Status</th>
                                     <th style="text-align:right;">Ordered on</th>
+                                    <th style="text-align:right;">Order Status</th>
                                     <th style="text-align:right;">Actions</th>
                                 </tr>
                             </thead>
@@ -71,6 +72,9 @@
                                             <td><?= isset($order->pro_name) ? $order->pro_name : ''; ?></td>
                                             <td><img class="" src="../../admin/ecommerce/<?= $order->photo; ?>" alt="<?= $order->pro_name; ?>" style="width:45px;height:35px;"></td>
                                             <td style="text-align:right;">
+                                                <?= isset($order->pro_number) ? $order->pro_number : ''; ?>
+                                            </td>
+                                            <td style="text-align:right;">
                                                 <?= isset($order->pro_price) ? number_format($order->pro_price, 2, '.', '') : ''; ?>
                                                 <b> &#2547;</b></td>
                                             <td style="text-align:right;">
@@ -82,17 +86,16 @@
                                                         echo isset($total) ? number_format($total, 2, '.', '') : ''; ?>
                                                 <b>&#2547;</b></td>
                                             <td style="text-align:right;">
-
+                                                <?php echo  $helpers->dateFormat($order->ordered_on); ?>
+                                            </td>
+                                            <td style="text-align:right;">
                                                 <?php if ($order->status == '1') { ?>
                                                     <span style="color:#333;font-weight:700;"><?= "Processed"; ?></span>
                                                 <?php } elseif ($order->status == '2') { ?>
-                                                    <span style="color:#333;font-weight:700;"><?= "Confirmed"; ?></span>
+                                                    <span class="btn btn-sm btn-success" style="color:#FFF;font-weight:700;"><?= "Confirmed"; ?> <i class="fas fa-check"></i> </span>
                                                 <?php } else { ?>
                                                     <span style="color:#cd1f05;font-weight:700;"><?= "Pending"; ?></span>
                                                 <?php } ?>
-                                            </td>
-                                            <td style="text-align:right;">
-                                                <?php echo  $helpers->dateFormat($order->ordered_on); ?>
                                             </td>
                                             <td style="text-align:right;">
                                                 <?php if ($order->status == '0') {
@@ -102,6 +105,7 @@
                                                         <input type="hidden" name="action" value="varify">
 
                                                         <input type="hidden" name="order_id" value="<?= $order->order_id; ?>">
+
                                                         <input type="hidden" name="customer_id" value="<?= $order->customer_id; ?>">
                                                         <input type="hidden" name="status" value="<?= $order->status; ?>">
 
@@ -109,7 +113,7 @@
                                                         <button type="submit" name="submit" value="confirm_order" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Confirm</button>
                                                     </form>
                                                 <?php } else { ?>
-                                                    <a href="?delete_id=<?= $order->order_id; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
+                                                    <span class="btn btn-sm btn-danger"><i class="fas fa-check"></i> OK</span>
                                                 <?php } ?>
                                             </td>
                                         </tr>
@@ -119,7 +123,6 @@
                                             }
                                         }
                                     } else { ?>
-
                                     <div class="alert alert-primary alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -129,9 +132,9 @@
                                     </div>
                                 <?php } ?>
                                 <tr>
-                                    <td colspan="9">
+                                    <td colspan="10">
                                         <div class="row">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-5">
                                                 <div class="row d-dlex flex-row justify-content-around" style="padding-top:35px;">
                                                     <a href=" ../index.php" class="btn btn-sm btn-primary"><i class="fas fa-cart-plus">
                                                         </i> Cintinue shopping</a>
@@ -139,7 +142,7 @@
                                                         </i> Home page</a>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-8">
+                                            <div class="col-sm-7">
                                                 <div class="price-calculation" style="padding-right:64.5%;">
                                                     <span style="display:block;text-align:right;font-weight:bold;color:#000;font-size:16px;">
                                                         Sub total :
@@ -172,14 +175,13 @@
                             </tbody>
                             <tfoot class="thead-inverse">
                                 <tr>
-                                    <th colspan="9" class="text-center py-2"></th>
+                                    <th colspan="10" class="text-center py-2"></th>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- /Content area ends -->

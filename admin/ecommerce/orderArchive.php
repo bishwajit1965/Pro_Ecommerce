@@ -14,11 +14,10 @@
 
         Session::init();
         $customerId = Session::get('customerId');
-        $tableCustomer = 'tbl_customer';
         ?>
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Orders inbox page<small>it all starts here</small></h1>
+            <h1>Orders archive page<small>it all starts here</small></h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li><a href="#">Examples</a></li>
@@ -33,8 +32,8 @@
                     <h3 class="box-title">
                         <a class="btn btn-sm btn-primary" href="addProduct.php">
                             <i class="fa fa-plus"></i> Add Products data</a>
-                        <a class="btn btn-sm btn-success" href="orderArchive.php">
-                            <i class="fa fa-fast-forward"></i> Order archive</a>
+                        <a class="btn btn-sm btn-success" href="inbox.php">
+                            <i class="fa fa-fast-backward"></i> Order index</a>
                         <span class="label label-success">
                             Products </span><sup><span class="label label-danger">
                                 <?php
@@ -122,9 +121,9 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $customerOrderDetails = $cart->customerOrders($tableOrders);
-                                if (!empty($customerOrderDetails)) {
-                                    foreach ($customerOrderDetails as $result) {
+                                $customerOrderArchive = $cart->customersOrdersArchive($tableOrdersArchive);
+                                if (!empty($customerOrderArchive)) {
+                                    foreach ($customerOrderArchive as $result) {
                                         ?>
                                         <tr>
                                             <td><?php echo $result->order_id; ?>
@@ -163,7 +162,7 @@
                                                     <span style="color:#cd1f05;font-weight:700;"><?= "Pending"; ?></span>
                                                 <?php } elseif ($result->status == '1') { ?>
                                                     <span style="color:#000;font-weight:700;"><?= "Processed"; ?></span>
-                                                <?php } elseif ($result->status == '2') { ?>
+                                                <?php } elseif ($result->status == '3') { ?>
                                                     <span data-toggle="tooltip" title="Your product will be delivered soon !!!" style="color:#0076ec;font-weight:800;"><?= "Confirmed"; ?></span>
                                                 <?php } else { } ?>
                                             </td>
@@ -204,7 +203,7 @@
                                                             <button type="submit" data-toggle="tooltip" title="Revoke order" name="submit" value="revoke_status" class="btn btn-xs btn-info"><i class="fa fa-paper-plane"></i> Revoke Order</button>
 
                                                         </form>
-                                                    <?php } elseif ($result->status == '2') { ?>
+                                                    <?php } elseif ($result->status == '3') { ?>
                                                         <form action="processOrders.php" method="post">
 
                                                             <input type="hidden" name="action" value="verify">
@@ -217,7 +216,7 @@
 
                                                             <input type="hidden" name="status" value="<?php echo $result->status; ?>">
 
-                                                            <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Archive order" name="submit" value="move_to_archive_and_delete" onClick="return confirm('Are you sure of archiving this order ?');"> <i class="fa fa-trash"></i> Archive order</button>
+                                                            <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Archive order" name="submit" value="delete" onClick="return confirm('Are you sure of archiving this order ?');"> <i class="fa fa-trash"></i> Delete</button>
 
                                                         </form>
                                                     <?php } else { ?>

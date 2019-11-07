@@ -291,6 +291,7 @@ ul>li>a {
 * {
     box-sizing: border-box;
 }
+
 /* Just add this class to a div containg the image */
 .zoom {
     padding: 1px;
@@ -309,5 +310,6 @@ ul>li>a {
     /* Safari 3-8 */
     transform: scale(5.5);
 }
+
 /* Image zoom effect ends
 ======================== */
