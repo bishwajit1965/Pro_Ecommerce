@@ -1,4 +1,6 @@
-<?php include_once 'partials/_head.php'; ?>
+<?php
+include_once 'partials/_head.php';
+?>
 <?php
 if (isset($_GET['single_id'])) {
     $id = $helpers->validation($_GET['single_id']);
@@ -40,7 +42,7 @@ if (isset($_GET['single_id'])) {
                 </div>
                 <div class="row">
                     <?php
-                    $single_product = $products->getSingleProduct($id, $tablePeoducts);
+                    $single_product = $products->getSingleProduct($id, $tableProducts);
                     ?>
                     <div class="col-sm-6">
                         <img src="../../admin/ecommerce/<?= $single_product->photo; ?>" class="card-img-top cart-img img-cover" alt="Cart Image" style="height:292px;">
@@ -107,7 +109,8 @@ if (isset($_GET['single_id'])) {
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <input type="number" name="quantity" value="1" min="1" autofocus max="20" selected class="form-control form-control-sm mt-2 mb-2 bg-light" placeholder="Select">
+                                        <input type="number" name="quantity" value="1" min="1" autofocus max="20"
+                                               selected class="form-control form-control-sm mt-2 mb-2 bg-light" placeholder="Select">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -117,7 +120,8 @@ if (isset($_GET['single_id'])) {
                                     <button type="submit" name="submit" value="add-to-cart" class="btn btn-sm btn-primary mt-2 mb-2">
                                         <i class="fas fa-cart-plus"></i> Buy Prod</button>
 
-                                    <a href="../index.php" class="btn btn-success btn-sm mt-2 mb-2"><i class=" fas fa-fast-backward"></i> Change Prod</a>
+                                    <a href="../index.php" class="btn btn-success btn-sm mt-2 mb-2">
+                                        <i class=" fas fa-fast-backward"></i> Change Prod</a>
                                 </div>
                             </div>
                         </form>

@@ -26,7 +26,7 @@ Session::checkSession();
         <div class="row text-center bg-info text-white">
             <div class="col-sm-2"></div>
             <div class="col-sm-8 pt-2">
-                <h2>Customer Profile Index</h4>
+                <h2>Customer Profile Index</h2>
             </div>
             <div class="col-sm-2">
                 <h3><span class="badge badge-info"><i class="fas fa-cart-plus">&nbsp;</i><sup>3</sup></span class="badge badge-secondary"></h3>
@@ -65,7 +65,6 @@ Session::checkSession();
                     <?php
                     $customerData = $customerProfile->customerIndex($tableCustomer);
                     foreach ($customerData as $customer) {
-
                         ?>
                         <tr>
                             <td><?php echo $customer->id; ?>
@@ -89,17 +88,24 @@ Session::checkSession();
                             <td><?php echo $helpers->dateFormat($customer->updated_at); ?>
                             </td>
                             <td>
-                                <?php if (Session::get('login') ==  $customer->email) { ?>
+                                <?php if (Session::get('login') == $customer->email) { ?>
                                     <form action="processCustomerProfile.php" method="post">
                                         <input type="hidden" name="action" value="verify">
-                                        <input type="hidden" name="delete_customer_id" value="<?php echo $customer->id; ?>">
+                                        <input type="hidden" name="delete_customer_id"
+                                               value="<?php echo $customer->id; ?>">
 
-                                        <a href="editCustomerProfile.php?edit_customer_id=<?php echo $customer->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> </a>
+                                        <a href="editCustomerProfile.php?edit_customer_id=
+                                        <?php echo $customer->id; ?>"
+                                           class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i> </a>
 
-                                        <button type="submit" name="submit" onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')" class="btn btn-sm btn-danger" value="delete"> <i class="fas fa-trash"></i>
+                                        <button type="submit" name="submit"
+                                                onClick="return confirm('Afe you sure of deleting this dfata ? Once lost, lost for ever.')"
+                                                class="btn btn-sm btn-danger" value="delete"><i
+                                                    class="fas fa-trash"></i>
                                         </button>
                                     </form>
-                                <?php  } ?>
+                                <?php } ?>
                             </td>
                         </tr>
                     <?php

@@ -1,6 +1,5 @@
+<?php ob_start();?>
 <?php
-ob_start();
-
 include_once '../../admin/app/start.php';
 
 // Classes included for global use
@@ -23,14 +22,14 @@ Session::checkLogin();
 
 // Verifies if the customer logged in or not
 Session::checkSession();
-$session = Session::checkSession();
+
 // Session id for individual customer
 $sessionId = session_id();
 
 // Session based individual customer Id
 $customerId = Session::get('customerId');
 
-// Detecte file name
+// Detects file name
 $current_page = basename($_SERVER['SCRIPT_FILENAME'], '.php');
 
 // Class objects instantiated
@@ -50,8 +49,9 @@ $tableCart = 'tbl_cart';
 $tableCategory = 'tbl_category';
 $tableCustomer = 'tbl_customer';
 $tableOrders = 'tbl_orders';
-$tablePeoducts = 'tbl_products';
+$tableProducts = 'tbl_products';
 $tableSubCategory = 'tbl_sub_category';
+$tableOrderArchive = 'tbl_order_archive';
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +67,7 @@ $tableSubCategory = 'tbl_sub_category';
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="../css/bootstrap4.min.css"> -->
+     <link rel="stylesheet" href="../css/bootstrap4.min.css">
     <!-- Font awesome kit-->
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet">

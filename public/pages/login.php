@@ -141,7 +141,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <button type="submit" name="submit" style="width:100%;" value="login"
-                                    class="btn btn-sm btn-info d-block"><i class="fas fa-users"></i> Log in
+                                    class="btn btn-sm btn-info d-block">
+                                    <i class="fas fa-users"></i> Log in
                                 </button>
                             </div>
                             <div class="col-sm-6">
@@ -153,11 +154,13 @@
                         <hr>
                         <div class="row mt-2 ">
                             <div class="col-sm-6">
-                                <a href="#" class="btn btn-sm btn-success d-block"><i class="fab fa-facebook"></i>
+                                <a href="#" class="btn btn-sm btn-success d-block">
+                                    <i class="fab fa-facebook"></i>
                                     Log in</a>
                             </div>
                             <div class="col-sm-6">
-                                <a href="#" class="btn btn-sm btn-danger d-block"><i class="fab fa-google"></i>
+                                <a href="#" class="btn btn-sm btn-danger d-block">
+                                    <i class="fab fa-google"></i>
                                     Log in</a>
                             </div>
                         </div>

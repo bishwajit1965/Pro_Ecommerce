@@ -78,7 +78,7 @@
                                     <?= isset($cart->pro_number) ? $cart->pro_number : ''; ?>
                                 </td>
                                 <td style="">
-                                    <?= isset($cart->pro_price) ? number_format($cart->pro_price, 2, '.', '') : ''; ?>
+                                    <?= isset($cart->pro_price) ? number_format($cart->pro_price, 2, '.', ',') : ''; ?>
                                     <b> &#2547;</b></td>
 
                                 <td>
@@ -99,7 +99,7 @@
                                 </td>
                                 <td style="display:block;text-align:right;">
                                     <?php $total = $cart->pro_price * $cart->pro_quantity;
-                                            echo isset($total) ? number_format($total, 2, '.', '') : ''; ?>
+                                            echo isset($total) ? number_format($total, 2, '.', ',') : ''; ?>
                                     <b>&#2547;</b></td>
                                 <td style="text-align:right;">
                                     <form action="processCart.php" method="post">
@@ -135,7 +135,7 @@
                                 <div class="col-sm-8" style="padding-top:35px;">
                                     <div class="row d-dlex flex-row justify-content-around">
                                         <a href=" ../index.php" class="btn btn-md btn-primary"><i class="fas fa-cart-plus">
-                                            </i> Cintinue shopping</a>
+                                            </i> Continue shopping</a>
                                         <?php
                                         if (!empty($cartData)) {
                                             ?>
@@ -154,7 +154,7 @@
                                         Sub total :
                                         <?php
                                         if (!empty($sum)) {
-                                            echo number_format($sum, 2, '.', '');
+                                            echo number_format($sum, 2, '.', ',');
                                         }
                                         ?>
                                         <b>&#2547;</b>
@@ -165,7 +165,7 @@
                                         <?php
                                         if (!empty($sum)) {
                                             $vat = $sum * 0.15;
-                                            echo number_format($vat, 2, '.', '');
+                                            echo number_format($vat, 2, '.', ',');
                                         }
                                         ?>
                                         <b>&#2547;</b>
@@ -175,7 +175,7 @@
                                         <?php
                                         if (!empty($sum) && !empty($vat)) {
                                             $grandTotal = $sum + $vat;
-                                            echo number_format($grandTotal, 2, '.', '');
+                                            echo number_format($grandTotal, 2, '.', ',');
                                         }
                                         ?>
                                         <b> &#2547; </b></span>

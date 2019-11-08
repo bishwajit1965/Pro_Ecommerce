@@ -21,7 +21,7 @@
                 <h2>Your orders in detailed list</h2>
             </div>
             <div class="col-sm-2">
-                <h3><span class="badge badge-secondart"><i class="fas fa-cart-plus 4x">&nbsp;</i><sup class="bg-danger px-2">3</sup></span class="badge badge-secondary"></h3>
+                <h3><span class="badge badge-secondary"><i class="fas fa-cart-plus 4x">&nbsp;</i><sup class="bg-danger px-2">3</sup></span class="badge badge-secondary"></h3>
             </div>
         </div>
         <!-- /Page title -->
@@ -30,13 +30,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="wrapper" style="border:1px solid#DDD;">
+                <div class="wrapper">
                     <?php
                     include_once '../../admin/app/start.php';
 
                     use Codecourse\Repositories\Session as Session;
-
-                    // Will display all the messages vlidation/insert/update/delete
+                    // Will display all the messages validation/insert/update/delete
                     $message = Session::get('message');
                     if (!empty($message)) {
                         echo $message;
@@ -83,7 +82,7 @@
 
                                             <td style="text-align:right;">
                                                 <?php $total = $order->pro_price * $order->pro_quantity;
-                                                        echo isset($total) ? number_format($total, 2, '.', '') : ''; ?>
+                                                        echo isset($total) ? number_format($total, 2, '.', ',') : ''; ?>
                                                 <b>&#2547;</b></td>
                                             <td style="text-align:right;">
                                                 <?php echo  $helpers->dateFormat($order->ordered_on); ?>
@@ -102,7 +101,7 @@
                                                             echo 'N/A';
                                                         } elseif ($order->status == '1') { ?>
                                                     <form action="processCart.php" method="post">
-                                                        <input type="hidden" name="action" value="varify">
+                                                        <input type="hidden" name="action" value="verify">
 
                                                         <input type="hidden" name="order_id" value="<?= $order->order_id; ?>">
 
@@ -110,14 +109,15 @@
                                                         <input type="hidden" name="status" value="<?= $order->status; ?>">
 
                                                         <input type="hidden" name="ordered_on" value="<?= $order->ordered_on; ?>">
-                                                        <button type="submit" name="submit" value="confirm_order" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Confirm</button>
+                                                        <button type="submit" name="submit" value="confirm_order" class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-check"></i> Confirm</button>
                                                     </form>
                                                 <?php } else { ?>
                                                     <span class="btn btn-sm btn-danger"><i class="fas fa-check"></i> OK</span>
                                                 <?php } ?>
                                             </td>
                                         </tr>
-                                        <!-- Grand tgotal calculation -->
+                                        <!-- Grand total calculation -->
                                     <?php if ($sum !== null) {
                                                 $sum = $sum + $total;
                                             }
@@ -128,7 +128,7 @@
                                             <span aria-hidden="true">&times;</span>
                                             <span class="sr-only">Close</span>
                                         </button>
-                                        <strong>SORRY !!!</strong> There is no product avaiable in the cart at present.
+                                        <strong>SORRY !!!</strong> There is no product available in the cart at present.
                                     </div>
                                 <?php } ?>
                                 <tr>
@@ -137,7 +137,7 @@
                                             <div class="col-sm-5">
                                                 <div class="row d-dlex flex-row justify-content-around" style="padding-top:35px;">
                                                     <a href=" ../index.php" class="btn btn-sm btn-primary"><i class="fas fa-cart-plus">
-                                                        </i> Cintinue shopping</a>
+                                                        </i> Continue shopping</a>
                                                     <a href=" ../index.php" class="btn btn-sm btn-info"><i class="fas fa-fast-backward">
                                                         </i> Home page</a>
                                                 </div>
@@ -147,7 +147,7 @@
                                                     <span style="display:block;text-align:right;font-weight:bold;color:#000;font-size:16px;">
                                                         Sub total :
                                                         <?php if (!empty($sum)) {
-                                                            echo number_format($sum, 2, '.', '');
+                                                            echo number_format($sum, 2, '.', ',');
                                                         } ?>
                                                         <b>&#2547;</b>
                                                     </span>
@@ -156,7 +156,7 @@
                                                         Vat - 15% :
                                                         <?php if (!empty($sum)) {
                                                             $vat = $sum * 0.15;
-                                                            echo number_format($vat, 2, '.', '');
+                                                            echo number_format($vat, 2, '.', ',');
                                                         } ?>
                                                         <b>&#2547;</b>
                                                     </span>
@@ -164,7 +164,7 @@
                                                         Grand total :
                                                         <?php if (!empty($sum) && !empty($vat)) {
                                                             $grandTotal = $sum + $vat;
-                                                            echo number_format($grandTotal, 2, '.', '');
+                                                            echo number_format($grandTotal, 2, '.', ',');
                                                         } ?>
                                                         <b> &#2547; </b></span>
                                                 </div>

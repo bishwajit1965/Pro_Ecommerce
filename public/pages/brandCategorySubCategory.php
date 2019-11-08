@@ -137,7 +137,7 @@
                             <?php
                             if (!empty($_GET['brand_id'])) {
                                 $brandId = $_GET['brand_id'];
-                                $displayIDWiseBrandedProduct = $products->displayAllBrandedItems($tablePeoducts, $brandId);
+                                $displayIDWiseBrandedProduct = $products->displayAllBrandedItems($tableProducts, $brandId);
                                 if (!empty($displayIDWiseBrandedProduct)) {
                                     foreach ($displayIDWiseBrandedProduct as $displayAllData) {
                                         if ($brandId == $displayAllData->brand_id) {
@@ -199,7 +199,7 @@
                                             }
                                         } elseif (isset($_GET['category_id'])) {
                                             $categoryId = $_GET['category_id'];
-                                            $categoryWiseProductData = $products->categoryIdWisePdoductData($tablePeoducts, $categoryId);
+                                            $categoryWiseProductData = $products->categoryIdWisePdoductData($tableProducts, $categoryId);
                                             if (!empty($categoryWiseProductData)) {
                                                 foreach ($categoryWiseProductData as $categoryProduct) {
                                                     if ($categoryId == $categoryProduct->cat_id) {
@@ -247,9 +247,9 @@
                                                                         } ?>
 
                                                         <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
-                                                            <a href="single.php?single_id=<?php echo $categoryProduct->pro_id; ?>" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i> Add</a>
+                                                            <a href="single.php?single_id=<?php echo $categoryProduct->pro_id; ?>"                                                                class="btn btn-primary btn-sm"> <i class="fas fa-info-circle"></i> Add</a>
 
-                                                            <a href="single.php?single_id=<?php echo $categoryProduct->pro_id; ?>" class="btn btn-warning btn-sm"><i class="fas fa-info-circle"></i> Details</a>
+                                                            <a href="single.php?single_id=<?php echo $categoryProduct->pro_id; ?>"                                                            class="btn btn-warning btn-sm"> <i class="fas fa-info-circle"></i> Details</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,7 +262,8 @@
                                             }
                                         } elseif (isset($_GET['sub_category_id'])) {
                                             $subCategoryId = $_GET['sub_category_id'];
-                                            $subCategoryWiseProductData = $products->subCategoryIdWisePdoductData($tablePeoducts, $subCategoryId);
+                                            $subCategoryWiseProductData =
+                                                $products->subCategoryIdWisePdoductData($tableProducts, $subCategoryId);
                                             if (!empty($subCategoryWiseProductData)) {
                                                 foreach ($subCategoryWiseProductData as $subCategoryProduct) {
                                                     if ($subCategoryId == $subCategoryProduct->sub_cat_id) {
@@ -287,25 +288,23 @@
                                                         </span>
                                                         <span style="font-weight:bold; display:block;">Brand :
                                                             <?php
-                                                                            $brandName = $brand->getBrand($tableBrand);
-                                                                            if (!empty($brandName)) {
-                                                                                foreach ($brandName as $b_data) {
-                                                                                    if ($b_data->brand_id == $subCategoryProduct->brand_id) {
-                                                                                        echo $b_data->brand_name;
-                                                                                    }
-                                                                                }
-                                                                            } ?>
+                                                            $brandName = $brand->getBrand($tableBrand);
+                                                            if (!empty($brandName)) {
+                                                                foreach ($brandName as $b_data) {
+                                                                    if ($b_data->brand_id == $subCategoryProduct->brand_id) {
+                                                                        echo $b_data->brand_name;
+                                                                    }
+                                                                }
+                                                            } ?>
                                                         </span>
                                                         <span class="rating-star">
                                                             <b>Rating:</b>
                                                         </span>
                                                         <?php
-                                                                        $rating = $subCategoryProduct->pro_rating;
-                                                                        for ($i = 1; $i <= $rating; $i++) {
-                                                                            ?>
+                                                        $rating = $subCategoryProduct->pro_rating;
+                                                        for ($i = 1; $i <= $rating; $i++) { ?>
                                                             <i class="fas fa-star rating-star"></i>
-                                                        <?php
-                                                                        } ?>
+                                                        <?php } ?>
                                                         <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
                                                             <a href="single.php?single_id=<?php echo $subCategoryProduct->pro_id; ?>" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i> Add</a>
 
@@ -324,7 +323,7 @@
                                     ?>
                                 <!-- Default branded data loading if brand not clicked ends-->
                                 <?php
-                                    $products = $frontEnd->defaultFrontEndBrandedProducts($tablePeoducts);
+                                    $products = $frontEnd->defaultFrontEndBrandedProducts($tableProducts);
                                     foreach ($products as $product) {
                                         ?>
                                     <div class="col-sm-3 p-1 products-data">
@@ -337,41 +336,36 @@
                                                 <p class="card-texts">
                                                     <?= isset($product->pro_description) ? $helpers->textShorten(htmlspecialchars_decode($product->pro_description), 68)  : ''; ?>
                                                 </p>
-                                                <s>Price :
-                                                    <?= isset($product->former_price) ? number_format($product->former_price, 2, '.', '') : ''; ?>
-                                                    <b>&#2547;</b>
+                                                <s>Price : <?= isset($product->former_price) ? number_format($product->former_price, 2, '.', '') : ''; ?> <b>&#2547;</b>
                                                 </s>
-                                                <span style="font-weight:bold; display:block;">Price :
-                                                    <?= isset($product->present_price) ? number_format($product->present_price, 2, '.', '') : ''; ?>
-                                                    <b>&#2547;</b>
+                                                <span style="font-weight:bold; display:block;">Price : <?= isset($product->present_price) ? number_format($product->present_price, 2, '.', '') : ''; ?><b>&#2547;</b>
                                                 </span>
-
                                                 <span style="font-weight:bold; display:block;">Brand :
                                                     <?php
-                                                            $brandName = $brand->getBrand($tableBrand);
-                                                            if (!empty($brandName)) {
-                                                                foreach ($brandName as $b_data) {
-                                                                    if ($b_data->brand_id == $product->brand_id) {
-                                                                        echo $b_data->brand_name;
-                                                                    }
-                                                                }
-                                                            } ?>
+                                                    $brandName = $brand->getBrand($tableBrand);
+                                                    if (!empty($brandName)) {
+                                                        foreach ($brandName as $b_data) {
+                                                            if ($b_data->brand_id == $product->brand_id) {
+                                                                echo $b_data->brand_name;
+                                                            }
+                                                        }
+                                                    } ?>
                                                 </span>
 
                                                 <span class="rating-star">
                                                     <b>Rating:</b>
                                                 </span>
                                                 <?php
-                                                        $rating = $product->pro_rating;
-                                                        for ($i = 1; $i <= $rating; $i++) {
-                                                            ?>
+                                                $rating = $product->pro_rating;
+                                                for ($i = 1; $i <= $rating; $i++) {
+                                                    ?>
                                                     <i class="fas fa-star rating-star"></i>
-                                                <?php
-                                                        } ?>
-
+                                                <?php } ?>
                                                 <div class="btn-group cart-add-link" role="group" aria-label="Basic example">
-                                                    <a href="single.php?single_id=<?php echo $product->pro_id; ?>" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i> Add</a>
-                                                    <a href="single.php?single_id=<?php echo $product->pro_id; ?>" class="btn btn-warning btn-sm"><i class="fas fa-info-circle"></i> Details</a>
+                                                    <a href="single.php?single_id=<?php echo $product->pro_id; ?>"
+                                                       class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i> Add</a>
+                                                    <a href="single.php?single_id=<?php echo $product->pro_id; ?>"
+                                                       class="btn btn-warning btn-sm"><i class="fas fa-info-circle"></i> Details</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -397,16 +391,12 @@
                                     <?php
                                     $brandedData = $brand->brandedItems($tableBrand);
                                     if (!empty($brandedData)) {
-                                        foreach ($brandedData as $brand) {
-                                            ?>
+                                        foreach ($brandedData as $brand) { ?>
                                             <li>
                                                 <a href="brandCategorySubCategory.php?brand_id=<?= $brand->brand_id ?>">
                                                     <?= $brand->brand_name ?></a>
                                             </li>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
+                                    <?php } } ?>
                                 </ul>
                             </div>
                         </div>
@@ -419,17 +409,13 @@
                                     <?php
                                     $categoryData = $category->index($tableCategory);
                                     if (!empty($categoryData)) {
-                                        foreach ($categoryData as $category) {
-                                            ?>
+                                        foreach ($categoryData as $category) { ?>
                                             <li>
                                                 <a href="brandCategorySubCategory.php?category_id=<?= $category->cat_id; ?>">
                                                     <?= $category->cat_name; ?>
                                                 </a>
                                             </li>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
+                                    <?php } } ?>
                                 </ul>
                             </div>
                         </div>
@@ -443,17 +429,13 @@
                                     <?php
                                     $subCategoryData = $subCategory->index($tableSubCategory);
                                     if (!empty($subCategoryData)) {
-                                        foreach ($subCategoryData as $subCategory) {
-                                            ?>
+                                        foreach ($subCategoryData as $subCategory) { ?>
                                             <li>
                                                 <a href="brandCategorySubCategory.php?sub_category_id=<?= $subCategory->sub_cat_id; ?>">
                                                     <?= $subCategory->sub_cat_name; ?>
                                                 </a>
                                             </li>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
+                                    <?php } } ?>
                                 </ul>
                             </div>
                         </div>

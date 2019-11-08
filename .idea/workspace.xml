@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1931ebf9-a21e-4a1a-8baf-560994821571" name="Default Changelist" comment="" />
+    <list default="true" id="1931ebf9-a21e-4a1a-8baf-560994821571" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/app/Codecourse/Repositories/Frontend.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/app/Codecourse/Repositories/Frontend.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/ecommerce/processOrders.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/ecommerce/processOrders.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/brandCategorySubCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/brandCategorySubCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/cart.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/cart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/customerProfileIndex.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/customerProfileIndex.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/home.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/order.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/orderDetails.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/orderDetails.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/partials/_head.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/partials/_head.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/processCart.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/processCart.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pages/single.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/pages/single.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,8 +29,21 @@
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="Git.Settings">
-    <option name="PATH_TO_GIT" value="C:\Users\User\Downloads\Programs\Git-2.18.0-64-bit_2\Git-2.18.0-64-bit_2.exe" />
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,10 +57,16 @@
   <component name="ProjectId" id="1THeOKxrOJBkDelVGKzt3bpmBd4" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Programs/Git-2.18.0-64-bit_2" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -45,6 +79,19 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="login.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost/Pro_Ecommerce/public/pages/login.php">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.login.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -63,6 +110,14 @@
       <workItem from="1573126556665" duration="1098000" />
       <workItem from="1573127745879" duration="218000" />
       <workItem from="1573128070422" duration="700000" />
+      <workItem from="1573128964035" duration="712000" />
+      <workItem from="1573130144978" duration="209000" />
+      <workItem from="1573130632012" duration="2771000" />
+      <workItem from="1573133486533" duration="390000" />
+      <workItem from="1573138109090" duration="2514000" />
+      <workItem from="1573140962861" duration="11010000" />
+      <workItem from="1573152792919" duration="196000" />
+      <workItem from="1573228630883" duration="1476000" />
     </task>
     <servers />
   </component>

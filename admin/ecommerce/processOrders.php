@@ -1,3 +1,4 @@
+
 <?php
 
 require_once '../app/start.php';
@@ -58,7 +59,7 @@ switch ($_POST['submit']) {
                                 // Revoke staus in orders table
                                 $statusUpdated = $cart->revokeOrderStatus($tableOrders, $order_id, $pro_price, $ordered_on, $ordered_status);
                                 // validation messages and page redirects
-                                if (statusUpdated) {
+                                if ($statusUpdated) {
                                     $message = '<div class="alert alert-success alert-dismissible " role="alert">
                                     <strong> WOW !</strong> Ordered status has been rovoked successfully !!!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -93,7 +94,7 @@ switch ($_POST['submit']) {
                                 $ordered_status = $cart->validate($_POST['status']);
                                 $statusUpdated = $cart->deleteOrder($tableOrders, $order_id, $customer_id, $ordered_on, $ordered_status);
                                 // validation messages and page redirects
-                                if (statusUpdated) {
+                                if ($statusUpdated) {
                                     $message = '<div class="alert alert-info alert-dismissible " role="alert">
                                     <strong> WOW !</strong> Order has been archived successfully !!!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -128,7 +129,7 @@ switch ($_POST['submit']) {
                                 $ordered_status = $cart->validate($_POST['status']);
                                 $statusUpdated = $cart->deleteOrder($tableOrderArchive, $order_id, $customer_id, $ordered_on, $ordered_status);
                                 // validation messages and page redirects
-                                if (statusUpdated) {
+                                if ($statusUpdated) {
                                     $message = '<div class="alert alert-info alert-dismissible " role="alert">
                                     <strong> WOW !</strong> Order archived data has been deleted successfully !!!
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">

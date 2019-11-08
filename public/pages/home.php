@@ -26,7 +26,8 @@
                         <div class="row">
                             <div class="col-sm-3 p-1">
                                 <div class="card" style="">
-                                    <img src="img/product_images/cell-phone.jpg" class="card-img-top cart-img img-cover"
+                                    <img src="img/product_images/cell-phone.jpg"
+                                         class="card-img-top cart-img img-cover"
                                     alt="Cart Image">
                                     <div class="card-body p-1 pt-3">
                                         <h6 class="card-title">Phone</h6>
