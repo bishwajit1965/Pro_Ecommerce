@@ -39,7 +39,7 @@ class Core
                 return $galleryData;
             }
         } catch (PDOException $e) {
-            echo $e->getMesssage();
+            echo $e->getMessage();
         }
     }
 
@@ -204,26 +204,28 @@ class Core
             echo $e->getMessage();
         }
     }
-
-    /**
-     * Redirect url function.
-     *
-     * @param [type] $url
-     *
-     * @return void
-     */
+    // Delete data from database when there is no photo
+    public function delete($id, $table)
+    {
+        try {
+            $sql = "DELETE FROM $table WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $_GET['delete_id']]);
+            $stmt->bindValue(':id', $id);
+            $stmtExec = $stmt->execute();
+            if ($stmtExec) {
+                return $stmtExec ? true : false;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
     public function redirect($url)
     {
         header('Location:' . $url);
     }
 
-    /**
-     * Count rows from related table
-     *
-     * @param [type] $table
-     * @return void
-     */
 
     public function numberOfRows($table)
     {

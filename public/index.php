@@ -6,19 +6,30 @@ include_once '../admin/app/start.php';
 use Codecourse\Repositories\Brand as Brand;
 use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Category as Category;
-use Codecourse\Repositories\CustomerProfileIndex as CustomerProfileIndex;
 use Codecourse\Repositories\FrontEnd as FrontEnd;
-use Codecourse\Repositories\Helpers as Helper;
+use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\Products;
+use Codecourse\Repositories\Profile as Profile;
 use Codecourse\Repositories\Session as Session;
+use Codecourse\Repositories\SocialMedia as SocialMedia;
 use Codecourse\Repositories\SubCategory as SubCategory;
 
+// starts session
+Session::init();
+
+// Classes instantiated
 $cart = new Cart();
+$brand = new Brand();
+$category = new Category();
+$frontEnd = new FrontEnd();
+$helper = new Helpers();
+$pdoduct = new Products();
+$profile = new Profile();
+$subCategory = new SubCategory();
+$socialMedia = new SocialMedia();
 
 $session = Session::checkLogin();
 $sessionId = session_id();
-// starts session
-Session::init();
 $sessionId = session_id();
 
 // Gets the file name to show whether it is active or not
@@ -30,22 +41,16 @@ $table5 = 'tbl_cart';
 $table3 = 'tbl_category';
 $table = 'tbl_products';
 $table2 = 'tbl_sub_category';
-
 $tableBrand = 'tbl_brand';
 $tableCategory = 'tbl_category';
 $tableSubCategory = 'tbl_sub_category';
 $tableCustomer = 'tbl_customer';
 $tableCart = 'tbl_cart';
+$tableHeader = 'tbl_header';
 $tablePeoducts = 'tbl_products';
 $tableOrders = 'tbl_orders';
+$tableSocialMedia = 'tbl_social_sites';
 
-// Classes instantiated
-$brand = new Brand();
-$category = new Category();
-$frontEnd = new FrontEnd();
-$helper = new Helper();
-$pdoduct = new Products();
-$subCategory = new SubCategory();
 ?>
 <!doctype html>
 <html lang="en">
@@ -60,7 +65,7 @@ $subCategory = new SubCategory();
     <title>Ecommerce site</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="css/bootstrap4.min.css"> -->
+    <link rel="stylesheet" href="css/bootstrap4.min.css">
     <!-- Favicon -->
     <link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon" />
     <!-- Font awesome kit-->

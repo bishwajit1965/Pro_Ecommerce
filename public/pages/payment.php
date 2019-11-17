@@ -38,7 +38,7 @@
     </div>
     <!-- Content area begins -->
     <div class="container-fluid bg-light">
-        <div class="row d-flex justify-content-center ">
+        <div class="row d-flex justify-content-center">
             <div class="col-sm-4 py-4">
                 <div class="payment-option d-flex justify-content-between mt-3 mb-3">
                     <a href="paymentOnLine.php" class="btn btn-lg btn-primary"><i class="fas fa-signal"></i> Online

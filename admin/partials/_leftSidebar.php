@@ -77,6 +77,30 @@
                     <li><a href="../roles/userIndex.php"><i class="fa fa-circle-o"></i> User index</a></li>
                 </ul>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Header Options</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../header/headerIndex.php"><i class="fa fa-circle-o"></i> Header index</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-files-o"></i>
+                    <span>Social Media Options</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="../socialMedia/socialmediaIndex.php"><i class="fa fa-circle-o"></i> Social Media</a></li>
+                </ul>
+            </li>
 
             <li class="treeview">
                 <a href="#">

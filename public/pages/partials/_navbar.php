@@ -1,6 +1,7 @@
 <nav class="row navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
     <a class="navbar-brand" href="../index.php" style="font-size:16px;">HOME</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,40 +24,40 @@
             $current_page = basename($path, '.php');
             if ($session == true) {
                 ?>
-                <li class="nav-item">
-                    <a class="nav-link" <?php if ($current_page == 'customerProfileIndex') {
+            <li class="nav-item">
+                <a class="nav-link" <?php if ($current_page == 'customerProfileIndex') {
                                                 echo 'id="active"';
                                             }
                                             ?> href="customerProfileIndex.php">Profile</a>
-                </li>
-                <?php
+            </li>
+            <?php
                     if ($cart->checkCartTable($table5, $sessionId)) { ?>
-                    <li class="nav-item">
-                        <a <?php if ($current_page == 'cart') {
+            <li class="nav-item">
+                <a <?php if ($current_page == 'cart') {
                                         echo 'id="active"';
                                     } ?> class="nav-link" href="cart.php"> Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a <?php if ($current_page == 'payment') {
+            </li>
+            <li class="nav-item">
+                <a <?php if ($current_page == 'payment') {
                                         echo 'id="active"';
                                     } ?>class="nav-link" href="payment.php"> Payment</a>
-                    </li>
+            </li>
             <?php }
             } ?>
             <?php
             $orderRelatedCustomerIdData = $cart->checksCustomerIdInOrdersTable($customerId, $tableOrders);
             if (!empty($orderRelatedCustomerIdData)) {
                 ?>
-                <li class="nav-item">
-                    <a <?php if ($current_page == 'orderDetails') {
+            <li class="nav-item">
+                <a <?php if ($current_page == 'orderDetails') {
                                 echo 'id="active"';
                             } ?>class="nav-link" href="orderDetails.php"> Order List</a>
-                </li>
-                <li class="nav-item">
-                    <a <?php if ($current_page == 'order') {
+            </li>
+            <li class="nav-item">
+                <a <?php if ($current_page == 'order') {
                                 echo 'id="active"';
                             } ?>class="nav-link" href="order.php"> Order</a>
-                </li>
+            </li>
             <?php
             }
             ?>
@@ -67,7 +68,8 @@
                     } ?>class="nav-link" href="brandCategorySubCategory.php">View products</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
                     Dropdown
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

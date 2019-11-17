@@ -1,5 +1,5 @@
-<?php ob_start();?>
 <?php
+ob_start();
 include_once '../../admin/app/start.php';
 
 // Classes included for global use
@@ -9,9 +9,11 @@ use Codecourse\Repositories\Category as Category;
 use Codecourse\Repositories\CustomerProfile as CustomerProfile;
 use Codecourse\Repositories\FrontEnd as FrontEnd;
 use Codecourse\Repositories\Helpers as Helpers;
+use Codecourse\Repositories\Invoice as Invoice;
 use Codecourse\Repositories\LoginCustomer as LoginCustomer;
 use Codecourse\Repositories\Products as Products;
 use Codecourse\Repositories\Session as Session;
+use Codecourse\Repositories\SocialMedia as SocialMedia;
 use Codecourse\Repositories\SubCategory as SubCategory;
 
 // Starts session
@@ -39,9 +41,11 @@ $category = new Category;
 $customerProfile = new CustomerProfile();
 $frontEnd = new FrontEnd();
 $helpers = new Helpers();
+$invoice = new Invoice();
 $loginCustomer = new LoginCustomer();
 $products = new Products();
 $subCategory = new SubCategory;
+$socialMedia = new SocialMedia();
 
 // Tables listed for use where necessary
 $tableBrand = 'tbl_brand';
@@ -49,9 +53,11 @@ $tableCart = 'tbl_cart';
 $tableCategory = 'tbl_category';
 $tableCustomer = 'tbl_customer';
 $tableOrders = 'tbl_orders';
+$tableHeader = 'tbl_header';
 $tableProducts = 'tbl_products';
 $tableSubCategory = 'tbl_sub_category';
 $tableOrderArchive = 'tbl_order_archive';
+$tableSocialMedia = 'tbl_social_sites';
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +73,7 @@ $tableOrderArchive = 'tbl_order_archive';
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-     <link rel="stylesheet" href="../css/bootstrap4.min.css">
+    <link rel="stylesheet" href="../css/bootstrap4.min.css">
     <!-- Font awesome kit-->
     <script src="https://kit.fontawesome.com/1b551efcfa.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Allura&display=swap" rel="stylesheet">

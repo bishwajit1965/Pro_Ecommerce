@@ -94,7 +94,6 @@
                                         <input type="text" name="phone" class="form-control"
                                             value="<?php echo $result->phone; ?>">
                                     </div>
-
                                 </div>
                                 <div class="col-sm-5">
                                     <div class="form-group">

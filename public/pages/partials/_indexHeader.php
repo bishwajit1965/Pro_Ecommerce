@@ -1,8 +1,29 @@
-<div class="row pt-1 header-area">
+<?php
+include_once '../admin/app/start.php';
+
+use Codecourse\Repositories\Session as Session;
+
+$customerId = Session::get('customerId');
+?>
+
+<div class="row pt-1 header-area" style='
+ <?php
+    $headerData = $frontEnd->headerBannerAndDataView($tableHeader);
+    if (!empty($headerData)) {
+        foreach ($headerData as $data) { ?>
+                background-image:url("../admin/header/<?= $data->photo; ?>");
+            <?php }
+            } ?>'>
     <div class="col-sm-3 d-flex flex-column justify-content-center">
-        <h1 id="heading">Ecommerce site</h1>
-        <h2>Your favourite web store</h3>
-            <h3> Serving since 1995</h3>
+        <?php
+        $headerData = $frontEnd->headerBannerAndDataView($tableHeader);
+        if (!empty($headerData)) {
+            foreach ($headerData as $data) { ?>
+                <h1 id="heading"><?= $data->title; ?></h1>
+                <h2><?= $data->slogan; ?></h3>
+                    <h3><?= 'Estd : ' . $helper->formatDate($data->established); ?></h3>
+            <?php }
+            } ?>
     </div>
     <div class="col-sm-3 d-flex flex-column justify-content-center text-center">
         <div class="search-container">
@@ -19,14 +40,6 @@
                     <span class="input-group-text bg-warning pb-2 px-2"><i class="fas fa-cart-plus"></i></span>
                 </div>
                 <?php
-                include_once '../admin/app/start.php';
-
-                use Codecourse\Repositories\Session as Session;
-                use Codecourse\Repositories\Cart as Cart;
-
-                $customerId = Session::get('customerId');
-                $tableOrders = 'tbl_orders';
-                $cart = new Cart();
                 $orderRelatedCustomerIdData = $cart->checksCustomerIdInOrdersTable($customerId, $tableOrders);
                 if (!empty($orderRelatedCustomerIdData)) {
                     $quantity = 0;
@@ -39,22 +52,40 @@
                     $grandTotal = $sum + $vat;
                 }
                 ?>
-                <input type="text" name="total_price" class="form-control form-control-sm" placeholder="<?php if (!empty($quantity) && !empty($grandTotal)) {
-                                                                                                            echo 'Q:' . $quantity . '|P :' . number_format($grandTotal, 2, '.', '') . '&#2547;';
-                                                                                                        } else {
-                                                                                                            echo "Hello ! welcome.";
-                                                                                                        } ?>">
+                <input placeholder="<?php if (!empty($quantity) && !empty($grandTotal)) {
+                                        echo 'Q:' . $quantity . '|P :' . number_format($grandTotal, 2, '.', ',') . '&#2547;';
+                                    } else {
+                                        echo "Hello! Order now.";
+                                    } ?>" type="text" name="total_price" class="form-control ">
             </div>
         </form>
     </div>
     <div class="col-sm-4 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="col-sm-7 social-links d-flex flex-row justify-content-between">
-                <a href=""><i class="fab fa-facebook-square"></i> </a>
-                <a href=""><i class="fab fa-linkedin"></i> </a>
-                <a href=""><i class="fab fa-twitter"></i> </a>
-                <a href=""><i class="fab fa-google-plus"></i> </a>
-                <a href=""><i class="fab fa-github"></i> </a>
+                <?php
+                $socialMediaData = $frontEnd->socialMediaDataView($tableSocialMedia);
+                if (!empty($socialMediaData)) {
+                    foreach ($socialMediaData as $mediaData) { ?>
+                        <a href="<?= $mediaData->site_name; ?>" target="blank">
+                    <?php
+                            if ($mediaData->site_name == 'http://www.facebook.com') {
+                                echo '<i class="fab fa-facebook-square"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.twitter.com') {
+                                echo '<i class="fab fa-twitter"></i>';
+                            } elseif ($mediaData->site_name == 'http://www.linkedin.com') {
+                                echo '<i class="fab fa-linkedin"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.github.com') {
+                                echo '<i class="fab fa-github"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.plus.google.com') {
+                                echo '<i class="fab fa-google-plus"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.youtube.com') {
+                                echo '<i class="fab fa-youtube"></i>';
+                            } else { }
+                        }
+                    }
+                    ?>
+                        </a>
             </div>
             <div class="col-sm-5 d-flex flex-row justify-content-between log-in">
                 <?php

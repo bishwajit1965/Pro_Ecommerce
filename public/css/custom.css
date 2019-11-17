@@ -16,7 +16,7 @@
 
 .header-area {
     background-color: #000;
-    background-image: url(../img/background/web-banner.jpg);
+    /* background-image: url(../img/background/web-banner.jpg); */
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -252,7 +252,7 @@ ul>li>a {
 .panel {
     padding: 0 10px;
     display: none;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.486);
     overflow: hidden;
 }
 
@@ -262,12 +262,26 @@ ul>li>a {
 
 /* Top footer area
 ======================= */
-.top-footer h5 {
-    border-bottom: 2px solid#999999;
+.top-footer :hover {
+    background-color: #2a2a2a;
+    color: #DDD;
+}
+
+.footer-text>h6 {
+    border-bottom: 2px solid#2e2e2e;
+    font-size: 16px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .fab {
     font-size: 26px;
+}
+
+/* Footer area
+=================== */
+.top-social-links>.footer-area>a {
+    color: #FFF;
 }
 
 /* Sticky navbar

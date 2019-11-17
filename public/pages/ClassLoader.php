@@ -42,3 +42,4 @@ $tableCustomer = 'tbl_customer';
 $tableCart = 'tbl_cart';
 $tablePeoducts = 'tbl_products';
 $tableOrders = 'tbl_orders';
+$tableOrderArchive = 'tbl_order_archive';

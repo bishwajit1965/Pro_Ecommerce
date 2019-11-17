@@ -17,7 +17,7 @@ if (isset($_GET['edit_customer_id'])) {
 // Data will be fetched for display
 $result = $customerProfile->updateView($id, $table);
 ?>
-<?php include_once '../partials/_head.php'; ?>
+<?php include_once 'partials/_head.php'; ?>
 
 <body>
     <div class="container-fluid">
@@ -25,10 +25,10 @@ $result = $customerProfile->updateView($id, $table);
         <div class="row bg-dark py-1"></div>
         <!-- /Header Border -->
         <!-- Header -->
-        <?php include_once '../partials/_header.php'; ?>
+        <?php include_once 'partials/_header.php'; ?>
         <!-- /Header ends -->
         <!-- Navbar -->
-        <?php include_once '../partials/_navbar.php'; ?>
+        <?php include_once 'partials/_navbar.php'; ?>
         <!-- /Navbar ends -->
         <!-- Page title -->
         <div class="row text-center bg-info text-white">
@@ -118,16 +118,16 @@ $result = $customerProfile->updateView($id, $table);
     <!-- Footer area begins -->
     <div class="container-fluid">
         <!-- Footer top -->
-        <?php include_once '../partials/_top-footer.php'; ?>
+        <?php include_once 'partials/_top-footer.php'; ?>
         <!-- /Footer top -->
         <!-- Footer -->
-        <?php include_once '../partials/_footer.php'; ?>
+        <?php include_once 'partials/_footer.php'; ?>
         <!-- /Footer ends -->
     </div>
     <!-- /Footer area ends -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <?php include_once '../partials/_scripts.php'; ?>
+    <?php include_once 'partials/_scripts.php'; ?>
 </body>
 
 </html>

@@ -48,7 +48,7 @@
         }
         ?>
         <div class="table-responsive-sm">
-            <table class="table table-striped table-condensed table-responsive table-sm  mb-0">
+            <table class="table table-condensed table-responsive table-sm  mb-0">
                 <thead class="thead-inverse">
                     <tr>
                         <th width="2%">Id</th>

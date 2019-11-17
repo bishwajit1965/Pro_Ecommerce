@@ -11,6 +11,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="nivo-slider/jquery.nivo.slider.js"></script>
 <script src="js/scrolltop.js"></script>
+<!-- Google Map -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" type="text/javascript"></script>
 
 <!-- Sticky navbar -->
 <script>
@@ -91,4 +93,14 @@
     // ]]>
 </script>
 <!-- /Nivo slider -->
+<!-- Google Map for Location -->
+<script>
+    function myMap() {
+        var mapProp = {
+            center: new google.maps.LatLng(23.1697102, 89.213707),
+            zoom: 5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script>
 <?php ob_flush(); ?>

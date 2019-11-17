@@ -139,7 +139,6 @@
                                                 <?php $price = $result->pro_price;
                                                         echo number_format($price, 2, '.', '') . ' &#2547'; ?>
                                             </td>
-
                                             <td>
                                                 <?php echo $result->pro_quantity; ?>
                                             </td>
@@ -174,7 +173,6 @@
                                                 <?php if ($_SESSION['userEmail'] == $user_home->getEmail()) { ?>
                                                     <?php if ($result->status == '0') { ?>
                                                         <form action="processOrders.php" method="post">
-
                                                             <input type="hidden" name="order_id" value="<?php echo $result->order_id; ?>">
 
                                                             <input type="hidden" name="pro_price" value="<?= $result->pro_price; ?>">

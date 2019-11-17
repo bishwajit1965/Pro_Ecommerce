@@ -3,11 +3,24 @@ require_once '../../admin/app/start.php';
 
 use Codecourse\Repositories\Session as Session;
 ?>
-<div class="row pt-1 header-area">
+<div class="row pt-1 header-area" style='
+    <?php
+    $headerData = $frontEnd->headerBannerAndDataView($tableHeader);
+    if (!empty($headerData)) {
+        foreach ($headerData as $data) { ?>
+                background-image:url("../../admin/header/<?= $data->photo; ?>");
+            <?php }
+            } ?>'>
     <div class="col-sm-3 d-flex flex-column justify-content-center">
-        <h1 id="heading">Ecommerce site</h1>
-        <h2>Your favourite web store</h3>
-            <h3> Serving since 1995</h3>
+        <?php
+        $headerData = $frontEnd->headerBannerAndDataView($tableHeader);
+        if (!empty($headerData)) {
+            foreach ($headerData as $data) { ?>
+                <h1 id="heading"><?= $data->title; ?></h1>
+                <h2><?= $data->slogan; ?></h3>
+                    <h3><?= 'Estd : ' . $helpers->formatDate($data->established); ?></h3>
+            <?php }
+            } ?>
     </div>
     <div class="col-sm-3 d-flex flex-column justify-content-center text-center">
         <div class="search-container">
@@ -114,25 +127,41 @@ use Codecourse\Repositories\Session as Session;
                         break;
                 }
                 ?>
-
-                    <input type="text" disabled="disabled" class="form-control form-control-sm" placeholder="<?php
-                                                                                                                if (isset($sum)  && isset($quantity)) {
-                                                                                                                    echo "Qty:" . $quantity . '|' . "Pri:" . number_format($sum, 2, '.', '') . ' + Vat due (15%)' . '&#2547; ';
-                                                                                                                } else {
-                                                                                                                    echo $message;
-                                                                                                                }
-                                                                                                                ?>">
+                    <input placeholder="<?php if (isset($sum)  && isset($quantity)) {
+                                            echo "Qty:" . $quantity . '|' . "Pri:" . number_format($sum, 2, '.', ',') . ' + Vat due (15%)' . '&#2547; ';
+                                        } else {
+                                            echo $message;
+                                        }
+                                        ?>" type="text" disabled="disabled" class="form-control form-control-sm">
             </div>
         </form>
     </div>
     <div class="col-sm-3 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="col-sm-8 d-flex justify-content-between social-links">
-                <a href=""><i class="fab fa-facebook text-white"></i></a>
-                <a href=""><i class="fab fa-linkedin text-white"></i></a>
-                <a href=""><i class="fab fa-twitter text-white"></i></a>
-                <a href=""><i class="fab fa-google-plus text-white"></i></a>
-                <a href=""><i class="fab fa-github text-white"></i></a>
+                <?php
+                $socialMediaData = $frontEnd->socialMediaDataView($tableSocialMedia);
+                if (!empty($socialMediaData)) {
+                    foreach ($socialMediaData as $mediaData) { ?>
+                        <a href="<?= $mediaData->site_name; ?>" target="blank">
+                    <?php
+                            if ($mediaData->site_name == 'http://www.facebook.com') {
+                                echo '<i class="fab fa-facebook-square"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.twitter.com') {
+                                echo '<i class="fab fa-twitter"></i>';
+                            } elseif ($mediaData->site_name == 'http://www.linkedin.com') {
+                                echo '<i class="fab fa-linkedin"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.github.com') {
+                                echo '<i class="fab fa-github"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.plus.google.com') {
+                                echo '<i class="fab fa-google-plus"></i>';
+                            } elseif ($mediaData->site_name == 'https://www.youtube.com') {
+                                echo '<i class="fab fa-youtube"></i>';
+                            } else { }
+                        }
+                    }
+                    ?>
+                        </a>
             </div>
             <div class="col-sm-4 d-flex justify-content-between log-in">
                 <?php

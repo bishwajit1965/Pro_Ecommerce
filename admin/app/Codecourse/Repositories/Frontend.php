@@ -35,6 +35,40 @@ class FrontEnd
         }
     }
 
+    // View header image and data in Index page
+    public function headerBannerAndDataView($table)
+    {
+        try {
+            $sql = "SELECT * FROM $table LIMIT 1";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $headerData[] = $data;
+                }
+                return $headerData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMesssage();
+        }
+    }
+    // View hsocial media data in Index page
+    public function socialMediaDataView($table)
+    {
+        try {
+            $sql = "SELECT * FROM $table LIMIT 6";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $socialMediaData[] = $data;
+                }
+                return $socialMediaData;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMesssage();
+        }
+    }
     /**
      * Branded products default
      *
@@ -101,31 +135,31 @@ class FrontEnd
 
             <ul class="pagination">
                 <?php
-                $total_no_of_pages = ceil($total_no_of_records / $records_per_page);
-                $current_page = 1;
-                if (isset($_GET["page_no"])) {
-                    $current_page = $_GET["page_no"];
-                }
-                if ($current_page != 1) {
-                    $previous = $current_page - 1;
-                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=1'>First</a></li>";
-                    echo "<li><a class='page-link' href='" . $self . "?page_no=" . $previous . "'>Previous</a></li>";
-                }
-                for ($i = 1; $i <= $total_no_of_pages; $i++) {
-                    if ($i == $current_page) {
-                        echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'
+                            $total_no_of_pages = ceil($total_no_of_records / $records_per_page);
+                            $current_page = 1;
+                            if (isset($_GET["page_no"])) {
+                                $current_page = $_GET["page_no"];
+                            }
+                            if ($current_page != 1) {
+                                $previous = $current_page - 1;
+                                echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=1'>First</a></li>";
+                                echo "<li><a class='page-link' href='" . $self . "?page_no=" . $previous . "'>Previous</a></li>";
+                            }
+                            for ($i = 1; $i <= $total_no_of_pages; $i++) {
+                                if ($i == $current_page) {
+                                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'
                         style='color:red; background-color:#D9EDF7;'> " . $i . "</a></li>";
-                    } else {
-                        echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'>" . $i . "</a></li>";
-                    }
-                }
-                if ($current_page != $total_no_of_pages) {
-                    $next = $current_page + 1;
-                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $next . "'>Next</a></li>";
-                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $total_no_of_pages . "'>Last</a></li>";
-                } ?>
+                                } else {
+                                    echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $i . "'>" . $i . "</a></li>";
+                                }
+                            }
+                            if ($current_page != $total_no_of_pages) {
+                                $next = $current_page + 1;
+                                echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $next . "'>Next</a></li>";
+                                echo "<li class='page-item'><a class='page-link' href='" . $self . "?page_no=" . $total_no_of_pages . "'>Last</a></li>";
+                            } ?>
             </ul>
-            <?php
+<?php
         }
     }
 
