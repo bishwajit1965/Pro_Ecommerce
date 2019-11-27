@@ -16,7 +16,8 @@ if (isset($_POST['submit'])) {
                         if (isset($_POST['submit'])) {
                             if (isset($_POST['pro_id']) && $_POST['pro_id'] !== null) {
                                 $productId = $_POST['pro_id'];
-                                $quantity = $_POST['quantity'];
+                                $quantity = $_POST['pro_quantity'];
+                                $pro_description = $_POST['pro_description'];
                                 if (session_id() !== null) {
                                     $sessionId = session_id();
                                     // Checks to prevent duplicate entry
@@ -34,7 +35,8 @@ if (isset($_POST['submit'])) {
                                         $products->redirect($home_url);
                                     } else {
                                         // If not added previously the data will be inserted
-                                        $lastId = $cart->addToCart($tableCart, $tablePeoducts, $productId, $quantity, $sessionId);
+                                        $quantity = $_POST['pro_quantity'];
+                                        $lastId = $cart->addToCart($tableCart, $tablePeoducts, $productId,  $pro_description, $quantity, $sessionId);
                                         $message = '<div class="alert alert-success alert-dismissible mb-0" role="alert"">
                                         <strong>WOW !!!</strong> Product has been added to cart successfully!!!
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

@@ -27,11 +27,9 @@
             <li class="nav-item">
                 <a class="nav-link" <?php if ($current_page == 'customerProfileIndex') {
                                                 echo 'id="active"';
-                                            }
-                                            ?> href="customerProfileIndex.php">Profile</a>
+                                            } ?> href="customerProfileIndex.php">Profile</a>
             </li>
-            <?php
-                    if ($cart->checkCartTable($table5, $sessionId)) { ?>
+            <?php if ($cart->checkCartTable($table5, $sessionId)) { ?>
             <li class="nav-item">
                 <a <?php if ($current_page == 'cart') {
                                         echo 'id="active"';
@@ -42,6 +40,7 @@
                                         echo 'id="active"';
                                     } ?>class="nav-link" href="payment.php"> Payment</a>
             </li>
+
             <?php }
             } ?>
             <?php
@@ -67,7 +66,32 @@
                         echo 'id="active"';
                     } ?>class="nav-link" href="brandCategorySubCategory.php">View products</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item">
+                <a <?php if ($current_page == 'aboutUs') {
+                        echo 'id="active"';
+                    } ?>class="nav-link" href="aboutUs.php"> About Us</a>
+            </li>
+            <li class="nav-item">
+                <a <?php if ($current_page == 'contact') {
+                        echo 'id="active"';
+                    } ?>class="nav-link" href="contact.php"> Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a <?php if ($current_page == 'termsAndConditions') {
+                        echo 'id="active"';
+                    } ?>class="nav-link" href="termsAndConditions.php"> Term & Cond</a>
+            </li>
+            <li class="nav-item">
+                <a <?php if ($current_page == 'privacyPolicy') {
+                        echo 'id="active"';
+                    } ?>class="nav-link" href="privacyPolicy.php"> Priv Policy</a>
+            </li>
+            <li class="nav-item">
+                <a <?php if ($current_page == 'returnPolicy') {
+                        echo 'id="active"';
+                    } ?>class="nav-link" href="returnPolicy.php"> Retu Policy</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Dropdown
@@ -78,7 +102,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
-            </li>
+            </li> -->
         </ul>
     </div>
 </nav>

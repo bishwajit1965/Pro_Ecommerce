@@ -41,20 +41,21 @@
             Session::set('message', null);
         }
         ?>
-        <div class="table-responsive-sm">
-            <table class="table table-hover table-sm table-condensed">
-                <thead class="thead-inverse">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="">
                     <tr>
                         <th>ID</th>
                         <th>Pro Name</th>
                         <th>Pro Image</th>
                         <th style="text-align:right;">Pro Number</th>
                         <th>Ordered on</th>
+                        <th style="text-align:right;">Order Status</th>
+                        <th style="text-align:right;">Actions</th>
                         <th style="text-align:right;">Pro price</th>
                         <th style="text-align:right;">Pro Qunty</th>
                         <th style="text-align:right;">Total Price</th>
-                        <th style="text-align:right;">Order Status</th>
-                        <th style="text-align:right;">Actions</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -80,19 +81,6 @@
                         <td style="text-align:;">
                             <?php echo  $helpers->dateFormat($order->ordered_on); ?>
                         </td>
-
-                        <td style="text-align:right;">
-                            <?= isset($order->pro_price) ? number_format($order->pro_price, 2, '.', '') : ''; ?>
-                            <b> &#2547;</b></td>
-
-                        <td style="text-align:right;">
-                            <?= isset($order->pro_quantity) ? $order->pro_quantity : ''; ?>
-                        </td>
-
-                        <td style="text-align:right;">
-                            <?php $total = $order->pro_price * $order->pro_quantity;
-                                            echo isset($total) ? number_format($total, 2, '.', ',') : ''; ?>
-                            <b>&#2547;</b></td>
                         <td style="text-align:right;">
                             <?php if ($order->status == '1') { ?>
                             <span style="color:#333;font-weight:700;"><?= "Processed"; ?></span>
@@ -126,25 +114,40 @@
                             <span class="btn btn-sm btn-danger"><i class="fas fa-check"></i> OK</span>
                             <?php } ?>
                         </td>
+                        <td style="text-align:right;">
+                            <?= isset($order->pro_price) ? number_format($order->pro_price, 2, '.', '') : ''; ?>
+                            <b> &#2547;</b></td>
+
+                        <td style="text-align:right;">
+                            <?= isset($order->pro_quantity) ? $order->pro_quantity : ''; ?>
+                        </td>
+
+                        <td style="text-align:right;">
+                            <?php $total = $order->pro_price * $order->pro_quantity;
+                                            echo isset($total) ? number_format($total, 2, '.', ',') : ''; ?>
+                            <b>&#2547;</b></td>
+
                     </tr>
-
-                    <!-- Grand total calculation -->
-                    <?php if ($sum !== null) {
-                                    $sum = $sum + $total;
-                                }
-                            }
-                        } else { ?>
-                    <div class="alert alert-primary alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <strong>SORRY !!!</strong> There is no product available in the cart at present.
-                    </div>
-                    <?php } ?>
-
                     <tr>
-                        <td colspan="5">
+                        <td>
+                            <!-- Grand total calculation -->
+                            <?php if ($sum !== null) {
+                                            $sum = $sum + $total;
+                                        }
+                                    }
+                                } else { ?>
+                            <div class="alert alert-primary alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <strong>SORRY !!!</strong> There is no product available in the cart at present.
+                            </div>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
                             <div class="row d-flex flex-row justify-content-around pt-5">
                                 <a href=" ../index.php" class="btn btn-sm btn-primary"><i class="fas fa-cart-plus"></i>
                                     Continue shopping</a>
@@ -153,14 +156,14 @@
                                     Home page</a>
                             </div>
                         </td>
-                        <td colspan="5">
-                            <div class="price-calculation" style="padding-right:240px;">
+                        <td colspan="3">
+                            <div class="price-calculation" style="padding-right:px;">
                                 <span
                                     style="display:block;text-align:right;font-weight:bold;color:#000;font-size:16px;">
                                     Sub total :
                                     <?php if (!empty($sum)) {
-                                        echo number_format($sum, 2, '.', ',');
-                                    } ?>
+                                                echo number_format($sum, 2, '.', ',');
+                                            } ?>
                                     <b>&#2547;</b>
                                 </span>
                                 <span style="margin-left:auto;">+</span>
@@ -168,17 +171,17 @@
                                     style="display:block;text-align:right;font-weight:bold;color:#000;margin-bottom:10px;border-bottom:3px solid #a6a6a6;font-size:16px;">
                                     Vat - 15% :
                                     <?php if (!empty($sum)) {
-                                        $vat = $sum * 0.15;
-                                        echo number_format($vat, 2, '.', ',');
-                                    } ?>
+                                                $vat = $sum * 0.15;
+                                                echo number_format($vat, 2, '.', ',');
+                                            } ?>
                                     <b>&#2547;</b>
                                 </span>
                                 <span style="display:block;text-align:right;font-weight:800;font-size:18px;color:#000;">
                                     Grand total :
                                     <?php if (!empty($sum) && !empty($vat)) {
-                                        $grandTotal = $sum + $vat;
-                                        echo number_format($grandTotal, 2, '.', ',');
-                                    } ?>
+                                                $grandTotal = $sum + $vat;
+                                                echo number_format($grandTotal, 2, '.', ',');
+                                            } ?>
                                     <b> &#2547; </b></span>
                             </div>
                         </td>

@@ -82,6 +82,7 @@ class Cart
                         $session_id = $cartProduct->session_id;
                         $pro_id = $cartProduct->pro_id;
                         $pro_name = $cartProduct->pro_name;
+                        $pro_description = $cartProduct->pro_description;
                         $pro_number = $cartProduct->pro_number;
                         $pro_price = $cartProduct->pro_price;
                         $pro_quantity = $cartProduct->pro_quantity;
@@ -89,7 +90,7 @@ class Cart
                         $photo = $cartProduct->photo;
 
                         // Inserts dat to orders table
-                        $query = "INSERT INTO $tableOrders (cart_id, customer_id, session_id, pro_id, pro_name,pro_number, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_number', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
+                        $query = "INSERT INTO $tableOrders (cart_id, customer_id, session_id, pro_id, pro_name,pro_description, pro_number, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_description', '$pro_number', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
 
                         $stmt = $this->conn->prepare($query);
                         $stmt->bindParam(":$customer_id", $customer_id);
@@ -97,6 +98,7 @@ class Cart
                         $stmt->bindParam(":$session_id", $session_id);
                         $stmt->bindParam(":$pro_id", $pro_id);
                         $stmt->bindParam(":$pro_name", $pro_name);
+                        $stmt->bindParam(":$pro_description", $pro_description);
                         $stmt->bindParam(":$pro_number", $pro_number);
                         $stmt->bindParam(":$pro_price", $pro_price);
                         $stmt->bindParam(":$pro_quantity", $pro_quantity);
@@ -135,7 +137,7 @@ class Cart
                     $photo = $cartProduct->photo;
 
                     // Inserts dat to order archive table table
-                    $query = "INSERT INTO $tableOrderArchive (cart_id, customer_id, session_id, pro_id, pro_name,pro_number, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_number', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
+                    $query = "INSERT INTO $tableOrderArchive (cart_id, customer_id, session_id, pro_id, pro_name, pro_number, pro_price, pro_quantity, total_price, photo) VALUES ('$cart_id', '$customer_id', '$session_id', '$pro_id', '$pro_name', '$pro_number', '$pro_price', '$pro_quantity', '$total_price', '$photo')";
 
                     $stmt = $this->conn->prepare($query);
                     $stmt->bindParam(":$customer_id", $customer_id);
@@ -159,7 +161,7 @@ class Cart
     }
 
     // Insert data to cart table
-    public function addToCart($table5, $table3, $productId, $quantity, $sessionId)
+    public function addToCart($table5, $table3, $productId, $pro_description, $quantity, $sessionId)
     {
         try {
             // selected from products table
@@ -171,12 +173,32 @@ class Cart
             $customerId = Session::get('customerId');
             $pro_name = $cartItem->pro_name;
             $pro_number = $cartItem->pro_number;
+            $pro_description = $cartItem->pro_description;
             $quantity = $quantity;
             $pro_price = $cartItem->present_price;
             $photo = $cartItem->photo;
 
             // Insert into cart table
-            $query = "INSERT INTO $table5 (customer_id, session_id, pro_id, pro_number, pro_name, pro_price, pro_quantity, photo) VALUES('$customerId', '$sessionId', '$productId', '$pro_number', '$pro_name', '$pro_price', '$quantity', '$photo')";
+            $query = "INSERT INTO $table5 (
+                customer_id,
+                session_id,
+                pro_id,
+                pro_number,
+                pro_name,
+                pro_description,
+                pro_quantity,
+                pro_price,
+                photo)
+                VALUES(
+                    '$customerId',
+                    '$sessionId',
+                    '$productId',
+                    '$pro_number',
+                    '$pro_name',
+                    '$pro_description',
+                    '$quantity',
+                    '$pro_price',
+                    '$photo')";
 
             $stmt = $this->conn->prepare($query);
             $stmt->bindValue(":$cartItem->id", $cartItem->id);
@@ -184,8 +206,9 @@ class Cart
             $stmt->bindValue(":$productId", $productId);
             $stmt->bindValue(":$pro_number", $pro_number);
             $stmt->bindValue(":$pro_name", $pro_name);
-            $stmt->bindValue(":$pro_price", $pro_price);
+            $stmt->bindValue(":$pro_description", $pro_description);
             $stmt->bindValue(":$quantity", $quantity);
+            $stmt->bindValue(":$pro_price", $pro_price);
             $stmt->bindValue(":$photo", $photo);
             $stmtExec = $stmt->execute();
             if ($stmtExec) {

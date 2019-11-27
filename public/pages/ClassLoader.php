@@ -5,6 +5,7 @@ include_once '../../admin/app/start.php';
 use Codecourse\Repositories\Brand as Brand;
 use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\Category as Category;
+use Codecourse\Repositories\ContactUs as ContactUs;
 use Codecourse\Repositories\CustomerProfile as CustomerProfile;
 use Codecourse\Repositories\Helpers as Helpers;
 use Codecourse\Repositories\LoginCustomer as LoginCustomer;
@@ -27,17 +28,19 @@ $customerId = Session::get('customerId');
 // Class objects instantiated
 $brand = new Brand();
 $cart = new Cart();
-$category = new Category;
+$category = new Category();
+$contactUs = new ContactUs();
 $customerProfile = new CustomerProfile();
 $helpers = new Helpers();
 $loginCustomer = new LoginCustomer();
 $products = new Products();
-$subCategory = new SubCategory;
+$subCategory = new SubCategory();
 
 // Tables listed for use where necessary
 $tableBrand = 'tbl_brand';
 $tableCategory = 'tbl_category';
 $tableSubCategory = 'tbl_sub_category';
+$tableContactUs = 'tbl_contact_us';
 $tableCustomer = 'tbl_customer';
 $tableCart = 'tbl_cart';
 $tablePeoducts = 'tbl_products';

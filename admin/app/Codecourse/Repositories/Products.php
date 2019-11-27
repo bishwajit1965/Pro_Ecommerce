@@ -17,7 +17,6 @@ class Products
         $dbConnection = $database->dbConnection();
         $this->conn = $dbConnection;
     }
-
     // View Data in Index page
     public function index($table)
     {
@@ -29,7 +28,6 @@ class Products
                 while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
                     $products[] = $data;
                 }
-
                 return $products;
             }
         } catch (PDOException $e) {
@@ -143,8 +141,6 @@ class Products
             } else {
                 return false;
             }
-
-            return $single_product;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -185,7 +181,6 @@ class Products
             } else {
                 return false;
             }
-
             return $result;
         } catch (PDOException $e) {
             echo $e->getMessage();

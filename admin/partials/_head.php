@@ -7,6 +7,7 @@ use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\CustomerProfile as CustomerProfile;
 use Codecourse\Repositories\Header as Header;
 use Codecourse\Repositories\Helpers as Helpers;
+use Codecourse\Repositories\Invoice as Invoice;
 use Codecourse\Repositories\Products as Products;
 use Codecourse\Repositories\Session as Session;
 use Codecourse\Repositories\SocialMedia as SocialMedia;
@@ -18,6 +19,7 @@ $cart = new Cart();
 $customerProfile = new CustomerProfile();
 $helpers = new Helpers();
 $header = new Header();
+$invoice = new Invoice();
 $products = new Products();
 $socialMedia = new SocialMedia();
 $user_home = new User();
@@ -29,6 +31,7 @@ $tableOrders = 'tbl_orders';
 $tableOrdersArchive = 'tbl_order_archive';
 $tableHeader = 'tbl_header';
 $tableSocialMedia = 'tbl_social_sites';
+$tableInvoice = 'tbl_invoice';
 
 // Checks if logged in or not
 if (!$user_home->is_logged_in()) {

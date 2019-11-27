@@ -33,7 +33,7 @@ $sessionId = session_id();
 $sessionId = session_id();
 
 // Gets the file name to show whether it is active or not
-$fileName = basename($_SERVER["SCRIPT_FILENAME"], '.php');
+$current_page = basename($_SERVER["SCRIPT_FILENAME"], '.php');
 
 // Tables
 $table1 = 'tbl_brand';
@@ -98,7 +98,7 @@ $tableSocialMedia = 'tbl_social_sites';
         <!-- Navbar -->
         <nav class="row navbar navbar-expand-lg navbar-dark bg-dark clearfix" id="navbar">
             <a <?php
-                if ($fileName == 'index') {
+                if ($current_page == 'index') {
                     echo 'id="active"';
                 }  ?> class="navbar-brand" href="index.php" style="font-size:16px;">HOME</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -108,7 +108,7 @@ $tableSocialMedia = 'tbl_social_sites';
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a <?php
-                            if ($fileName == 'brandCategorySubCategory') {
+                            if ($current_page == 'brandCategorySubCategory') {
                                 echo 'id="active"';
                             }  ?>class="nav-link" href="pages/brandCategorySubCategory.php">View products</a>
                     </li>
@@ -149,6 +149,26 @@ $tableSocialMedia = 'tbl_social_sites';
                     <?php
                     }
                     ?>
+                    <li class="nav-item">
+                        <a <?php if ($current_page == 'aboutUs') {
+                                echo 'id="active"';
+                            } ?>class="nav-link" href="pages/aboutUs.php"> About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a <?php if ($current_page == 'termsAndConditions') {
+                                echo 'id="active"';
+                            } ?>class="nav-link" href="pages/termsAndConditions.php"> Term & Cond</a>
+                    </li>
+                    <li class="nav-item">
+                        <a <?php if ($current_page == 'privacyPolicy') {
+                                echo 'id="active"';
+                            } ?>class="nav-link" href="pages/privacyPolicy.php"> Priv Policy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a <?php if ($current_page == 'returnPolicy') {
+                                echo 'id="active"';
+                            } ?>class="nav-link" href="pages/returnPolicy.php"> Retu Policy</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown

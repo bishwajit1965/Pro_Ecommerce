@@ -37,7 +37,7 @@
         <!-- Contact form -->
         <div class="row d-flex justify-content-center">
             <div class="col-sm-6 sm-offset-3">
-                <h1 class="page-heading text-center">Contact us </h1>
+                <h1 class="page-heading text-center">Edit Contact details</h1>
                 <hr>
                 <div class="row">
                     <div class="col-sm-12">
@@ -60,19 +60,9 @@
                 form>a {
                     display: inline;
                 }
-
-                .message-area {
-                    background-color: #D4EDDA;
-                    border-left: 4px solid#4CAF50;
-                    padding: 6px;
-                    border-radius: 3px;
-                    font-weight: 600;
-                }
                 </style>
-
-
-                <div class="foprm-area mb-4 mt-4">
-                    <form action="processContactUs.php" class="" method="post">
+                <div class="foprm-area mb-4">
+                    <form action="processContactUs.php" class="w-100 mb-" method="post">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -110,15 +100,14 @@
 
                         <input type="hidden" name="action" value="verify">
 
-                        <input type="hidden" name="customer_session" value="<?= $customerId; ?>">
+                        <input type="hidden" name="session_id" value="<?= $customerId; ?>">
 
-                        <input type="hidden" name="customer_id" value="<?= $sessionId; ?>">
-
-                        <button type="submit" name="submit" value="contact-us" class="btn btn-sm btn-success"><i
-                                class="fas fa-envelope"></i> Contact us</button>
                         <input type="hidden" name="action" value="verify">
 
                         <input type="hidden" name="session_id" value="<?= $sessionId; ?>">
+
+                        <button type="submit" name="submit" value="update_message" class="btn btn-sm btn-info"><i
+                                class="fas fa-edit"></i> Update </button>
                     </form>
                     <form action="#" method="post" class="mb-">
                         <button type="submit" class="btn btn-sm btn-info" onClick="history.go();"><i
@@ -129,16 +118,6 @@
                             Contact Home</button>
                     </form>
                 </div>
-                <?php
-                $result = $contactUs->index($tableContactUs);
-                foreach ($result as $contctData) {
-                    if ($customerId == $contctData->customer_id) { ?>
-                <div class="message-area mb-2">
-                    <?php echo $contctData->first_name . ' ' . $contctData->last_name . ' : ' . $contctData->message; ?>
-                </div>
-                <?php }
-                }
-                ?>
             </div>
         </div>
         <!-- Contact form -->

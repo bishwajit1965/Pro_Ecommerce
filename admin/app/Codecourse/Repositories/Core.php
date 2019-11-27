@@ -43,6 +43,24 @@ class Core
         }
     }
 
+    // Fetch data as per 'customer_id' and 'session_id'
+    public function viewSpcificDataBySession($table, $customerId, $sessionId)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE customer_id = '$customerId' && session_id = '$sessionId'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $result[] = $data;
+                }
+                return $result;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
     // Insert data
     public function store($fields, $table)
     {
@@ -223,7 +241,7 @@ class Core
 
     public function redirect($url)
     {
-        header('Location:' . $url);
+        header("Location: $url");
     }
 
 

@@ -1,18 +1,62 @@
-
 <?php
 
 require_once '../app/start.php';
 
 use Codecourse\Repositories\Cart as Cart;
+use Codecourse\Repositories\Invoice as Invoice;
 use Codecourse\Repositories\Session as Session;
 
+$invoice = new Invoice();
 $cart = new Cart();
 Session::init();
 $sessionId = session_id();
 $tableOrders = 'tbl_orders';
-$tableOrderArchive = 'tbl_order_archive';
+$tableInvoice = 'tbl_invoice';
 
 switch ($_POST['submit']) {
+    case 'generate_invoice':
+        if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
+            if ($_REQUEST['action'] == 'verify') {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['submit'])) {
+                        if (isset($_POST['pro_id']) && $_POST['pro_id'] !== null) {
+                            $productId = $_POST['pro_id'];
+                            $orderId = $_POST['order_id'];
+                            if (session_id() !== null) {
+                                $sessionId = session_id();
+                                // Fetches data to verify product and user session
+                                $stmtExecute = $invoice->preventDuplicateEntry($tableInvoice, $orderId, $sessionId);
+                                // Prevents duplicate invoice generation
+                                if ($stmtExecute->pro_id == $productId && $stmtExecute->customer_session == $sessionId) {
+                                    $message = '<div class="alert alert-danger alert-dismissible" role="alert">
+                                    <strong> SORRY !</strong> Invoice has been already been generated before !!! The order is archivable !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'inbox.php';
+                                    $invoice->redirect("$home_url");
+                                } else {
+                                    $ivoiceData = $invoice->generateInvoice($tableOrders, $sessionId, $orderId, $tableInvoice);
+                                    // validation messages and page redirects
+                                    $message = '<div class="alert alert-success alert-dismissible" role="alert">
+                                    <strong> WOW !</strong> Invoice has been generated successfully !!!
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>';
+                                    Session::set('message', $message);
+                                    $home_url = 'inbox.php';
+                                    $invoice->redirect("$home_url");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        break;
     case 'update-status':
         if (isset($_REQUEST['action']) && !empty($_REQUEST['action'])) {
             if ($_REQUEST['action'] == 'verify') {

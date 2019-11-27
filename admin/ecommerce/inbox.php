@@ -47,35 +47,37 @@
                         </span>
                     </h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                            title="Collapse"><i class="fa fa-minus"></i></button>
 
-                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
+                            title="Remove"><i class="fa fa-times"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <!-- Code below -->
                     <style>
-                        * {
-                            box-sizing: border-box;
-                        }
+                    * {
+                        box-sizing: border-box;
+                    }
 
-                        .zoom {
-                            padding: 1px;
-                            background-color: #DDD;
-                            transition: transform .2s;
-                            width: 50px;
-                            height: 52px;
-                            margin: 0 auto;
-                            border-radius: 5px;
-                        }
+                    .zoom {
+                        padding: 1px;
+                        background-color: #DDD;
+                        transition: transform .2s;
+                        width: 50px;
+                        height: 52px;
+                        margin: 0 auto;
+                        border-radius: 5px;
+                    }
 
-                        .zoom:hover {
-                            -ms-transform: scale(5.5);
-                            /* IE 9 */
-                            -webkit-transform: scale(5.5);
-                            /* Safari 3-8 */
-                            transform: scale(5.5);
-                        }
+                    .zoom:hover {
+                        -ms-transform: scale(5.5);
+                        /* IE 9 */
+                        -webkit-transform: scale(5.5);
+                        /* Safari 3-8 */
+                        transform: scale(5.5);
+                    }
                     </style>
                     <?php
                     // Will display all the messages vlidation/insert/update/delete
@@ -103,7 +105,8 @@
 
                     ?>
                     <div class="table-responsive-sm">
-                        <table id="example1" class="table table-bordered table-sm table-condensed table-striped table-compact">
+                        <table id="example1"
+                            class="table table-bordered table-sm table-condensed table-striped table-compact">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -126,108 +129,135 @@
                                 if (!empty($customerOrderDetails)) {
                                     foreach ($customerOrderDetails as $result) {
                                         ?>
-                                        <tr>
-                                            <td><?php echo $result->order_id; ?>
-                                            </td>
-                                            <td><?php echo $helpers->dateFormat($result->ordered_on); ?>
-                                            </td>
-                                            <td><?php echo $result->pro_name; ?>
-                                            </td>
-                                            <td><?php echo $result->pro_number; ?>
-                                            </td>
-                                            <td>
-                                                <?php $price = $result->pro_price;
+                                <tr>
+                                    <td><?php echo $result->order_id; ?>
+                                    </td>
+                                    <td><?php echo $helpers->dateFormat($result->ordered_on); ?>
+                                    </td>
+                                    <td><?php echo $result->pro_name; ?>
+                                    </td>
+                                    <td><?php echo $result->pro_number; ?>
+                                    </td>
+                                    <td>
+                                        <?php $price = $result->pro_price;
                                                         echo number_format($price, 2, '.', '') . ' &#2547'; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $result->pro_quantity; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $result->total_price; ?>
-                                            </td>
-                                            <td>
-                                                <?php if (empty($result->photo)) { ?>
-                                                    <div class="zoom">
-                                                        <img id="image" src="../gallery/avatar/avatar.png" alt="Alternative Image" style="width:50px;height:50px;"></div>
-                                                <?php } else { ?>
-                                                    <div class="zoom">
-                                                        <img id="image" src="<?php echo $result->photo; ?>" class="img-thumbnail" style="width:50px;height:50px;" alt="Product Photo"></div>
-                                                <?php } ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $result->customer_id; ?>
-                                            </td>
-                                            <td>
-                                                <?php if ($result->status == '0') { ?>
-                                                    <span style="color:#cd1f05;font-weight:700;"><?= "Pending"; ?></span>
-                                                <?php } elseif ($result->status == '1') { ?>
-                                                    <span style="color:#000;font-weight:700;"><?= "Processed"; ?></span>
-                                                <?php } elseif ($result->status == '2') { ?>
-                                                    <span data-toggle="tooltip" title="Your product will be delivered soon !!!" style="color:#0076ec;font-weight:800;"><?= "Confirmed"; ?></span>
-                                                <?php } else { } ?>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-xs btn-success" href="customer.php?customer_id=<?= $result->customer_id; ?>"> View details</a>
-                                            </td>
-                                            <td>
-                                                <?php if ($_SESSION['userEmail'] == $user_home->getEmail()) { ?>
-                                                    <?php if ($result->status == '0') { ?>
-                                                        <form action="processOrders.php" method="post">
-                                                            <input type="hidden" name="order_id" value="<?php echo $result->order_id; ?>">
-
-                                                            <input type="hidden" name="pro_price" value="<?= $result->pro_price; ?>">
-
-                                                            <input type="hidden" name="ordered_on" value="<?= $result->ordered_on; ?>">
-
-                                                            <input type="hidden" name="status" value="<?= $result->status; ?>">
-
-                                                            <input type="hidden" name="action" value="verify">
-
-                                                            <button type="submit" data-toggle="tooltip" title="Shift order" name="submit" value="update-status" class="btn btn-xs btn-primary"><i class="fa fa-paper-plane"></i> Shift order</button>
-
-                                                        </form>
-                                                    <?php } elseif ($result->status == '1') { ?>
-                                                        <form action="processOrders.php" method="post">
-
-                                                            <input type="hidden" name="order_id" value="<?php echo $result->order_id; ?>">
-
-                                                            <input type="hidden" name="pro_price" value="<?= $result->pro_price; ?>">
-
-                                                            <input type="hidden" name="ordered_on" value="<?= $result->ordered_on; ?>">
-
-                                                            <input type="hidden" name="status" value="<?= $result->status; ?>">
-
-                                                            <input type="hidden" name="action" value="verify">
-
-                                                            <button type="submit" data-toggle="tooltip" title="Revoke order" name="submit" value="revoke_status" class="btn btn-xs btn-info"><i class="fa fa-paper-plane"></i> Revoke Order</button>
-
-                                                        </form>
-                                                    <?php } elseif ($result->status == '2') { ?>
-                                                        <form action="processOrders.php" method="post">
-
-                                                            <input type="hidden" name="action" value="verify">
-
-                                                            <input type="hidden" name="order_id" value="<?php echo $result->order_id; ?>">
-
-                                                            <input type="hidden" name="customer_id" value="<?php echo $result->customer_id; ?>">
-
-                                                            <input type="hidden" name="ordered_on" value="<?php echo $result->ordered_on; ?>">
-
-                                                            <input type="hidden" name="status" value="<?php echo $result->status; ?>">
-
-                                                            <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Archive order" name="submit" value="move_to_archive_and_delete" onClick="return confirm('Are you sure of archiving this order ?');"> <i class="fa fa-trash"></i> Archive order</button>
-
-                                                        </form>
-                                                    <?php } else { ?>
-                                            </td>
+                                    </td>
+                                    <td>
+                                        <?php echo $result->pro_quantity; ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $result->total_price; ?>
+                                    </td>
+                                    <td>
+                                        <?php if (empty($result->photo)) { ?>
+                                        <div class="zoom">
+                                            <img id="image" src="../gallery/avatar/avatar.png" alt="Alternative Image"
+                                                style="width:50px;height:50px;"></div>
+                                        <?php } else { ?>
+                                        <div class="zoom">
+                                            <img id="image" src="<?php echo $result->photo; ?>" class="img-thumbnail"
+                                                style="width:50px;height:50px;" alt="Product Photo"></div>
                                         <?php } ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $result->customer_id; ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($result->status == '0') { ?>
+                                        <span style="color:#cd1f05;font-weight:700;"><?= "Pending"; ?></span>
+                                        <?php } elseif ($result->status == '1') { ?>
+                                        <span style="color:#000;font-weight:700;"><?= "Processed"; ?></span>
+                                        <?php } elseif ($result->status == '2') { ?>
+                                        <span data-toggle="tooltip" title="Your product will be delivered soon !!!"
+                                            style="color:#0076ec;font-weight:800;"><?= "Confirmed"; ?></span>
+                                        <?php } else { } ?>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-xs btn-success" data-toggle="tooltip"
+                                            title="View customer address."
+                                            href="customer.php?customer_id=<?= $result->customer_id; ?>"><i
+                                                class="fa fa-eye"></i> Address</a>
+                                    </td>
+                                    <td>
+                                        <?php if ($_SESSION['userEmail'] == $user_home->getEmail()) { ?>
+                                        <?php if ($result->status == '0') { ?>
+                                        <form action="processOrders.php" method="post">
+                                            <input type="hidden" name="order_id"
+                                                value="<?php echo $result->order_id; ?>">
+
+                                            <input type="hidden" name="pro_price" value="<?= $result->pro_price; ?>">
+
+                                            <input type="hidden" name="ordered_on" value="<?= $result->ordered_on; ?>">
+
+                                            <input type="hidden" name="status" value="<?= $result->status; ?>">
+
+                                            <input type="hidden" name="action" value="verify">
+
+                                            <button type="submit" data-toggle="tooltip" title="Shift order"
+                                                name="submit" value="update-status" class="btn btn-xs btn-primary"><i
+                                                    class="fa fa-paper-plane"></i> Shift order</button>
+
+                                        </form>
+                                        <?php } elseif ($result->status == '1') { ?>
+                                        <form action="processOrders.php" method="post">
+
+                                            <input type="hidden" name="order_id"
+                                                value="<?php echo $result->order_id; ?>">
+
+                                            <input type="hidden" name="pro_price" value="<?= $result->pro_price; ?>">
+
+                                            <input type="hidden" name="ordered_on" value="<?= $result->ordered_on; ?>">
+
+                                            <input type="hidden" name="status" value="<?= $result->status; ?>">
+                                        </form>
+                                        <?php } elseif ($result->status == '2') { ?>
+                                        <form action="processOrders.php" method="post">
+
+                                            <input type="hidden" name="action" value="verify">
+
+                                            <input type="hidden" name="order_id"
+                                                value="<?php echo $result->order_id; ?>">
+
+                                            <input type="hidden" name="customer_id"
+                                                value="<?php echo $result->customer_id; ?>">
+
+                                            <input type="hidden" name="ordered_on"
+                                                value="<?php echo $result->ordered_on; ?>">
+
+                                            <input type="hidden" name="status" value="<?php echo $result->status; ?>">
+
+                                            <button type="submit" class="btn btn-xs btn-danger" data-toggle="tooltip"
+                                                title="Archive order" name="submit" value="move_to_archive_and_delete"
+                                                onClick="return confirm('Are you sure of archiving this order ?');"> <i
+                                                    class="fa fa-trash"></i> Archive</button>
+                                        </form>
+                                        <!-- For generating invoice -->
+                                        <form action="processInvoice.php" method="post">
+                                            <input type="hidden" name="action" value="verify">
+
+                                            <input type="hidden" name="pro_id" value="<?php echo $result->pro_id; ?>">
+
+                                            <input type="hidden" name="order_id"
+                                                value="<?php echo $result->order_id; ?>">
+
+                                            <button style="margin-top:8px;" type="submit" class="btn btn-xs btn-success"
+                                                data-toggle="tooltip" title="Generate Invoice" name="submit"
+                                                value="generate_invoice"
+                                                onClick="return confirm('Are you sure of archiving this order ?');">
+                                                <i class="fa fa-invoice"></i> Gen Invoice</button>
+
+                                        </form>
+                                        <?php } else { ?>
+                                    </td>
+                                    <?php } ?>
 
                                     <?php } else { ?>
-                                        <td>
-                                            <a class="btn btn-xs btn-primary buttons" href="editProduct.php?edit_id=<?php echo $result->pro_id; ?>">
-                                                <i class="fa fa-eye"></i> View</a><?php } ?>
-                                        </td>
-                                        </tr>
+                                    <td>
+                                        <a class="btn btn-xs btn-primary buttons"
+                                            href="editProduct.php?edit_id=<?php echo $result->pro_id; ?>">
+                                            <i class="fa fa-eye"></i> View</a><?php } ?>
+                                    </td>
+                                </tr>
                                 <?php
                                     }
                                 } ?>
