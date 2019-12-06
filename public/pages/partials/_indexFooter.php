@@ -10,31 +10,39 @@
             </div>
             <div class="col-sm-3 footer-text">
                 <h6 class="text-uppercase">Latest Testimonials</h6>
-                <ul>
-                    <li>
-                        <a href="">
-                            <img src="img/background/background.jpg" alt="" style="width:30px;height:30px;border-radius:50%;margin-right:8px;float:left;">
-                            <p class="text-lowercase" style="font-size:14px;line-height:12px;"> Lorem ipsum dolor sit amet consectetur adipisicing elit....</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="img/background/background.jpg" alt="" style="width:30px;height:30px;border-radius:50%;margin-right:8px;float:left;">
-                            <p class="text-lowercase" style="font-size:14px;line-height:12px;"> Lorem ipsum dolor sit amet consectetur adipisicing elit....</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="img/background/background.jpg" alt="" style="width:30px;height:30px;border-radius:50%;margin-right:8px;float:left;">
-                            <p class="text-lowercase" style="font-size:14px;line-height:12px;"> Lorem ipsum dolor sit amet consectetur adipisicing elit....</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="img/background/background.jpg" alt="" style="width:30px;height:30px;border-radius:50%;margin-right:8px;float:left;">
-                            <p class="text-lowercase" style="font-size:14px;line-height:12px;"> Lorem ipsum dolor sit amet consectetur adipisicing elit....</p>
-                        </a>
-                    </li>
+                <ul style="list-style:none;padding:0px;">
+                    <?php
+                    include '../admin/app/start.php';
+
+                    use Codecourse\Repositories\FrontEnd as FrontEnd;
+                    use Codecourse\Repositories\Helpers as Helpers;
+
+                    $frontEnd = new FrontEnd();
+                    $helpers = new Helpers();
+                    $tableContactUs = 'tbl_contact_us';
+                    $result = $frontEnd->getContactMessage($tableContactUs);
+                    if ($result) {
+                        foreach ($result as $contctData) {
+                            ?>
+                    <a href="pages/testimonials.php?testimonial_id=<?= $contctData->id; ?>">
+                        <li>
+                            <span
+                                style="background-color:#DDD;width:11px;height:11px;border-radius:50%;margin-right:8px;float:left;"></span>
+                            <p style="font-size:12px;font-weight:500;line-height:11px;color:#c0c0c0;margin-bottom:5px;">
+                                <?php echo $helpers->textShorten($contctData->message, 50); ?>
+                            </p>
+                            <p
+                                style="font-size:14px; font-weight:600; line-height:10px; color:#c0c0c0; margin-left:24px; text-transform:italic;">
+                                -
+                                <?php echo ucfirst($contctData->first_name) . ' ' . ucfirst($contctData->last_name); ?>
+                            </p>
+
+                        </li>
+                    </a>
+                    <?php
+                        }
+                    }
+                    ?>
                 </ul>
             </div>
             <div class="top-social-links footer-text col-sm-3">
@@ -44,7 +52,7 @@
                     $socialMediaData = $frontEnd->socialMediaDataView($tableSocialMedia);
                     if (!empty($socialMediaData)) {
                         foreach ($socialMediaData as $mediaData) { ?>
-                            <a href="<?= $mediaData->site_name; ?>" target="blank">
+                    <a href="<?= $mediaData->site_name; ?>" target="blank">
                         <?php
                                 if ($mediaData->site_name == 'http://www.facebook.com') {
                                     echo '<i class="fab fa-facebook-square"></i>';
@@ -62,10 +70,11 @@
                             }
                         }
                         ?>
-                            </a>
+                    </a>
                 </div>
                 <div class="facebook justify-content-around">
-                    <a href="http://www.facebook.com" target="blank"><img src="img/logo/facebookProfile.jpg" class="img-fluid img-thumbnail" alt="Facebook"></a>
+                    <a href="http://www.facebook.com" target="blank"><img src="img/logo/facebookProfile.jpg"
+                            class="img-fluid img-thumbnail" alt="Facebook"></a>
                 </div>
             </div>
         </div>

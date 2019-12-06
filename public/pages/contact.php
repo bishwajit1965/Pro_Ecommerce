@@ -60,17 +60,7 @@
                 form>a {
                     display: inline;
                 }
-
-                .message-area {
-                    background-color: #D4EDDA;
-                    border-left: 4px solid#4CAF50;
-                    padding: 6px;
-                    border-radius: 3px;
-                    font-weight: 600;
-                }
                 </style>
-
-
                 <div class="foprm-area mb-4 mt-4">
                     <form action="processContactUs.php" class="" method="post">
                         <div class="row">
@@ -116,6 +106,7 @@
 
                         <button type="submit" name="submit" value="contact-us" class="btn btn-sm btn-success"><i
                                 class="fas fa-envelope"></i> Contact us</button>
+
                         <input type="hidden" name="action" value="verify">
 
                         <input type="hidden" name="session_id" value="<?= $sessionId; ?>">
@@ -129,16 +120,7 @@
                             Contact Home</button>
                     </form>
                 </div>
-                <?php
-                $result = $contactUs->index($tableContactUs);
-                foreach ($result as $contctData) {
-                    if ($customerId == $contctData->customer_id) { ?>
-                <div class="message-area mb-2">
-                    <?php echo $contctData->first_name . ' ' . $contctData->last_name . ' : ' . $contctData->message; ?>
-                </div>
-                <?php }
-                }
-                ?>
+
             </div>
         </div>
         <!-- Contact form -->

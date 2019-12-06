@@ -66,11 +66,11 @@
                             <tr>
                                 <td>5</td>
                                 <td>Deep fridge</td>
-                                <td>34 55 66</td>
+                                <td>34 55 66 </td>
                                 <td>
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit...
                                 </td>
-                                <td>TK 5000.00</td>
+                                <td>5000.00 &#2547</td>
                             </tr>
                             <tr>
                                 <td>5</td>
@@ -79,25 +79,25 @@
                                 <td>
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit...
                                 </td>
-                                <td>TK 5000.00</td>
+                                <td>5000.00 &#2547</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Deep fridge</td>
-                                <td>34 55 66</td>
+                                <td>34 55 66 </td>
                                 <td>
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit...
                                 </td>
-                                <td>TK 5000.00</td>
+                                <td>5000.00 &#2547</td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Deep fridge</td>
-                                <td>34 55 66</td>
+                                <td>34 55 66 </td>
                                 <td>
                                     Lorem ipsum dolor sit, amet consectetur adipisicing elit...
                                 </td>
-                                <td>TK 5000.00</td>
+                                <td>5000.00 &#2547</td>
                             </tr>
 
                         </tbody>
@@ -127,19 +127,19 @@
                                 <tbody>
                                     <tr>
                                         <td><strong>Subtotal:</strong> </td>
-                                        <td>TK 12,000.00 </td>
+                                        <td>12,000.00 &#2547</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Vat 15%:</strong> </td>
-                                        <td>TK 200.00 </td>
+                                        <td>200.00 &#2547</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Shipping:</strong> </td>
-                                        <td>TK 500.00 </td>
+                                        <td>500.00 &#2547</td>
                                     </tr>
                                     <tr>
                                         <td><strong>Grand total:</strong> </td>
-                                        <td>TK 15500.00 </td>
+                                        <td>15500.00 &#2547</td>
                                     </tr>
                                 </tbody>
                             </table>

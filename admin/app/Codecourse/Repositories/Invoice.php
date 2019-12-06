@@ -186,4 +186,16 @@ class Invoice
             echo $e->getMessage();
         }
     }
+    public function numberOfRows($table, $sessionId)
+    {
+        $query = "SELECT FOUND_ROWS() FROM $table WHERE customer_session = '$sessionId'";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $rows = $stmt->rowCount();
+        if ($rows) {
+            return $rows;
+        } else {
+            return false;
+        }
+    }
 }

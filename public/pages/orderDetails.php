@@ -126,7 +126,6 @@
                             <?php $total = $order->pro_price * $order->pro_quantity;
                                             echo isset($total) ? number_format($total, 2, '.', ',') : ''; ?>
                             <b>&#2547;</b></td>
-
                     </tr>
                     <tr>
                         <td>

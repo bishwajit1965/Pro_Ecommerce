@@ -17,6 +17,42 @@ class FrontEnd
         $dbConnection = $database->dbConnection();
         $this->conn = $dbConnection;
     }
+    // View contacts data
+    public function getContactMessage($table)
+    {
+        try {
+            $sql = "SELECT * FROM $table  WHERE status = 0 ORDER BY id DESC LIMIT 5";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            if ($stmt->rowCount() > 0) {
+                while ($data = $stmt->fetch(PDO::FETCH_OBJ)) {
+                    $result[] = $data;
+                }
+                return $result;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+    // View single testimonial data as per user
+    public function viewSingleTestimonial($id, $table)
+    {
+        try {
+            $sql = "SELECT * FROM $table WHERE id = :testimonial_id && status='0'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':testimonial_id', $id);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_OBJ);
+            if ($result) {
+                return $result;
+            } else {
+                return false;
+            }
+            return $result;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
 
     // View Data in Index page
     public function frontEndDataAndPagination($query)
@@ -132,7 +168,6 @@ class FrontEnd
         $total_no_of_records = $stmt->rowCount();
         if ($total_no_of_records > 0) {
             ?>
-
             <ul class="pagination">
                 <?php
                             $total_no_of_pages = ceil($total_no_of_records / $records_per_page);

@@ -16,7 +16,8 @@
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search...">
                 <span class="input-group-btn">
-                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                            class="fa fa-search"></i>
                     </button>
                 </span>
             </div>
@@ -98,7 +99,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../socialMedia/socialmediaIndex.php"><i class="fa fa-circle-o"></i> Social Media</a></li>
+                    <li><a href="../socialMedia/socialmediaIndex.php"><i class="fa fa-circle-o"></i> Social Media</a>
+                    </li>
                 </ul>
             </li>
 
@@ -123,7 +125,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../subCategory/subCategoryIndex.php"><i class="fa fa-circle-o"></i> Sub Category index</a></li>
+                    <li><a href="../subCategory/subCategoryIndex.php"><i class="fa fa-circle-o"></i> Sub Category
+                            index</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -147,8 +150,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="../ecommerce/ecommerceIndex.php"><i class="fa fa-circle-o"></i> Ecommerce index</a></li>
+                    <li><a href="../ecommerce/ecommerceIndex.php"><i class="fa fa-circle-o"></i> Ecommerce index</a>
+                    </li>
                     <li><a href="../ecommerce/inbox.php"><i class="fa fa-circle-o"></i> Orders</a></li>
+                    <li><a href="../ecommerce/invoiceIndex.php"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                    <li><a href="../aboutUs/addAboutUs.php"><i class="fa fa-circle-o"></i> About us</a></li>
                 </ul>
             </li>
         </ul>

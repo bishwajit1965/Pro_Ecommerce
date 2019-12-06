@@ -3,6 +3,7 @@ ob_start();
 
 require_once '../app/start.php';
 
+use Codecourse\Repositories\AboutUs as AboutUs;
 use Codecourse\Repositories\Cart as Cart;
 use Codecourse\Repositories\CustomerProfile as CustomerProfile;
 use Codecourse\Repositories\Header as Header;
@@ -23,6 +24,7 @@ $invoice = new Invoice();
 $products = new Products();
 $socialMedia = new SocialMedia();
 $user_home = new User();
+$aboutUs = new AboutUs;
 
 // Necessary tables
 $tableCustomer = 'tbl_customer';
@@ -32,6 +34,7 @@ $tableOrdersArchive = 'tbl_order_archive';
 $tableHeader = 'tbl_header';
 $tableSocialMedia = 'tbl_social_sites';
 $tableInvoice = 'tbl_invoice';
+$tableAboutUs = 'tbl_about_us';
 
 // Checks if logged in or not
 if (!$user_home->is_logged_in()) {

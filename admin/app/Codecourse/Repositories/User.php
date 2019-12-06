@@ -2,15 +2,15 @@
 
 namespace Codecourse\Repositories;
 
-use Codecourse\Repositories\PHPMailer as PHPMailer;
 use Codecourse\Repositories\Database as Database;
+use Codecourse\Repositories\PHPMailer as PHPMailer;
 use PDO;
 use PDOException;
 
 class User
 {
     private $conn;
-    private $table ='tbl_users';
+    private $table = 'tbl_users';
 
     public function __construct()
     {

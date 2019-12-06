@@ -16,22 +16,22 @@
     </div>
     <!-- Content area begins -->
     <style>
-        .page-heading {
-            font-size: 45px;
-            font-weight: 900;
-            color: #333;
-            text-shadow: 1px 2px 4px #777;
-        }
+    .page-heading {
+        font-size: 45px;
+        font-weight: 900;
+        color: #333;
+        text-shadow: 1px 2px 4px #777;
+    }
 
-        hr {
-            background-color: #138496;
-            padding: 3px;
-            margin-top: -5px;
-        }
+    hr {
+        background-color: #138496;
+        padding: 3px;
+        margin-top: -5px;
+    }
 
-        h1 {
-            margin-bottom: 15px;
-        }
+    h1 {
+        margin-bottom: 15px;
+    }
     </style>
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -72,22 +72,23 @@
                         if ($result) {
                             $id = 1;
                             foreach ($result as $contctData) { ?>
-                                <tr>
-                                    <td><?= $id++; ?></td>
-                                    <td><?= $contctData->first_name; ?></td>
-                                    <td><?= $contctData->last_name; ?></td>
-                                    <td><?= $contctData->email; ?></td>
-                                    <td><?= $contctData->phone; ?></td>
-                                    <td><?= $helpers->textShorten($contctData->message, 50); ?></td>
-                                    <td>
-                                        <a href="editContact.php?edit_id=<?= $contctData->id; ?>" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit</a>
-                                        <a href="?delete_id=<?= $contctData->id; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete</a>
-                                    </td>
-                                </tr>
+                        <tr>
+                            <td><?= $id++; ?></td>
+                            <td><?= $contctData->first_name; ?></td>
+                            <td><?= $contctData->last_name; ?></td>
+                            <td><?= $contctData->email; ?></td>
+                            <td><?= $contctData->phone; ?></td>
+                            <td><?= $helpers->textShorten($contctData->message, 50); ?></td>
+                            <td>
+                                <a href="editContact.php?edit_id=<?= $contctData->id; ?>"
+                                    class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="?delete_id=<?= $contctData->id; ?>" class="btn btn-sm btn-danger"><i
+                                        class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
                         <?php
                             }
                         } ?>
-
                     </tbody>
                 </table>
             </div>

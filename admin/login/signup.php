@@ -2,8 +2,8 @@
 
 require_once '../app/start.php';
 
-use Codecourse\Repositories\User as User;
 use Codecourse\Repositories\Session as Session;
+use Codecourse\Repositories\User as User;
 
 Session::init();
 $reg_user = new User();
@@ -36,7 +36,7 @@ if (isset($_POST['btn-signup'])) {
 				Hello $firstName $lastName,<br/><br/>
 				Welcome to Project Master! <br/>
 				To complete your registration  please , just click following link <br/><br /><br />
-                <a href='http://localhost/pro_master/admin/login/verify.php?id=$id&code=$code'>
+                <a href='http://localhost/Pro_Ecommerce/admin/login/verify.php?id=$id&code=$code'>
                 Click HERE to Activate :)</a>
 				<br /><br />
 				Thanks,";
@@ -49,7 +49,7 @@ if (isset($_POST['btn-signup'])) {
                     Please click on the confirmation link in the email to create your account.
 		  		</div>";
         } else {
-            echo 'sorry , Query could not be executed...';
+            echo 'SORRY , Query could not be executed...';
         }
     }
 }
@@ -60,7 +60,7 @@ if (isset($_POST['btn-signup'])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pro_master | Registration Page</title>
+    <title>Pro_Ecommerce | Registration Page</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
